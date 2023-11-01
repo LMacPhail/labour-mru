@@ -1,4 +1,4 @@
-import { MP, PolicyInterests } from "./types";
+import { MP, PartyIDs, PolicyInterests } from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -157,6 +157,9 @@ export const formatResponse = (values: string[][]): MP[] => {
           break;
         case "incumbentMajoritySize":
           mp.incumbentMajoritySize = parseInt(v);
+          break;
+        case "incumbentParty":
+          mp.incumbentParty = v as PartyIDs;
           break;
         default:
           mp[valueIdx] = v;
