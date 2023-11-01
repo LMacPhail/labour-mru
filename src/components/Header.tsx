@@ -1,4 +1,5 @@
 import React from "react";
+import { ProjectTitle } from "./ProjectTitle";
 
 export const Header: React.FC = () => {
   return (
@@ -8,13 +9,7 @@ export const Header: React.FC = () => {
         aria-label="Global"
       >
         <div className="mr-5 md:mr-0 md:hidden">
-          <a
-            className="flex-none text-xl font-semibold dark:text-white"
-            href="#"
-            aria-label="Brand"
-          >
-            Labour MPs
-          </a>
+          <ProjectTitle />
         </div>
 
         <div className="w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-3 sm:order-3">

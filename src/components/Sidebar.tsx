@@ -1,6 +1,4 @@
 import React from "react";
-import { ProjectTitle } from "./ProjectTitle";
-import { Filters } from "./filters/Filters";
 
 export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   children,
