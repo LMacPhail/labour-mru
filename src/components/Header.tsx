@@ -2,12 +2,12 @@ import React from "react";
 
 export const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 lg:pl-64 dark:bg-gray-800 dark:border-gray-700">
+    <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 md:pl-72 dark:bg-gray-800 dark:border-gray-700">
       <nav
         className="flex basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8"
         aria-label="Global"
       >
-        <div className="mr-5 lg:mr-0 lg:hidden">
+        <div className="mr-5 md:mr-0 md:hidden">
           <a
             className="flex-none text-xl font-semibold dark:text-white"
             href="#"

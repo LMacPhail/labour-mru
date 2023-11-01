@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ProjectTitle } from "./ProjectTitle";
-import { Filters } from "./Filters";
+import { Filters } from "./filters/Filters";
 
-export const FilterSidebar: React.FC<{}> = ({}) => {
+export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <>
       <input type="checkbox" id="drawer-left" className="drawer-toggle" />
@@ -30,24 +32,21 @@ export const FilterSidebar: React.FC<{}> = ({}) => {
       </div>
       <label className="overlay" htmlFor="drawer-left"></label>
       <div className="drawer bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div className="drawer-content flex flex-col h-full top-0 left-0 bottom-0 z-[60] w-64  pt-7 pb-10 overflow-y-auto scrollbar-y ">
+        <div className="drawer-content flex flex-col h-full top-0 left-0 bottom-0 z-[60] w-72 pt-7 pb-10 overflow-y-auto scrollbar-y ">
           <label
             htmlFor="drawer-left"
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           >
             ✕
           </label>
-          <div className="px-6">
-            <ProjectTitle />
-          </div>
-          <Filters />
+          {children}
         </div>
       </div>
       <div
         id="application-sidebar"
-        className={`hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-white border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 dark:scrollbar-y dark:bg-gray-800 dark:border-gray-700`}
+        className={`hidden fixed top-0 left-0 bottom-0 z-[60] w-72 bg-white border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y md:block md:translate-x-0 md:right-auto md:bottom-0 dark:scrollbar-y dark:bg-gray-800 dark:border-gray-700`}
       >
-        <Filters />
+        {children}
       </div>
     </>
   );

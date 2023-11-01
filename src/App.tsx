@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
 import { Header } from "./components/Header";
-import { FilterSidebar } from "./components/FilterSidebar";
+import { Sidebar } from "./components/Sidebar";
 import Main from "./components/Main";
+import { Filters } from "./components/filters/Filters";
 
 function App() {
   return (
     <div className="">
       <Header />
-      <FilterSidebar />
+      <Sidebar>
+        <Filters />
+      </Sidebar>
       <Main />
     </div>
   );
