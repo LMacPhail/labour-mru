@@ -2,7 +2,7 @@ export type PartyIDs = "CON" | "SNP" | "LDM" | "LAB";
 
 export type Policy = {
   links: string[];
-  positive: boolean;
+  positive?: boolean;
 };
 
 export type PolicyInterests = {
@@ -27,7 +27,7 @@ export type MP = {
   name: string; // 0
   constituency: string; // 1
   incumbentParty: PartyIDs; // 9
-  incumbentMajoritySize: number; // 10
+  incumbentMajoritySize: number | "n/a"; // 10
   alreadyCouncillor: string;
   biography: string;
   socialMedia: SocialMediaLinks;

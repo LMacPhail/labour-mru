@@ -1,6 +1,6 @@
 import React from "react";
-import { MP } from "../data/types";
-import { ProfileContent, ProfileHeader } from "./Profile";
+import { MP } from "../../data/types";
+import { ProfileContent, ProfileHeader } from "../Profile";
 
 export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
   return (
