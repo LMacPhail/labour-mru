@@ -17,10 +17,10 @@ export type PolicyInterests = {
 };
 
 export type SocialMediaLinks = {
-  twitter: string; // 13
-  facebook: string;
-  linkedin: string;
-  instagram: string;
+  twitter?: string; // 13
+  facebook?: string;
+  linkedin?: string;
+  instagram?: string;
 };
 
 export type MP = {
@@ -40,3 +40,5 @@ export type MP = {
   policyInterests: PolicyInterests;
   notes?: string; // 36
 };
+
+export type ViewType = "about" | "index";

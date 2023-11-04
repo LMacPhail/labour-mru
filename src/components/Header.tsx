@@ -1,11 +1,17 @@
 import React from "react";
 import { ProjectTitle } from "./ProjectTitle";
-import { LinkButton } from "./Link";
+import { ViewType } from "../data/types";
+import { SET_VIEW_ACTION } from "../state/actions";
+import { useDispatch } from "react-redux";
 
 export const Header: React.FC<{
-  setView(view: "about" | "index"): void;
   view: "about" | "index";
-}> = ({ setView, view }) => {
+}> = ({ view }) => {
+  const dispatch = useDispatch();
+  const setView = (view: ViewType) => {
+    dispatch({ type: SET_VIEW_ACTION, payload: { view } });
+  };
+
   return (
     <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-4 md:pl-72 dark:bg-gray-800 dark:border-gray-700">
       <nav

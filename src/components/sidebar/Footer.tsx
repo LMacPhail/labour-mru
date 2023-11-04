@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
         </a>
       </p>
       <span className="mt-2">
-        Get in touch with us at <a>our@email.com</a>
+        Get in touch with us at <a href="/">our@email.com</a>
       </span>
     </div>
   );

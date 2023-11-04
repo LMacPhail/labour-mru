@@ -4,19 +4,15 @@ import { Sidebar } from "./components/sidebar/Sidebar";
 import Main from "./components/Main";
 import { SidebarContent } from "./components/sidebar/SidebarContent";
 import { Header } from "./components/Header";
+import { AppState } from "./state/store";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [view, setView] = React.useState<"about" | "index">("about");
+  const view = useSelector((state: AppState) => state.view);
 
-  const setPageView = useCallback(
-    (view: "about" | "index") => {
-      setView(view);
-    },
-    [view]
-  );
   return (
     <div className="">
-      <Header setView={setPageView} view={view} />
+      <Header view={view} />
       <Sidebar>
         <SidebarContent />
       </Sidebar>
