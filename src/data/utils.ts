@@ -83,35 +83,35 @@ const blankMp = (): MP => ({
   policyInterests: {
     climate: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     migration: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     LGBTQ: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     workers: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     nhs: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     benefits: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     strikes: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
     publicOwnership: {
       links: [],
-      positive: false,
+      positive: undefined,
     },
   },
 });
@@ -149,14 +149,15 @@ export const formatResponse = (values: string[][]): MP[] => {
           break;
         case "policyInterests":
           const policyType = policyLookupIdx[x];
-          if (x % 2 === 0) {
+          if (x % 2 === 1) {
             mp.policyInterests[policyType].links = [v];
           } else {
-            mp.policyInterests[policyType].positive = v === "Positive";
+            mp.policyInterests[policyType].positive =
+              v === "Positive" ? true : v === "Negative" ? false : undefined;
           }
           break;
         case "incumbentMajoritySize":
-          mp.incumbentMajoritySize = parseInt(v);
+          mp.incumbentMajoritySize = v ? parseInt(v) : "n/a";
           break;
         case "incumbentParty":
           mp.incumbentParty = v as PartyIDs;

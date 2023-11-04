@@ -1,13 +1,12 @@
 import React from "react";
-import { Accordion } from "./Accordion";
-import { formatResponse } from "../data/utils";
-import { values } from "../data/test/rawResponse";
+import About from "./content/About";
+import MPIndex from "./content/MPIndex";
 
-const Main: React.FC = () => {
-  const mps = formatResponse(values);
+const Main: React.FC<{ view: "about" | "index" }> = ({ view }) => {
   return (
     <div className="w-full pt-10 px-4 sm:px-6 md:px-8 md:pl-80">
-      <Accordion mps={mps} />
+      {view === "about" && <About />}
+      {view === "index" && <MPIndex />}
     </div>
   );
 };

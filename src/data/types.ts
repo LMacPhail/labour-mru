@@ -2,7 +2,7 @@ export type PartyIDs = "CON" | "SNP" | "LDM" | "LAB";
 
 export type Policy = {
   links: string[];
-  positive: boolean;
+  positive?: boolean;
 };
 
 export type PolicyInterests = {
@@ -17,17 +17,17 @@ export type PolicyInterests = {
 };
 
 export type SocialMediaLinks = {
-  twitter: string; // 13
-  facebook: string;
-  linkedin: string;
-  instagram: string;
+  twitter?: string; // 13
+  facebook?: string;
+  linkedin?: string;
+  instagram?: string;
 };
 
 export type MP = {
   name: string; // 0
   constituency: string; // 1
   incumbentParty: PartyIDs; // 9
-  incumbentMajoritySize: number; // 10
+  incumbentMajoritySize: number | "n/a"; // 10
   alreadyCouncillor: string;
   biography: string;
   socialMedia: SocialMediaLinks;
@@ -40,3 +40,5 @@ export type MP = {
   policyInterests: PolicyInterests;
   notes?: string; // 36
 };
+
+export type ViewType = "about" | "index";

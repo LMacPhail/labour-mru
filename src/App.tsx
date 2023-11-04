@@ -1,18 +1,22 @@
 import React from "react";
 import "./App.css";
-import { Header } from "./components/Header";
-import { Sidebar } from "./components/Sidebar";
+import { Sidebar } from "./components/sidebar/Sidebar";
 import Main from "./components/Main";
-import { Filters } from "./components/filters/Filters";
+import { SidebarContent } from "./components/sidebar/SidebarContent";
+import { Header } from "./components/Header";
+import { AppState } from "./state/store";
+import { useSelector } from "react-redux";
 
 function App() {
+  const view = useSelector((state: AppState) => state.view);
+
   return (
     <div className="">
-      <Header />
+      <Header view={view} />
       <Sidebar>
-        <Filters />
+        <SidebarContent />
       </Sidebar>
-      <Main />
+      <Main view={view} />
     </div>
   );
 }
