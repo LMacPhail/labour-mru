@@ -1,4 +1,5 @@
-import { MP, PartyIDs, PolicyInterests } from "./types";
+import { PolicyStance } from "../components/filters/PolicyStance";
+import { Filters, MP, PartyIDs, PolicyInterests } from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -81,37 +82,45 @@ const blankMp = (): MP => ({
     directorOfCompanies: "",
   },
   policyInterests: {
-    climate: {
+    11: {
       links: [],
       positive: undefined,
+      type: "climate",
     },
-    migration: {
+    12: {
       links: [],
       positive: undefined,
+      type: "migration",
     },
-    LGBTQ: {
+    13: {
       links: [],
       positive: undefined,
+      type: "LGBTQ",
     },
-    workers: {
+    14: {
       links: [],
       positive: undefined,
+      type: "workers",
     },
-    nhs: {
+    15: {
       links: [],
       positive: undefined,
+      type: "nhs",
     },
-    benefits: {
+    16: {
       links: [],
       positive: undefined,
+      type: "benefits",
     },
-    strikes: {
+    17: {
       links: [],
       positive: undefined,
+      type: "strikes",
     },
-    publicOwnership: {
+    18: {
       links: [],
       positive: undefined,
+      type: "publicOwnership",
     },
   },
 });
@@ -149,10 +158,14 @@ export const formatResponse = (values: string[][]): MP[] => {
           break;
         case "policyInterests":
           const policyType = policyLookupIdx[x];
+          const policyIdx = Math.round(x / 2); // Unique index for each policy type
+          if (mp.policyInterests[policyIdx] === undefined) {
+            mp.policyInterests[policyIdx] = { type: policyType, links: [] };
+          }
           if (x % 2 === 1) {
-            mp.policyInterests[policyType].links = [v];
+            mp.policyInterests[policyIdx].links = [v];
           } else {
-            mp.policyInterests[policyType].positive =
+            mp.policyInterests[policyIdx].positive =
               v === "Positive" ? true : v === "Negative" ? false : undefined;
           }
           break;
@@ -171,3 +184,5 @@ export const formatResponse = (values: string[][]): MP[] => {
 
   return mpData;
 };
+
+export const filterProfiles = (profiles: MP[], filters: Filters) => {};
