@@ -1,4 +1,3 @@
-import { PolicyStance } from "../components/filters/PolicyStance";
 import { Filters, MP, PartyIDs, PolicyInterests, PolicyType } from "./types";
 
 const TWITTER_IDX = 13;
