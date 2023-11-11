@@ -1,5 +1,5 @@
 import { PolicyStance } from "../components/filters/PolicyStance";
-import { Filters, MP, PartyIDs, PolicyInterests } from "./types";
+import { Filters, MP, PartyIDs, PolicyInterests, PolicyType } from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -82,45 +82,37 @@ const blankMp = (): MP => ({
     directorOfCompanies: "",
   },
   policyInterests: {
-    11: {
+    climate: {
       links: [],
       positive: undefined,
-      type: "climate",
     },
-    12: {
+    migration: {
       links: [],
       positive: undefined,
-      type: "migration",
     },
-    13: {
+    LGBTQ: {
       links: [],
       positive: undefined,
-      type: "LGBTQ",
     },
-    14: {
+    workers: {
       links: [],
       positive: undefined,
-      type: "workers",
     },
-    15: {
+    nhs: {
       links: [],
       positive: undefined,
-      type: "nhs",
     },
-    16: {
+    benefits: {
       links: [],
       positive: undefined,
-      type: "benefits",
     },
-    17: {
+    strikes: {
       links: [],
       positive: undefined,
-      type: "strikes",
     },
-    18: {
+    publicOwnership: {
       links: [],
       positive: undefined,
-      type: "publicOwnership",
     },
   },
 });
@@ -158,14 +150,10 @@ export const formatResponse = (values: string[][]): MP[] => {
           break;
         case "policyInterests":
           const policyType = policyLookupIdx[x];
-          const policyIdx = Math.round(x / 2); // Unique index for each policy type
-          if (mp.policyInterests[policyIdx] === undefined) {
-            mp.policyInterests[policyIdx] = { type: policyType, links: [] };
-          }
           if (x % 2 === 1) {
-            mp.policyInterests[policyIdx].links = [v];
+            mp.policyInterests[policyType].links = [v];
           } else {
-            mp.policyInterests[policyIdx].positive =
+            mp.policyInterests[policyType].positive =
               v === "Positive" ? true : v === "Negative" ? false : undefined;
           }
           break;
@@ -185,4 +173,18 @@ export const formatResponse = (values: string[][]): MP[] => {
   return mpData;
 };
 
-export const filterProfiles = (profiles: MP[], filters: Filters) => {};
+export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
+  const policyFilters = filters.policies;
+  // If there are no active filters, then return all data
+  if (!Object.values(policyFilters).some((p) => p.positive !== undefined))
+    return profiles;
+
+  return profiles.filter((profile) =>
+    Object.keys(policyFilters).some(
+      (policyType: PolicyType) =>
+        policyFilters[policyType].positive !== undefined &&
+        profile.policyInterests[policyType].positive ===
+          policyFilters[policyType].positive
+    )
+  );
+};

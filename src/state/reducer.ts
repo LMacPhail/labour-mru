@@ -1,6 +1,7 @@
 import {
   Action,
   SET_LOADING_ACTION,
+  SET_POLICY_STANCE_ACTION,
   SET_PROFILES_ACTION,
   SET_VIEW_ACTION,
 } from "./actions";
@@ -34,6 +35,14 @@ export default function appReducer(
       return {
         ...state,
         view: action.payload.view,
+      };
+    }
+    case SET_POLICY_STANCE_ACTION: {
+      const { category, positive } = action.payload;
+      const policies = state.activeFilters.policies;
+      return {
+        ...state,
+        activeFilters: { policies: { ...policies, [category]: { positive } } },
       };
     }
     default: {

@@ -35,32 +35,36 @@ export const PolicyStance: React.FC = () => {
 const PositiveNegativeChoice: React.FC<{
   category: PolicyType;
 }> = ({ category }) => {
-  const policy = useSelector((state: AppState) =>
-    state.activeFilters.policies.find((p) => p.type === category)
+  const policy = useSelector(
+    (state: AppState) => state.activeFilters.policies[category]
   );
-  const [negative, setNegative] = useState<boolean>(
-    policy ? !policy.positive : false
+  const [negativeChecked, setNegativeChecked] = useState<boolean>(
+    policy.positive ? !policy.positive : false
   );
-  const [positive, setPositive] = useState<boolean>(policy?.positive ?? false);
+  const [positiveChecked, setPositiveChecked] = useState<boolean>(
+    policy?.positive ?? false
+  );
 
   const dispatch = useDispatch();
   const handleCheck = (stance: "positive" | "negative") => {
     let positiveUpdate = undefined;
     if (stance === "positive") {
-      setPositive(!positive);
-      if (negative) {
-        setNegative(false);
+      const positive = !positiveChecked;
+      setPositiveChecked(positive);
+      if (negativeChecked) {
+        setNegativeChecked(false);
       }
       positiveUpdate = positive ? positive : undefined;
     }
 
     if (stance === "negative") {
-      setNegative(!negative);
-      if (positive) {
-        setPositive(false);
+      const negative = !negativeChecked;
+      setNegativeChecked(negative);
+      if (positiveChecked) {
+        setPositiveChecked(false);
       }
       // Bit confusing here: basically, if 'negative' is 'true', we want to set 'positive' to 'false'. Ahhh, naming.
-      positiveUpdate = negative ? false : undefined;
+      positiveUpdate = !negativeChecked ? false : undefined;
     }
     dispatch({
       type: SET_POLICY_STANCE_ACTION,
@@ -73,14 +77,14 @@ const PositiveNegativeChoice: React.FC<{
       <input
         type="checkbox"
         className="checkbox checkbox-bordered-error"
-        checked={negative}
+        checked={negativeChecked}
         onClick={() => handleCheck("negative")}
       />
       <p className="flex align-middle text-center">{category}</p>
       <input
         type="checkbox"
         className="checkbox checkbox-bordered-success"
-        checked={positive}
+        checked={positiveChecked}
         onClick={() => handleCheck("positive")}
       />
     </div>
