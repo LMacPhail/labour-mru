@@ -373,45 +373,46 @@ describe("formatResponse", () => {
   });
 });
 
-describe("filterProfiles", () => {
-  const blankFilters: Filters = {
-    policies: {
-      climate: {
-        links: undefined,
-        positive: undefined,
-      },
-      migration: {
-        links: undefined,
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: undefined,
-        positive: undefined,
-      },
-      workers: {
-        links: undefined,
-        positive: undefined,
-      },
-      nhs: {
-        links: undefined,
-        positive: undefined,
-      },
-      benefits: {
-        links: undefined,
-        positive: undefined,
-      },
-      strikes: {
-        links: undefined,
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: undefined,
-        positive: undefined,
-      },
+const blankFilters = (): Filters => ({
+  policies: {
+    climate: {
+      links: undefined,
+      positive: undefined,
     },
-  };
+    migration: {
+      links: undefined,
+      positive: undefined,
+    },
+    LGBTQ: {
+      links: undefined,
+      positive: undefined,
+    },
+    workers: {
+      links: undefined,
+      positive: undefined,
+    },
+    nhs: {
+      links: undefined,
+      positive: undefined,
+    },
+    benefits: {
+      links: undefined,
+      positive: undefined,
+    },
+    strikes: {
+      links: undefined,
+      positive: undefined,
+    },
+    publicOwnership: {
+      links: undefined,
+      positive: undefined,
+    },
+  },
+});
+
+describe("filterProfiles", () => {
   it("filters profiles that match only nhs positive", () => {
-    const nhsFilter: Filters = blankFilters;
+    const nhsFilter: Filters = blankFilters();
     nhsFilter.policies["nhs"].positive = true;
     const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
     expect(filtered.length).toBe(1);
@@ -419,7 +420,7 @@ describe("filterProfiles", () => {
   });
 
   it("filters profiles that match nhs and climate positive", () => {
-    const nhsFilter: Filters = blankFilters;
+    const nhsFilter: Filters = blankFilters();
     nhsFilter.policies["nhs"].positive = true;
     nhsFilter.policies["climate"].positive = true;
 
@@ -429,7 +430,7 @@ describe("filterProfiles", () => {
   });
 
   it("returns all profiles if the filters are all undefined (not active)", () => {
-    const nhsFilter: Filters = blankFilters;
+    const nhsFilter: Filters = blankFilters();
     const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
     expect(filtered.length).toBe(9);
     expect(filtered[0].name).toBe("Maureen Burke");
