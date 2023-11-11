@@ -1,5 +1,6 @@
 import { values } from "./test/rawResponse";
-import { formatResponse } from "./utils";
+import { Filters, MP } from "./types";
+import { filterProfiles, formatResponse } from "./utils";
 
 const expectedValues = [
   {
@@ -24,38 +25,14 @@ const expectedValues = [
         "Director - Glasgow East Women's Aid (resigned)\nDirector - Glasgow East Arts Company (resigned)\nDirector - Culture and Sport Glasgow CIC (resigned)\nDirector - Culture and Sport Glasgow (resigned)\nDirector - Glasgow East Arts Company Ltd (resigned)\nDirector - Jobs and Business Glasgow (resigned)\nDirector - Clude Gateway URC (resigned)\nDirector - Scottish Events Campus (resigned)",
     },
     policyInterests: {
-      climate: {
-        links: [""],
-        positive: true,
-      },
-      migration: {
-        links: [""],
-        positive: false,
-      },
-      LGBTQ: {
-        links: [""],
-        positive: true,
-      },
-      workers: {
-        links: [""],
-        positive: false,
-      },
-      nhs: {
-        links: [""],
-        positive: true,
-      },
-      benefits: {
-        links: [""],
-        positive: false,
-      },
-      strikes: {
-        links: [""],
-        positive: true,
-      },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      climate: { links: [""], positive: true },
+      migration: { links: [""], positive: false },
+      LGBTQ: { links: [""], positive: true },
+      workers: { links: [""], positive: false },
+      nhs: { links: [""], positive: false },
+      benefits: { links: [""], positive: false },
+      strikes: { links: [""], positive: true },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "maureen.burke@glasgow.gov.uk",
   },
@@ -80,38 +57,14 @@ const expectedValues = [
       directorOfCompanies: "",
     },
     policyInterests: {
-      climate: {
-        links: [],
-        positive: undefined,
-      },
-      migration: {
-        links: [],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [],
-        positive: undefined,
-      },
-      workers: {
-        links: [],
-        positive: undefined,
-      },
-      nhs: {
-        links: [],
-        positive: undefined,
-      },
-      benefits: {
-        links: [],
-        positive: undefined,
-      },
-      strikes: {
-        links: [],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [],
-        positive: undefined,
-      },
+      climate: { links: [], positive: undefined },
+      migration: { links: [], positive: undefined },
+      LGBTQ: { links: [], positive: undefined },
+      workers: { links: [], positive: undefined },
+      nhs: { links: [], positive: undefined },
+      benefits: { links: [], positive: undefined },
+      strikes: { links: [], positive: undefined },
+      publicOwnership: { links: [], positive: undefined },
     },
   },
   {
@@ -137,40 +90,23 @@ const expectedValues = [
       directorOfCompanies: "",
     },
     policyInterests: {
-      climate: {
-        links: [""],
-        positive: undefined,
-      },
-      migration: {
-        links: [""],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [""],
-        positive: undefined,
-      },
-      workers: {
-        links: [""],
-        positive: undefined,
-      },
+      climate: { links: [""], positive: undefined },
+      migration: { links: [""], positive: undefined },
+      LGBTQ: { links: [""], positive: undefined },
+      workers: { links: [""], positive: undefined },
       nhs: {
         links: ["Made a passing reference to NHS cuts in this campaign video"],
         positive: undefined,
       },
-      benefits: {
-        links: [""],
-        positive: undefined,
-      },
+      benefits: { links: [""], positive: undefined },
+
       strikes: {
         links: [
           "Weighed in against a strike by teachers in a school with blue water coming out of the taps",
         ],
         positive: undefined,
       },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "",
   },
@@ -197,38 +133,17 @@ const expectedValues = [
       directorOfCompanies: "",
     },
     policyInterests: {
-      climate: {
-        links: [""],
-        positive: undefined,
-      },
-      migration: {
-        links: [""],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [""],
-        positive: undefined,
-      },
-      workers: {
-        links: [""],
-        positive: undefined,
-      },
+      climate: { links: [""], positive: undefined },
+      migration: { links: [""], positive: undefined },
+      LGBTQ: { links: [""], positive: undefined },
+      workers: { links: [""], positive: undefined },
       nhs: {
         links: ["Ran the Great North Run for MS Society"],
         positive: undefined,
       },
-      benefits: {
-        links: [""],
-        positive: undefined,
-      },
-      strikes: {
-        links: [""],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      benefits: { links: [""], positive: undefined },
+      strikes: { links: [""], positive: undefined },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "",
   },
@@ -261,36 +176,21 @@ const expectedValues = [
         ],
         positive: true,
       },
-      migration: {
-        links: [""],
-        positive: undefined,
-      },
+      migration: { links: [""], positive: undefined },
       LGBTQ: {
         links: [
           "Elected honourary member of LGBT+ Labour Scotland in February 2020.",
         ],
         positive: undefined,
       },
-      workers: {
-        links: [""],
-        positive: undefined,
-      },
+      workers: { links: [""], positive: undefined },
       nhs: {
         links: ["Shared petition for 75th anniversary of NHS on Facebook "],
         positive: true,
       },
-      benefits: {
-        links: [""],
-        positive: undefined,
-      },
-      strikes: {
-        links: [""],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      benefits: { links: [""], positive: undefined },
+      strikes: { links: [""], positive: undefined },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "",
   },
@@ -318,10 +218,7 @@ const expectedValues = [
       directorOfCompanies: "",
     },
     policyInterests: {
-      climate: {
-        links: [""],
-        positive: undefined,
-      },
+      climate: { links: [""], positive: undefined },
       migration: {
         links: [
           'Resigned from the labour party over its Brexit stance; has come under pressure for saying that rejoining the EU isn\'t an issue for now / "dismissing the impact on EU families"',
@@ -332,28 +229,16 @@ const expectedValues = [
         links: ["Support for 'demedicalisation' (self-ID) for trans people"],
         positive: true,
       },
-      workers: {
-        links: [""],
-        positive: undefined,
-      },
-      nhs: {
-        links: [""],
-        positive: undefined,
-      },
+      workers: { links: [""], positive: undefined },
+      nhs: { links: [""], positive: undefined },
       benefits: {
         links: [
           "Said that he would scrap the two-child benefit cap ('a heinous policy') and bedroom tax ",
         ],
         positive: true,
       },
-      strikes: {
-        links: [""],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      strikes: { links: [""], positive: undefined },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "",
   },
@@ -387,14 +272,8 @@ const expectedValues = [
         ],
         positive: true,
       },
-      migration: {
-        links: [""],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [""],
-        positive: undefined,
-      },
+      migration: { links: [""], positive: undefined },
+      LGBTQ: { links: [""], positive: undefined },
       workers: {
         links: ["Some (mildly) positive union words"],
         positive: undefined,
@@ -405,14 +284,8 @@ const expectedValues = [
         ],
         positive: undefined,
       },
-      benefits: {
-        links: [""],
-        positive: undefined,
-      },
-      strikes: {
-        links: [""],
-        positive: undefined,
-      },
+      benefits: { links: [""], positive: undefined },
+      strikes: { links: [""], positive: undefined },
       publicOwnership: {
         links: [
           "His interview about energy transition doesn't include anything on public ownership; mentions the need for significant amounts of public finance but also the need to ensure that investors see a good return",
@@ -450,34 +323,13 @@ const expectedValues = [
         ],
         positive: undefined,
       },
-      migration: {
-        links: [""],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [""],
-        positive: undefined,
-      },
-      workers: {
-        links: [""],
-        positive: undefined,
-      },
-      nhs: {
-        links: [""],
-        positive: undefined,
-      },
-      benefits: {
-        links: [""],
-        positive: undefined,
-      },
-      strikes: {
-        links: [""],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [""],
-        positive: undefined,
-      },
+      migration: { links: [""], positive: undefined },
+      LGBTQ: { links: [""], positive: undefined },
+      workers: { links: [""], positive: undefined },
+      nhs: { links: [""], positive: undefined },
+      benefits: { links: [""], positive: undefined },
+      strikes: { links: [""], positive: undefined },
+      publicOwnership: { links: [""], positive: undefined },
     },
     notes: "",
   },
@@ -502,38 +354,14 @@ const expectedValues = [
       directorOfCompanies: "",
     },
     policyInterests: {
-      climate: {
-        links: [],
-        positive: undefined,
-      },
-      migration: {
-        links: [],
-        positive: undefined,
-      },
-      LGBTQ: {
-        links: [],
-        positive: undefined,
-      },
-      workers: {
-        links: [],
-        positive: undefined,
-      },
-      nhs: {
-        links: [],
-        positive: undefined,
-      },
-      benefits: {
-        links: [],
-        positive: undefined,
-      },
-      strikes: {
-        links: [],
-        positive: undefined,
-      },
-      publicOwnership: {
-        links: [],
-        positive: undefined,
-      },
+      climate: { links: [], positive: undefined },
+      migration: { links: [], positive: undefined },
+      LGBTQ: { links: [], positive: undefined },
+      workers: { links: [], positive: undefined },
+      nhs: { links: [], positive: undefined },
+      benefits: { links: [], positive: undefined },
+      strikes: { links: [], positive: undefined },
+      publicOwnership: { links: [], positive: undefined },
     },
   },
 ];
@@ -542,5 +370,69 @@ describe("formatResponse", () => {
   it("parses raw data to acceptable response", () => {
     const formatted = formatResponse(values);
     expect(formatted).toStrictEqual(expectedValues);
+  });
+});
+
+const blankFilters = (): Filters => ({
+  policies: {
+    climate: {
+      links: undefined,
+      positive: undefined,
+    },
+    migration: {
+      links: undefined,
+      positive: undefined,
+    },
+    LGBTQ: {
+      links: undefined,
+      positive: undefined,
+    },
+    workers: {
+      links: undefined,
+      positive: undefined,
+    },
+    nhs: {
+      links: undefined,
+      positive: undefined,
+    },
+    benefits: {
+      links: undefined,
+      positive: undefined,
+    },
+    strikes: {
+      links: undefined,
+      positive: undefined,
+    },
+    publicOwnership: {
+      links: undefined,
+      positive: undefined,
+    },
+  },
+});
+
+describe("filterProfiles", () => {
+  it("filters profiles that match only nhs positive", () => {
+    const nhsFilter: Filters = blankFilters();
+    nhsFilter.policies["nhs"].positive = true;
+    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+    expect(filtered.length).toBe(1);
+    expect(filtered[0].name).toBe("Martin Rhodes");
+  });
+
+  it("filters profiles that match nhs and climate positive", () => {
+    const nhsFilter: Filters = blankFilters();
+    nhsFilter.policies["nhs"].positive = true;
+    nhsFilter.policies["climate"].positive = true;
+
+    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+    expect(filtered.length).toBe(3);
+    expect(filtered[0].name).toBe("Maureen Burke");
+  });
+
+  it("returns all profiles if the filters are all undefined (not active)", () => {
+    const nhsFilter: Filters = blankFilters();
+    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+    expect(filtered.length).toBe(9);
+    expect(filtered[0].name).toBe("Maureen Burke");
   });
 });

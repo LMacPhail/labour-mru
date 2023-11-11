@@ -1,7 +1,20 @@
 export type PartyIDs = "CON" | "SNP" | "LDM" | "LAB";
 
+export const policyTypeNames = [
+  "climate",
+  "migration",
+  "LGBTQ",
+  "workers",
+  "nhs",
+  "benefits",
+  "strikes",
+  "publicOwnership",
+];
+
+export type PolicyType = (typeof policyTypeNames)[number];
+
 export type Policy = {
-  links: string[];
+  links?: string[];
   positive?: boolean;
 };
 
@@ -37,8 +50,10 @@ export type MP = {
     charitiesBoard: string;
     directorOfCompanies: string;
   };
-  policyInterests: PolicyInterests;
+  policyInterests: Record<PolicyType, Policy>;
   notes?: string; // 36
 };
 
 export type ViewType = "about" | "index";
+
+export type Filters = { policies: Record<Partial<PolicyType>, Policy> };

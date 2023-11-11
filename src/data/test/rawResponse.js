@@ -115,7 +115,7 @@ export const values = [
     "",
     "Negative",
     "",
-    "Positive",
+    "Negative",
     "",
     "Negative",
     "",

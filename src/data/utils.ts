@@ -1,4 +1,4 @@
-import { MP, PartyIDs, PolicyInterests } from "./types";
+import { Filters, MP, PartyIDs, PolicyInterests, PolicyType } from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -170,4 +170,20 @@ export const formatResponse = (values: string[][]): MP[] => {
   });
 
   return mpData;
+};
+
+export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
+  const policyFilters = filters.policies;
+  // If there are no active filters, then return all data
+  if (!Object.values(policyFilters).some((p) => p.positive !== undefined))
+    return profiles;
+
+  return profiles.filter((profile) =>
+    Object.keys(policyFilters).some(
+      (policyType: PolicyType) =>
+        policyFilters[policyType].positive !== undefined &&
+        profile.policyInterests[policyType].positive ===
+          policyFilters[policyType].positive
+    )
+  );
 };
