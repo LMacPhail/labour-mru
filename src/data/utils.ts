@@ -51,8 +51,8 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   26: "LGBTQ",
   27: "workers",
   28: "workers",
-  29: "nhs",
-  30: "nhs",
+  29: "NHS",
+  30: "NHS",
   31: "benefits",
   32: "benefits",
   33: "strikes",
@@ -97,7 +97,7 @@ const blankMp = (): MP => ({
       links: [],
       positive: undefined,
     },
-    nhs: {
+    NHS: {
       links: [],
       positive: undefined,
     },
@@ -115,6 +115,14 @@ const blankMp = (): MP => ({
     },
   },
 });
+
+// export const fetchMPs = (updateProfiles: (profiles: MP[]) => void) => {
+export const fetchMPs = () => {
+  fetch("https://api.futurelabourmps.com/")
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+};
 
 export const formatResponse = (values: string[][]): MP[] => {
   const mpData: MP[] = [];

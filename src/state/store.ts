@@ -33,7 +33,7 @@ export const initState: AppState = {
         links: undefined,
         positive: undefined,
       },
-      nhs: {
+      NHS: {
         links: undefined,
         positive: undefined,
       },

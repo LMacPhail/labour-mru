@@ -7,7 +7,7 @@ export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
     <div className="accordion-group">
       {mps.map((mp, i) => {
         return (
-          <div className="accordion">
+          <div className="accordion" key={i}>
             <input
               type="checkbox"
               id={`accordion-${i}`}

@@ -6,9 +6,11 @@ import { SidebarContent } from "./components/sidebar/SidebarContent";
 import { Header } from "./components/Header";
 import { AppState } from "./state/store";
 import { useSelector } from "react-redux";
+import { fetchMPs } from "./data/utils";
 
 function App() {
   const view = useSelector((state: AppState) => state.view);
+  fetchMPs();
 
   return (
     <div className="">
