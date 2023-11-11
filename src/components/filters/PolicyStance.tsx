@@ -80,7 +80,9 @@ const PositiveNegativeChoice: React.FC<{
         checked={negativeChecked}
         onClick={() => handleCheck("negative")}
       />
-      <p className="flex align-middle text-center">{category}</p>
+      <p className="flex align-middle text-center capitalize">
+        {category === "publicOwnership" ? "public ownership" : category}
+      </p>
       <input
         type="checkbox"
         className="checkbox checkbox-bordered-success"
