@@ -26,7 +26,7 @@ export const PolicyStance: React.FC = () => {
         <span>Positive</span>
       </div>
       {categories.map((category) => (
-        <PositiveNegativeChoice category={category} />
+        <PositiveNegativeChoice key={category} category={category} />
       ))}
     </div>
   );
@@ -78,7 +78,7 @@ const PositiveNegativeChoice: React.FC<{
         type="checkbox"
         className="checkbox checkbox-bordered-error"
         checked={negativeChecked}
-        onClick={() => handleCheck("negative")}
+        onChange={() => handleCheck("negative")}
       />
       <p className="flex align-middle text-center capitalize">
         {category === "publicOwnership" ? "public ownership" : category}
@@ -87,7 +87,7 @@ const PositiveNegativeChoice: React.FC<{
         type="checkbox"
         className="checkbox checkbox-bordered-success"
         checked={positiveChecked}
-        onClick={() => handleCheck("positive")}
+        onChange={() => handleCheck("positive")}
       />
     </div>
   );
