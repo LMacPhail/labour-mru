@@ -118,7 +118,7 @@ const blankMp = (): MP => ({
 
 // export const fetchMPs = (updateProfiles: (profiles: MP[]) => void) => {
 export const fetchMPs = () => {
-  fetch("https://api.futurelabourmps.com/")
+  fetch("http://localhost:4000/api")
     .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.error(error));
