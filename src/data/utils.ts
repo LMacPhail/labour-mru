@@ -123,19 +123,6 @@ const blankMp = (): MP => ({
   },
 });
 
-// export const fetchMPs = (updateProfiles: (profiles: MP[]) => void) => {
-export const fetchMPs = (
-  updateProfiles: (profiles: MP[], status: DataStatus) => void
-) => {
-  fetch("http://localhost:4000/api")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      updateProfiles(formatResponse(data.values), "complete");
-    })
-    .catch((error) => console.error(error));
-};
-
 export const formatResponse = (values: string[][]): MP[] => {
   const mpData: MP[] = [];
 
@@ -206,4 +193,16 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
           policyFilters[policyType].positive
     )
   );
+};
+
+export const fetchMPs = (
+  updateProfiles: (profiles: MP[], status: DataStatus) => void
+) => {
+  fetch("http://localhost:4000/api")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      updateProfiles(formatResponse(data.values), "complete");
+    })
+    .catch((error) => console.error(error));
 };
