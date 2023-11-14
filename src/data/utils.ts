@@ -1,4 +1,11 @@
-import { Filters, MP, PartyIDs, PolicyInterests, PolicyType } from "./types";
+import {
+  DataStatus,
+  Filters,
+  MP,
+  PartyIDs,
+  PolicyInterests,
+  PolicyType,
+} from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -51,8 +58,8 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   26: "LGBTQ",
   27: "workers",
   28: "workers",
-  29: "nhs",
-  30: "nhs",
+  29: "NHS",
+  30: "NHS",
   31: "benefits",
   32: "benefits",
   33: "strikes",
@@ -97,7 +104,7 @@ const blankMp = (): MP => ({
       links: [],
       positive: undefined,
     },
-    nhs: {
+    NHS: {
       links: [],
       positive: undefined,
     },
@@ -186,4 +193,16 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
           policyFilters[policyType].positive
     )
   );
+};
+
+export const fetchMPs = (
+  updateProfiles: (profiles: MP[], status: DataStatus) => void
+) => {
+  fetch("http://localhost:4000/api")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      updateProfiles(formatResponse(data.values), "complete");
+    })
+    .catch((error) => console.error(error));
 };

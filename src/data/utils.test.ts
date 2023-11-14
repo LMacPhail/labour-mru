@@ -29,7 +29,7 @@ const expectedValues = [
       migration: { links: [""], positive: false },
       LGBTQ: { links: [""], positive: true },
       workers: { links: [""], positive: false },
-      nhs: { links: [""], positive: false },
+      NHS: { links: [""], positive: false },
       benefits: { links: [""], positive: false },
       strikes: { links: [""], positive: true },
       publicOwnership: { links: [""], positive: undefined },
@@ -61,7 +61,7 @@ const expectedValues = [
       migration: { links: [], positive: undefined },
       LGBTQ: { links: [], positive: undefined },
       workers: { links: [], positive: undefined },
-      nhs: { links: [], positive: undefined },
+      NHS: { links: [], positive: undefined },
       benefits: { links: [], positive: undefined },
       strikes: { links: [], positive: undefined },
       publicOwnership: { links: [], positive: undefined },
@@ -94,7 +94,7 @@ const expectedValues = [
       migration: { links: [""], positive: undefined },
       LGBTQ: { links: [""], positive: undefined },
       workers: { links: [""], positive: undefined },
-      nhs: {
+      NHS: {
         links: ["Made a passing reference to NHS cuts in this campaign video"],
         positive: undefined,
       },
@@ -137,7 +137,7 @@ const expectedValues = [
       migration: { links: [""], positive: undefined },
       LGBTQ: { links: [""], positive: undefined },
       workers: { links: [""], positive: undefined },
-      nhs: {
+      NHS: {
         links: ["Ran the Great North Run for MS Society"],
         positive: undefined,
       },
@@ -184,7 +184,7 @@ const expectedValues = [
         positive: undefined,
       },
       workers: { links: [""], positive: undefined },
-      nhs: {
+      NHS: {
         links: ["Shared petition for 75th anniversary of NHS on Facebook "],
         positive: true,
       },
@@ -230,7 +230,7 @@ const expectedValues = [
         positive: true,
       },
       workers: { links: [""], positive: undefined },
-      nhs: { links: [""], positive: undefined },
+      NHS: { links: [""], positive: undefined },
       benefits: {
         links: [
           "Said that he would scrap the two-child benefit cap ('a heinous policy') and bedroom tax ",
@@ -278,7 +278,7 @@ const expectedValues = [
         links: ["Some (mildly) positive union words"],
         positive: undefined,
       },
-      nhs: {
+      NHS: {
         links: [
           "Lots of tweets about the decline in quality of local services, especially in the NHS (e.g. here)",
         ],
@@ -326,7 +326,7 @@ const expectedValues = [
       migration: { links: [""], positive: undefined },
       LGBTQ: { links: [""], positive: undefined },
       workers: { links: [""], positive: undefined },
-      nhs: { links: [""], positive: undefined },
+      NHS: { links: [""], positive: undefined },
       benefits: { links: [""], positive: undefined },
       strikes: { links: [""], positive: undefined },
       publicOwnership: { links: [""], positive: undefined },
@@ -358,7 +358,7 @@ const expectedValues = [
       migration: { links: [], positive: undefined },
       LGBTQ: { links: [], positive: undefined },
       workers: { links: [], positive: undefined },
-      nhs: { links: [], positive: undefined },
+      NHS: { links: [], positive: undefined },
       benefits: { links: [], positive: undefined },
       strikes: { links: [], positive: undefined },
       publicOwnership: { links: [], positive: undefined },
@@ -391,7 +391,7 @@ const blankFilters = (): Filters => ({
       links: undefined,
       positive: undefined,
     },
-    nhs: {
+    NHS: {
       links: undefined,
       positive: undefined,
     },
@@ -411,27 +411,27 @@ const blankFilters = (): Filters => ({
 });
 
 describe("filterProfiles", () => {
-  it("filters profiles that match only nhs positive", () => {
-    const nhsFilter: Filters = blankFilters();
-    nhsFilter.policies["nhs"].positive = true;
-    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+  it("filters profiles that match only NHS positive", () => {
+    const NHSFilter: Filters = blankFilters();
+    NHSFilter.policies["NHS"].positive = true;
+    const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
     expect(filtered.length).toBe(1);
     expect(filtered[0].name).toBe("Martin Rhodes");
   });
 
-  it("filters profiles that match nhs and climate positive", () => {
-    const nhsFilter: Filters = blankFilters();
-    nhsFilter.policies["nhs"].positive = true;
-    nhsFilter.policies["climate"].positive = true;
+  it("filters profiles that match NHS and climate positive", () => {
+    const NHSFilter: Filters = blankFilters();
+    NHSFilter.policies["NHS"].positive = true;
+    NHSFilter.policies["climate"].positive = true;
 
-    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+    const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
     expect(filtered.length).toBe(3);
     expect(filtered[0].name).toBe("Maureen Burke");
   });
 
   it("returns all profiles if the filters are all undefined (not active)", () => {
-    const nhsFilter: Filters = blankFilters();
-    const filtered = filterProfiles(expectedValues as MP[], nhsFilter);
+    const NHSFilter: Filters = blankFilters();
+    const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
     expect(filtered.length).toBe(9);
     expect(filtered[0].name).toBe("Maureen Burke");
   });

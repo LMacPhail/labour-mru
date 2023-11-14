@@ -1,11 +1,13 @@
 export type PartyIDs = "CON" | "SNP" | "LDM" | "LAB";
 
+export type DataStatus = "loading" | "complete" | "error";
+
 export const policyTypeNames = [
   "climate",
   "migration",
   "LGBTQ",
   "workers",
-  "nhs",
+  "NHS",
   "benefits",
   "strikes",
   "publicOwnership",
@@ -23,7 +25,7 @@ export type PolicyInterests = {
   migration: Policy; // 23
   LGBTQ: Policy; // 25
   workers: Policy; // 27
-  nhs: Policy; // 29
+  NHS: Policy; // 29
   benefits: Policy; // 31
   strikes: Policy; // 33
   publicOwnership: Policy; // 35

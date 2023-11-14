@@ -9,7 +9,7 @@ const categories: PolicyType[] = [
   "migration",
   "LGBTQ",
   "workers",
-  "nhs",
+  "NHS",
   "benefits",
   "strikes",
   "publicOwnership",
@@ -26,7 +26,7 @@ export const PolicyStance: React.FC = () => {
         <span>Positive</span>
       </div>
       {categories.map((category) => (
-        <PositiveNegativeChoice key={category} category={category} />
+        <PositiveNegativeChoice category={category} key={category} />
       ))}
     </div>
   );
@@ -73,12 +73,16 @@ const PositiveNegativeChoice: React.FC<{
   };
 
   return (
-    <div className="flex flex-row justify-between m-3">
+    <div
+      className={`flex flex-row justify-between m-3 ${category}`}
+      key={category}
+    >
       <input
         type="checkbox"
         className="checkbox checkbox-bordered-error"
         checked={negativeChecked}
-        onChange={() => handleCheck("negative")}
+        onClick={() => handleCheck("negative")}
+        onChange={(_e) => handleCheck("negative")}
       />
       <p className="flex align-middle text-center capitalize">
         {category === "publicOwnership" ? "public ownership" : category}
@@ -87,7 +91,8 @@ const PositiveNegativeChoice: React.FC<{
         type="checkbox"
         className="checkbox checkbox-bordered-success"
         checked={positiveChecked}
-        onChange={() => handleCheck("positive")}
+        onClick={() => handleCheck("positive")}
+        onChange={(_e) => handleCheck("positive")}
       />
     </div>
   );
