@@ -20,20 +20,21 @@ export type Policy = {
   positive?: boolean;
 };
 
+// number comments are the column index
 export type PolicyInterests = {
-  climate: Policy; // 21 - 22
-  migration: Policy; // 23
-  LGBTQ: Policy; // 25
-  workers: Policy; // 27
-  NHS: Policy; // 29
-  benefits: Policy; // 31
-  strikes: Policy; // 33
-  publicOwnership: Policy; // 35
+  climate: Policy; // 20 - 21
+  migration: Policy; // 22
+  LGBTQ: Policy; // 24
+  workers: Policy; // 26
+  NHS: Policy; // 28
+  benefits: Policy; // 30
+  strikes: Policy; // 32
+  publicOwnership: Policy; // 34
 };
 
 export type SocialMediaLinks = {
-  twitter?: string; // 13
-  facebook?: string;
+  twitter?: string; // 12
+  facebook?: string; // 13
   linkedin?: string;
   instagram?: string;
 };
@@ -46,14 +47,14 @@ export type MP = {
   alreadyCouncillor: string;
   biography: string;
   socialMedia: SocialMediaLinks;
-  currentProfession: string; // 17
+  currentProfession: string; // 16
   organisationalLinks: {
-    membershipOrg: string; // 18
+    membershipOrg: string; // 17
     charitiesBoard: string;
     directorOfCompanies: string;
   };
   policyInterests: Record<PolicyType, Policy>;
-  notes?: string; // 36
+  notes?: string; // 35
 };
 
 export type ViewType = "about" | "index";

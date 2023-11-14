@@ -7,29 +7,30 @@ import {
   PolicyType,
 } from "./types";
 
-const TWITTER_IDX = 13;
-const FB_IDX = 14;
-const LI_IDX = 15;
-const INSTA_IDX = 16;
-const MEMBERSHIP_ORG_IDX = 18;
-const CHARITIES_ORG_IDX = 19;
-const DIRECTOR_ORG_IDX = 20;
+const TWITTER_IDX = 12;
+const FB_IDX = 13;
+const LI_IDX = 14;
+const INSTA_IDX = 15;
+const MEMBERSHIP_ORG_IDX = 17;
+const CHARITIES_ORG_IDX = 18;
+const DIRECTOR_ORG_IDX = 19;
 
 const mpIdxLookup: Record<number, keyof MP> = {
   0: "name",
   1: "constituency",
-  9: "incumbentParty",
-  10: "incumbentMajoritySize",
-  11: "alreadyCouncillor",
-  12: "biography",
+  8: "incumbentParty",
+  9: "incumbentMajoritySize",
+  10: "alreadyCouncillor",
+  11: "biography",
+  12: "socialMedia",
   13: "socialMedia",
   14: "socialMedia",
   15: "socialMedia",
-  16: "socialMedia",
-  17: "currentProfession",
+  16: "currentProfession",
+  17: "organisationalLinks",
   18: "organisationalLinks",
   19: "organisationalLinks",
-  20: "organisationalLinks",
+  20: "policyInterests",
   21: "policyInterests",
   22: "policyInterests",
   23: "policyInterests",
@@ -44,28 +45,27 @@ const mpIdxLookup: Record<number, keyof MP> = {
   32: "policyInterests",
   33: "policyInterests",
   34: "policyInterests",
-  35: "policyInterests",
+  35: "notes",
   36: "notes",
-  37: "notes",
 };
 
 const policyLookupIdx: Record<number, keyof PolicyInterests> = {
+  20: "climate",
   21: "climate",
-  22: "climate",
+  22: "migration",
   23: "migration",
-  24: "migration",
+  24: "LGBTQ",
   25: "LGBTQ",
-  26: "LGBTQ",
+  26: "workers",
   27: "workers",
-  28: "workers",
+  28: "NHS",
   29: "NHS",
-  30: "NHS",
+  30: "benefits",
   31: "benefits",
-  32: "benefits",
+  32: "strikes",
   33: "strikes",
-  34: "strikes",
+  34: "publicOwnership",
   35: "publicOwnership",
-  36: "publicOwnership",
 };
 
 const blankMp = (): MP => ({
@@ -157,10 +157,10 @@ export const formatResponse = (values: string[][]): MP[] => {
         case "policyInterests":
           const policyType = policyLookupIdx[x];
           if (x % 2 === 1) {
-            mp.policyInterests[policyType].links = [v];
-          } else {
             mp.policyInterests[policyType].positive =
               v === "Positive" ? true : v === "Negative" ? false : undefined;
+          } else {
+            mp.policyInterests[policyType].links = [v];
           }
           break;
         case "incumbentMajoritySize":
@@ -201,7 +201,6 @@ export const fetchMPs = (
   fetch("http://localhost:4000/api")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       updateProfiles(formatResponse(data.values), "complete");
     })
     .catch((error) => console.error(error));
