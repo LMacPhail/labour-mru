@@ -1,4 +1,11 @@
-import { Filters, MP, PartyIDs, PolicyInterests, PolicyType } from "./types";
+import {
+  DataStatus,
+  Filters,
+  MP,
+  PartyIDs,
+  PolicyInterests,
+  PolicyType,
+} from "./types";
 
 const TWITTER_IDX = 13;
 const FB_IDX = 14;
@@ -117,10 +124,15 @@ const blankMp = (): MP => ({
 });
 
 // export const fetchMPs = (updateProfiles: (profiles: MP[]) => void) => {
-export const fetchMPs = () => {
+export const fetchMPs = (
+  updateProfiles: (profiles: MP[], status: DataStatus) => void
+) => {
   fetch("http://localhost:4000/api")
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data);
+      updateProfiles(formatResponse(data.values), "complete");
+    })
     .catch((error) => console.error(error));
 };
 

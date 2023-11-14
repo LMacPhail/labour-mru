@@ -1,8 +1,7 @@
 import {
   Action,
-  SET_LOADING_ACTION,
   SET_POLICY_STANCE_ACTION,
-  SET_PROFILES_ACTION,
+  SET_DATA_ACTION,
   SET_VIEW_ACTION,
 } from "./actions";
 import { AppState, initState } from "./store";
@@ -13,21 +12,15 @@ export default function appReducer(
   action: Action
 ): AppState {
   switch (action.type) {
-    case SET_LOADING_ACTION: {
-      return {
-        ...state,
-        loading: action.payload.loading,
-      };
-    }
-    case SET_PROFILES_ACTION: {
+    case SET_DATA_ACTION: {
       const { data } = state;
-      const { profiles } = action.payload;
+      const { profiles, status } = action.payload;
       return {
         ...state,
-        loading: profiles !== undefined && profiles.length > 0,
         data: {
           ...data,
-          profiles: action.payload.profiles,
+          profiles: profiles,
+          status,
         },
       };
     }

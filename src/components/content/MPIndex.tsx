@@ -5,21 +5,31 @@ import { filterProfiles } from "../../data/utils";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";
+import { Spinner } from "../Spinner";
 
 const MPIndex: React.FC = () => {
   const filters = useSelector((state: AppState) => state.activeFilters);
-  const mpData = useSelector((state: AppState) => state.data.profiles);
-  const [mps, setMPs] = useState<MP[]>(filterProfiles(mpData, filters));
+  const data = useSelector((state: AppState) => state.data);
+  const { profiles, status } = data;
+  const [mps, setMPs] = useState<MP[]>(filterProfiles(profiles, filters));
 
   useEffect(() => {
-    setMPs(filterProfiles(mpData, filters));
-  }, [filters, mpData]);
+    setMPs(filterProfiles(profiles, filters));
+  }, [filters, profiles]);
 
   return (
-    <div className="flex flex-col">
-      <SearchInput />
-      <Accordion mps={mps} />
-    </div>
+    <>
+      {status === "loading" ? (
+        <div className="h-screen w-full flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="flex flex-col">
+          <SearchInput />
+          <Accordion mps={mps} />
+        </div>
+      )}
+    </>
   );
 };
 

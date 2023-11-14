@@ -1,5 +1,7 @@
 export type PartyIDs = "CON" | "SNP" | "LDM" | "LAB";
 
+export type DataStatus = "loading" | "complete" | "error";
+
 export const policyTypeNames = [
   "climate",
   "migration",

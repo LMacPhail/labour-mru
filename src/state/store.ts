@@ -5,15 +5,13 @@ import rootReducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 export type AppState = {
-  loading: boolean;
-  data: { profiles: MP[] };
+  data: { status: "loading" | "complete" | "error"; profiles: MP[] };
   view: ViewType;
   activeFilters: Filters;
 };
 
 export const initState: AppState = {
-  loading: true,
-  data: { profiles: formatResponse(values) },
+  data: { status: "loading", profiles: formatResponse(values) },
   view: "about",
   activeFilters: {
     policies: {
