@@ -13,12 +13,15 @@ import { SET_DATA_ACTION } from "./state/actions";
 function App() {
   const view = useSelector((state: AppState) => state.view);
   const dispatch = useDispatch();
-  const updateData = useCallback((mpData: MP[], status: DataStatus) => {
-    dispatch({
-      type: SET_DATA_ACTION,
-      payload: { profiles: mpData, status },
-    });
-  }, []);
+  const updateData = useCallback(
+    (mpData: MP[], status: DataStatus) => {
+      dispatch({
+        type: SET_DATA_ACTION,
+        payload: { profiles: mpData, status },
+      });
+    },
+    [dispatch]
+  );
   fetchMPs(updateData);
 
   return (
