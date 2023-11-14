@@ -4,7 +4,9 @@ This is an interface for researching the new Labour MPs in next year's election.
 
 ## Setup
 
-This is a React app with TypeScript. To get started, run `yarn install` and `yarn start` - the app should then be running at `localhost:3000`.
+This is a React app with TypeScript. To get started, run `yarn install` and `yarn start` - the frontend app should then be running at `localhost:3000`.
+
+To get the server running, go into the folder `./server` and run `node server.js`;
 
 ## Testing
 

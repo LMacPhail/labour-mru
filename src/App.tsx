@@ -6,10 +6,10 @@ import { SidebarContent } from "./components/sidebar/SidebarContent";
 import { Header } from "./components/Header";
 import { AppState } from "./state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMPs } from "./data/utils";
+import { fetchMPs, formatResponse } from "./data/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
-
+import { values } from "./data/test/rawResponse";
 function App() {
   const view = useSelector((state: AppState) => state.view);
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function App() {
     [dispatch]
   );
   fetchMPs(updateData);
+  console.log(formatResponse(values));
 
   return (
     <div className="">
