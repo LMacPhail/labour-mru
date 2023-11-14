@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMPs, formatResponse } from "./data/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
-import { values } from "./data/test/rawResponse";
+
 function App() {
   const view = useSelector((state: AppState) => state.view);
   const dispatch = useDispatch();
@@ -23,7 +23,6 @@ function App() {
     [dispatch]
   );
   fetchMPs(updateData);
-  console.log(formatResponse(values));
 
   return (
     <div className="">
