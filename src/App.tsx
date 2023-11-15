@@ -6,7 +6,7 @@ import { SidebarContent } from "./components/sidebar/SidebarContent";
 import { Header } from "./components/Header";
 import { AppState } from "./state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMPs } from "./data/utils";
+import { fetchMPs } from "./data/utils/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
 

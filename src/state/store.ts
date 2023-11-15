@@ -1,6 +1,6 @@
 import { values } from "../data/test/rawResponse";
 import { Filters, MP, ViewType } from "../data/types";
-import { formatResponse } from "../data/utils";
+import { formatResponse } from "../data/utils/utils";
 import rootReducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -16,35 +16,35 @@ export const initState: AppState = {
   activeFilters: {
     policies: {
       climate: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       migration: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       LGBTQ: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       workers: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       NHS: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       benefits: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       strikes: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
       publicOwnership: {
-        links: undefined,
+        source: undefined,
         positive: undefined,
       },
     },

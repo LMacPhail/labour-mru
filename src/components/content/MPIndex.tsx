@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { SearchInput } from "../SearchInput";
 import { Accordion } from "./Accordion";
-import { filterProfiles } from "../../data/utils";
+import { filterProfiles } from "../../data/utils/utils";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../atoms/Spinner";
 
 const MPIndex: React.FC = () => {
   const filters = useSelector((state: AppState) => state.activeFilters);
