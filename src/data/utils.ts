@@ -203,5 +203,7 @@ export const fetchMPs = (
     .then((data) => {
       updateProfiles(formatResponse(data.values), "complete");
     })
-    .catch((error) => console.error(error));
+    .catch((_error) => {
+      updateProfiles([], "error");
+    });
 };
