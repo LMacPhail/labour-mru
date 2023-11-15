@@ -18,7 +18,5 @@ export const extractLinks = (
     .filter((string) => !string.match(urlRegex) && string !== "")
     .map((string) => string.trim());
 
-  console.log(content);
-
   return { content, link };
 };

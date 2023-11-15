@@ -123,7 +123,7 @@ const ContentPoint: React.FC<{ subHeader: string; rawContent: string }> = ({
       ) : (
         <>
           {formattedContent[0].content}{" "}
-          {formattedContent[0].link && (
+          {formattedContent[0].link && formattedContent[0].link.length > 0 && (
             <a className="text-blue-500" href={formattedContent[0]?.link[0]}>
               (source)
             </a>
