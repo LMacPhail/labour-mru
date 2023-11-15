@@ -37,17 +37,17 @@ export const ProfileHeader: React.FC<{
           <p className="font-light text-sm italic">{constituency}</p>
         </span>
       </div>
-      <span className="flex flex-row font-extralight text-sm italic">
-        {Object.keys(socials).map((site: string) => {
-          const link = socials[site as keyof SocialMediaLinks];
-          if (link !== "") {
+      <span className="flex flex-row gap-2 font-extralight text-sm italic">
+        {Object.keys(socials)
+          .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
+          .map((site: string) => {
+            const link = socials[site as keyof SocialMediaLinks];
             return (
               <a href={link} key={`${name}-${site}-link`}>
                 {getLogo(site)}
               </a>
             );
-          }
-        })}
+          })}
       </span>
     </div>
   );
@@ -105,12 +105,14 @@ const ContentPoint: React.FC<{ subHeader: string; rawContent: string }> = ({
   const formattedContent = contentArray.map((content) => extractLinks(content));
 
   return (
-    <p className="mb-2">
-      <strong>{subHeader}</strong>:{" "}
+    <div className="mb-2">
+      <p>
+        <strong>{subHeader}</strong>:
+      </p>{" "}
       {formattedContent.length > 1 ? (
         <ul>
-          {formattedContent.map((formattedPoint) => (
-            <li>
+          {formattedContent.map((formattedPoint, i) => (
+            <li key={i}>
               {formattedPoint.content}{" "}
               {formattedPoint.link?.[0] && (
                 <a className="text-blue-500" href={formattedPoint.link[0]}>
@@ -130,6 +132,6 @@ const ContentPoint: React.FC<{ subHeader: string; rawContent: string }> = ({
           )}
         </>
       )}
-    </p>
+    </div>
   );
 };

@@ -1,5 +1,5 @@
 const urlRegex = /(https?:\/\/[^ ]*)/;
-const bracketRegex = /[\<|\>]/;
+const bracketRegex = /[<|>]/;
 
 /**
  * Given a content string including a hyperlink in <> parentheses, separates into content and link
