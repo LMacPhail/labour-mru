@@ -190,7 +190,8 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
 export const fetchMPs = (
   updateProfiles: (profiles: MP[], status: DataStatus) => void
 ) => {
-  fetch("http://localhost:4000/api")
+  console.log(process.env.REACT_APP_API_ENDPOINT);
+  fetch(process.env.REACT_APP_API_ENDPOINT ?? "")
     .then((response) => response.json())
     .then((data) => {
       updateProfiles(formatResponse(data.values), "complete");
