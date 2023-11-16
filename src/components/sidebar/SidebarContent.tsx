@@ -1,6 +1,6 @@
 import React from "react";
 import { Filters } from "../filters/Filters";
-import { ProjectTitle } from "../ProjectTitle";
+import { ProjectTitle } from "../atoms/ProjectTitle";
 import { Footer } from "./Footer";
 
 export const SidebarContent: React.FC = () => {

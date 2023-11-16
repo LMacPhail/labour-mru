@@ -16,7 +16,7 @@ export const policyTypeNames = [
 export type PolicyType = (typeof policyTypeNames)[number];
 
 export type Policy = {
-  links?: string[];
+  source?: string;
   positive?: boolean;
 };
 

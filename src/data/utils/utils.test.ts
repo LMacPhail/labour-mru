@@ -1,5 +1,5 @@
-import { values } from "./test/rawResponse";
-import { Filters, MP } from "./types";
+import { values } from "../test/rawResponse";
+import { Filters, MP } from "../types";
 import { filterProfiles, formatResponse } from "./utils";
 
 const expectedValues = [
@@ -27,37 +27,36 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       migration: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       LGBTQ: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       workers: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       NHS: {
-        links: ["Made a passing reference to NHS cuts in this campaign video"],
+        source: "Made a passing reference to NHS cuts in this campaign video",
         positive: undefined,
       },
       benefits: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       strikes: {
-        links: [
+        source:
           "Weighed in against a strike by teachers in a school with blue water coming out of the taps",
-        ],
         positive: false,
       },
       publicOwnership: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
     },
@@ -87,35 +86,35 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       migration: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       LGBTQ: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       workers: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       NHS: {
-        links: ["Ran the Great North Run for MS Society"],
+        source: "Ran the Great North Run for MS Society",
         positive: undefined,
       },
       benefits: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       strikes: {
         positive: undefined,
-        links: [""],
+        source: "",
       },
       publicOwnership: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
     },
@@ -145,39 +144,37 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [
+        source:
           "Has been involved in Fair Trade campaigning for a … about trade justice and climate justice - Source",
-        ],
         positive: true,
       },
       migration: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       LGBTQ: {
-        links: [
+        source:
           "Elected honourary member of LGBT+ Labour Scotland in February 2020.",
-        ],
         positive: true,
       },
       workers: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       NHS: {
-        links: ["Shared petition for 75th anniversary of NHS on Facebook "],
+        source: "Shared petition for 75th anniversary of NHS on Facebook ",
         positive: true,
       },
       benefits: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       strikes: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       publicOwnership: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
     },
@@ -208,39 +205,38 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       migration: {
-        links: [
+        source:
           'Resigned from the labour party over its Brexit sta… for now / "dismissing the impact on EU families"',
-        ],
+
         positive: undefined,
       },
       LGBTQ: {
-        links: ["Support for 'demedicalisation' (self-ID) for trans people"],
+        source: "Support for 'demedicalisation' (self-ID) for trans people",
         positive: true,
       },
       workers: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       NHS: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       benefits: {
-        links: [
+        source:
           "Said that he would scrap the two-child benefit cap ('a heinous policy') and bedroom tax ",
-        ],
         positive: true,
       },
       strikes: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       publicOwnership: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
     },
@@ -271,41 +267,38 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [
+        source:
           "In his role as lawyer, he was positive about progr…d for local prosperity to flow from new projects)",
-        ],
         positive: true,
       },
       migration: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       LGBTQ: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       workers: {
-        links: ["Some (mildly) positive union words"],
+        source: "Some (mildly) positive union words",
         positive: true,
       },
       NHS: {
-        links: [
+        source:
           "Lots of tweets about the decline in quality of local services, especially in the NHS (e.g. here)",
-        ],
         positive: true,
       },
       benefits: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       strikes: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       publicOwnership: {
-        links: [
+        source:
           "His interview about energy transition doesn't incl…e need to ensure that investors see a good return",
-        ],
         positive: undefined,
       },
     },
@@ -334,37 +327,36 @@ const expectedValues = [
     },
     policyInterests: {
       climate: {
-        links: [
+        source:
           "Visit to EMEC (Eureopean Marine Energy Centre) 'A …itter.com/GordonMcKee_/status/1521399496558657536",
-        ],
         positive: true,
       },
       migration: {
-        links: ["Nothing found"],
+        source: "Nothing found",
         positive: undefined,
       },
       LGBTQ: {
-        links: ["Nothing found"],
+        source: "Nothing found",
         positive: undefined,
       },
       workers: {
-        links: ["Nothing found"],
+        source: "Nothing found",
         positive: undefined,
       },
       NHS: {
-        links: ["Nothing found"],
+        source: "Nothing found",
         positive: undefined,
       },
       benefits: {
-        links: ["Nothing found"],
+        source: "Nothing found",
         positive: undefined,
       },
       strikes: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
       publicOwnership: {
-        links: [""],
+        source: "",
         positive: undefined,
       },
     },
@@ -382,35 +374,35 @@ describe("formatResponse", () => {
 const blankFilters = (): Filters => ({
   policies: {
     climate: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     migration: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     LGBTQ: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     workers: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     NHS: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     benefits: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     strikes: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
     publicOwnership: {
-      links: undefined,
+      source: undefined,
       positive: undefined,
     },
   },

@@ -5,7 +5,7 @@ import {
   PartyIDs,
   PolicyInterests,
   PolicyType,
-} from "./types";
+} from "./../types";
 
 const TWITTER_IDX = 12;
 const FB_IDX = 13;
@@ -89,35 +89,27 @@ const blankMp = (): MP => ({
   },
   policyInterests: {
     climate: {
-      links: [],
       positive: undefined,
     },
     migration: {
-      links: [],
       positive: undefined,
     },
     LGBTQ: {
-      links: [],
       positive: undefined,
     },
     workers: {
-      links: [],
       positive: undefined,
     },
     NHS: {
-      links: [],
       positive: undefined,
     },
     benefits: {
-      links: [],
       positive: undefined,
     },
     strikes: {
-      links: [],
       positive: undefined,
     },
     publicOwnership: {
-      links: [],
       positive: undefined,
     },
   },
@@ -160,7 +152,7 @@ export const formatResponse = (values: string[][]): MP[] => {
             mp.policyInterests[policyType].positive =
               v === "Positive" ? true : v === "Negative" ? false : undefined;
           } else {
-            mp.policyInterests[policyType].links = [v];
+            mp.policyInterests[policyType].source = v;
           }
           break;
         case "incumbentMajoritySize":
@@ -198,10 +190,13 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
 export const fetchMPs = (
   updateProfiles: (profiles: MP[], status: DataStatus) => void
 ) => {
-  fetch("http://localhost:4000/api")
+  console.log(process.env.REACT_APP_API_ENDPOINT);
+  fetch(process.env.REACT_APP_API_ENDPOINT ?? "")
     .then((response) => response.json())
     .then((data) => {
       updateProfiles(formatResponse(data.values), "complete");
     })
-    .catch((error) => console.error(error));
+    .catch((_error) => {
+      updateProfiles([], "error");
+    });
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectTitle } from "./ProjectTitle";
+import { ProjectTitle } from "./atoms/ProjectTitle";
 import { ViewType } from "../data/types";
 import { SET_VIEW_ACTION } from "../state/actions";
 import { useDispatch } from "react-redux";
