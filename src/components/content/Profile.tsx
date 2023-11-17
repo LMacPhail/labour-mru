@@ -11,7 +11,6 @@ import {
   LinkedinLogo,
   TwitterLogo,
 } from "@phosphor-icons/react";
-import { extractLinks } from "../../data/utils/string";
 import { FormattedContent } from "./FormattedContent";
 import { PolicyCard } from "./PolicyCard";
 import { PolicyBadge } from "../atoms/PolicyBadge";
@@ -70,6 +69,7 @@ export const ProfileHeader: React.FC<{
                 />
               );
             }
+            return <></>;
           })}
         </div>
       </div>
@@ -129,6 +129,7 @@ export const ProfileContent: React.FC<{
               />
             );
           }
+          return <></>;
         })}
       </div>
     </>
