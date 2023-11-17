@@ -38,7 +38,7 @@ export const ProfileHeader: React.FC<{
     }
   };
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row justify-between flex-wrap">
       <div className="lg:w-2/3">
         <h2 className="font-bold mb-2">{name}</h2>
         <span>
@@ -46,7 +46,7 @@ export const ProfileHeader: React.FC<{
           <p className="font-light text-sm italic">{constituency}</p>
         </span>
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-end h-full w-full gap-4 md:justify-between">
         <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">
           {Object.keys(socials)
             .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
@@ -59,7 +59,7 @@ export const ProfileHeader: React.FC<{
               );
             })}
         </span>
-        <div className="flex flex-row gap-1 justify-end">
+        <div className="flex flex-row flex-wrap gap-1 justify-end">
           {Object.keys(policyInterests).map((policyType) => {
             const policy = policyInterests[policyType];
             if (policy.source) {

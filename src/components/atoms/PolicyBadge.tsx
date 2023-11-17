@@ -17,7 +17,7 @@ export const PolicyBadge: React.FC<{
         positive
       )} text-white text-xs rounded-full px-2 py-1`}
     >
-      {policyName === "publicOwnership" ? "public ownership" : policyName}
+      {policyName}
     </span>
   );
 };
