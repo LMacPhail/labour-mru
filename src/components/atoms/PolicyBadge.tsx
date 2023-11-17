@@ -7,15 +7,15 @@ export const PolicyBadge: React.FC<{
 }> = ({ positive, policyName }) => {
   const getBGColour = (positive?: boolean) =>
     positive === undefined
-      ? "bg-slate-800 dark:bg-slate-100"
+      ? "bg-slate-800"
       : positive
-      ? "bg-green-700 dark:bg-green-300"
-      : "bg-red-700 dark:bg-red-300";
+      ? "bg-green-700"
+      : "bg-red-700";
   return (
     <span
       className={`w-min ${getBGColour(
         positive
-      )} text-white dark:text-black text-xs rounded-full px-2 py-1`}
+      )} text-white text-xs rounded-full px-2 py-1`}
     >
       {policyName}
     </span>

@@ -30,6 +30,8 @@ export type PolicyInterests = {
   benefits: Policy; // 30
   strikes: Policy; // 32
   publicOwnership: Policy; // 34
+  housing: Policy; // 41
+  palestine: Policy; // 43
 };
 
 export type SocialMediaLinks = {
