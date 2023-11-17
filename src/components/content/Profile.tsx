@@ -1,5 +1,10 @@
 import React from "react";
-import { Policy, PolicyType, SocialMediaLinks } from "../../data/types";
+import {
+  Policy,
+  PolicyInterests,
+  PolicyType,
+  SocialMediaLinks,
+} from "../../data/types";
 import {
   FacebookLogo,
   InstagramLogo,
@@ -7,6 +12,9 @@ import {
   TwitterLogo,
 } from "@phosphor-icons/react";
 import { extractLinks } from "../../data/utils/string";
+import { FormattedContent } from "./FormattedContent";
+import { PolicyCard } from "./PolicyCard";
+import { PolicyBadge } from "../atoms/PolicyBadge";
 
 const LOGO_SIZE = 24;
 
@@ -15,7 +23,8 @@ export const ProfileHeader: React.FC<{
   bio: string;
   constituency: string;
   socials: SocialMediaLinks;
-}> = ({ name, bio, constituency, socials }) => {
+  policyInterests: Record<PolicyType, Policy>;
+}> = ({ name, bio, constituency, socials, policyInterests }) => {
   const getLogo = (siteType: string) => {
     switch (siteType) {
       case "facebook":
@@ -37,18 +46,33 @@ export const ProfileHeader: React.FC<{
           <p className="font-light text-sm italic">{constituency}</p>
         </span>
       </div>
-      <span className="flex flex-row gap-2 font-extralight text-sm italic">
-        {Object.keys(socials)
-          .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
-          .map((site: string) => {
-            const link = socials[site as keyof SocialMediaLinks];
-            return (
-              <a href={link} key={`${name}-${site}-link`}>
-                {getLogo(site)}
-              </a>
-            );
+      <div className="flex flex-col justify-between">
+        <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">
+          {Object.keys(socials)
+            .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
+            .map((site: string) => {
+              const link = socials[site as keyof SocialMediaLinks];
+              return (
+                <a href={link} key={`${name}-${site}-link`}>
+                  {getLogo(site)}
+                </a>
+              );
+            })}
+        </span>
+        <div className="flex flex-row gap-1 justify-end">
+          {Object.keys(policyInterests).map((policyType) => {
+            const policy = policyInterests[policyType];
+            if (policy.source) {
+              return (
+                <PolicyBadge
+                  policyName={policyType as keyof PolicyInterests}
+                  positive={policy.positive}
+                />
+              );
+            }
           })}
-      </span>
+        </div>
+      </div>
     </div>
   );
 };
@@ -72,16 +96,16 @@ export const ProfileContent: React.FC<{
     <>
       {professionalInfo ? (
         <>
-          <ContentPoint subHeader="Profession" rawContent={profession} />
-          <ContentPoint
+          <FormattedContent subHeader="Profession" rawContent={profession} />
+          <FormattedContent
             subHeader="Organisation membership"
             rawContent={orgs.membershipOrg}
           />
-          <ContentPoint
+          <FormattedContent
             subHeader="Board of charities"
             rawContent={orgs.charitiesBoard}
           />
-          <ContentPoint
+          <FormattedContent
             subHeader="Director of companies"
             rawContent={orgs.directorOfCompanies}
           />
@@ -91,47 +115,22 @@ export const ProfileContent: React.FC<{
           No professional information found for this candidate at this time
         </p>
       )}
+      <h4 className="font-bold my-4">Policy Interests</h4>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Object.keys(policyInterests).map((policyType) => {
+          const policy = policyInterests[policyType];
+          if (policy.source) {
+            return (
+              <PolicyCard
+                key={`${policyType}`}
+                policyName={policyType as keyof PolicyInterests}
+                content={policy.source}
+                positive={policy.positive}
+              />
+            );
+          }
+        })}
+      </div>
     </>
-  );
-};
-
-const ContentPoint: React.FC<{ subHeader: string; rawContent: string }> = ({
-  subHeader,
-  rawContent,
-}) => {
-  const contentArray = rawContent.split("|");
-  if (contentArray.length === 1 && contentArray[0] === "") return <></>;
-
-  const formattedContent = contentArray.map((content) => extractLinks(content));
-
-  return (
-    <div className="mb-2">
-      <p>
-        <strong>{subHeader}</strong>:
-      </p>{" "}
-      {formattedContent.length > 1 ? (
-        <ul>
-          {formattedContent.map((formattedPoint, i) => (
-            <li key={i}>
-              {formattedPoint.content}{" "}
-              {formattedPoint.link?.[0] && (
-                <a className="text-blue-500" href={formattedPoint.link[0]}>
-                  (source)
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <>
-          {formattedContent[0].content}{" "}
-          {formattedContent[0].link && formattedContent[0].link.length > 0 && (
-            <a className="text-blue-500" href={formattedContent[0]?.link[0]}>
-              (source)
-            </a>
-          )}
-        </>
-      )}
-    </div>
   );
 };
