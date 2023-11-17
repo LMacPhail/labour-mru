@@ -47,6 +47,10 @@ const mpIdxLookup: Record<number, keyof MP> = {
   34: "policyInterests",
   35: "notes",
   36: "notes",
+  41: "policyInterests",
+  42: "policyInterests",
+  43: "policyInterests",
+  44: "policyInterests",
 };
 
 const policyLookupIdx: Record<number, keyof PolicyInterests> = {
@@ -66,6 +70,10 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   33: "strikes",
   34: "publicOwnership",
   35: "publicOwnership",
+  41: "housing",
+  42: "housing",
+  43: "palestine",
+  44: "palestine",
 };
 
 const blankMp = (): MP => ({
@@ -180,9 +188,8 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   return profiles.filter((profile) =>
     Object.keys(policyFilters).some(
       (policyType: PolicyType) =>
-        policyFilters[policyType].positive !== undefined &&
-        profile.policyInterests[policyType].positive ===
-          policyFilters[policyType].positive
+        policyFilters[policyType].positive &&
+        profile.policyInterests[policyType].source !== ""
     )
   );
 };
@@ -190,7 +197,6 @@ export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
 export const fetchMPs = (
   updateProfiles: (profiles: MP[], status: DataStatus) => void
 ) => {
-  console.log(process.env.REACT_APP_API_ENDPOINT);
   fetch(process.env.REACT_APP_API_ENDPOINT ?? "")
     .then((response) => response.json())
     .then((data) => {

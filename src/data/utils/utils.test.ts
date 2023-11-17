@@ -409,22 +409,22 @@ const blankFilters = (): Filters => ({
 });
 
 describe("filterProfiles", () => {
-  it("filters profiles that match only NHS positive", () => {
+  it("filters profiles that match any NHS mentions", () => {
     const NHSFilter: Filters = blankFilters();
     NHSFilter.policies["NHS"].positive = true;
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
-    expect(filtered.length).toBe(2);
-    expect(filtered[0].name).toBe("Martin Rhodes");
+    expect(filtered.length).toBe(5);
+    expect(filtered[0].name).toBe("Frank McNally");
   });
 
-  it("filters profiles that match NHS and climate positive", () => {
+  it("filters profiles that match NHS and climate mentions", () => {
     const NHSFilter: Filters = blankFilters();
     NHSFilter.policies["NHS"].positive = true;
     NHSFilter.policies["climate"].positive = true;
 
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
-    expect(filtered.length).toBe(3);
-    expect(filtered[0].name).toBe("Martin Rhodes");
+    expect(filtered.length).toBe(5);
+    expect(filtered[2].name).toBe("Martin Rhodes");
   });
 
   it("returns all profiles if the filters are all undefined (not active)", () => {
