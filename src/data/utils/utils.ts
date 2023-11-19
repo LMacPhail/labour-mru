@@ -190,19 +190,24 @@ export const formatResponse = (values: string[][]): MP[] => {
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   const policyFilters = filters.policies;
   // If there are no active filters, then return all data
-  if (!Object.values(policyFilters).some((p) => p.positive !== undefined))
+  if (
+    !Object.values(policyFilters).some((p) => p.positive !== undefined) &&
+    filters.searchInput === ""
+  )
     return profiles;
 
   const checkedFilters = Object.keys(policyFilters).filter(
     (type: PolicyType) => policyFilters[type].positive
   );
 
-  return profiles.filter((profile) =>
-    profileMatchesFilters(profile, checkedFilters)
+  return profiles.filter(
+    (profile) =>
+      matchesSelectedPolicies(profile, checkedFilters) &&
+      matchesSearchInput(profile, filters.searchInput.toLowerCase())
   );
 };
 
-const profileMatchesFilters = (
+const matchesSelectedPolicies = (
   profile: MP,
   checkedFilters: PolicyType[]
 ): boolean =>
@@ -211,6 +216,10 @@ const profileMatchesFilters = (
       profile.policyInterests[policyType].source !== "" &&
       profile.policyInterests[policyType].source !== undefined
   );
+
+const matchesSearchInput = (profile: MP, searchInput: string): boolean =>
+  profile.name.toLowerCase().includes(searchInput) ||
+  profile.constituency.toLowerCase().includes(searchInput);
 
 export const fetchMPs = (
   updateProfiles: (profiles: MP[], status: DataStatus) => void

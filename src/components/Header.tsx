@@ -41,9 +41,6 @@ export const Header: React.FC<{
               Index
             </button>
           </div>
-          <div className="hidden sm:block">
-            <button className="btn btn-outline-secondary">Contact</button>
-          </div>
         </div>
       </nav>
     </header>

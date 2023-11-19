@@ -442,6 +442,7 @@ describe("formatResponse", () => {
 });
 
 const blankFilters = (): Filters => ({
+  searchInput: "",
   policies: {
     climate: {
       source: undefined,

@@ -14,6 +14,7 @@ export const initState: AppState = {
   data: { status: "loading", profiles: formatResponse(values) },
   view: "about",
   activeFilters: {
+    searchInput: "",
     policies: {
       climate: {
         source: undefined,
