@@ -3,6 +3,7 @@ import {
   SET_POLICY_STANCE_ACTION,
   SET_DATA_ACTION,
   SET_VIEW_ACTION,
+  SET_SEARCH_INPUT_ACTION,
 } from "./actions";
 import { AppState, initState } from "./store";
 
@@ -32,10 +33,23 @@ export default function appReducer(
     }
     case SET_POLICY_STANCE_ACTION: {
       const { category, positive } = action.payload;
-      const policies = state.activeFilters.policies;
+      const { policies, searchInput } = state.activeFilters;
       return {
         ...state,
-        activeFilters: { policies: { ...policies, [category]: { positive } } },
+        activeFilters: {
+          searchInput,
+          policies: { ...policies, [category]: { positive } },
+        },
+      };
+    }
+    case SET_SEARCH_INPUT_ACTION: {
+      const { value } = action.payload;
+      return {
+        ...state,
+        activeFilters: {
+          ...state.activeFilters,
+          searchInput: value,
+        },
       };
     }
     default: {

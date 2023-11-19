@@ -13,6 +13,8 @@ const categories: PolicyType[] = [
   "benefits",
   "strikes",
   "publicOwnership",
+  "housing",
+  "palestine",
 ];
 
 export const PolicyStance: React.FC = () => {

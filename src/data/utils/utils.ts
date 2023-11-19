@@ -45,12 +45,12 @@ const mpIdxLookup: Record<number, keyof MP> = {
   32: "policyInterests",
   33: "policyInterests",
   34: "policyInterests",
-  35: "notes",
-  36: "notes",
-  41: "policyInterests",
-  42: "policyInterests",
-  43: "policyInterests",
-  44: "policyInterests",
+  35: "policyInterests",
+  36: "policyInterests",
+  37: "policyInterests",
+  38: "policyInterests",
+  39: "policyInterests",
+  40: "notes",
 };
 
 const policyLookupIdx: Record<number, keyof PolicyInterests> = {
@@ -70,10 +70,10 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   33: "strikes",
   34: "publicOwnership",
   35: "publicOwnership",
-  41: "housing",
-  42: "housing",
-  43: "palestine",
-  44: "palestine",
+  36: "housing",
+  37: "housing",
+  38: "palestine",
+  39: "palestine",
 };
 
 const blankMp = (): MP => ({
@@ -120,6 +120,12 @@ const blankMp = (): MP => ({
     publicOwnership: {
       positive: undefined,
     },
+    housing: {
+      positive: undefined,
+    },
+    palestine: {
+      positive: undefined,
+    },
   },
 });
 
@@ -160,7 +166,9 @@ export const formatResponse = (values: string[][]): MP[] => {
             mp.policyInterests[policyType].positive =
               v === "Positive" ? true : v === "Negative" ? false : undefined;
           } else {
-            mp.policyInterests[policyType].source = v;
+            if (v !== "Nothing found") {
+              mp.policyInterests[policyType].source = v;
+            }
           }
           break;
         case "incumbentMajoritySize":
@@ -182,22 +190,45 @@ export const formatResponse = (values: string[][]): MP[] => {
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   const policyFilters = filters.policies;
   // If there are no active filters, then return all data
-  if (!Object.values(policyFilters).some((p) => p.positive !== undefined))
+  if (
+    !Object.values(policyFilters).some((p) => p.positive !== undefined) &&
+    filters.searchInput === ""
+  )
     return profiles;
 
-  return profiles.filter((profile) =>
-    Object.keys(policyFilters).some(
-      (policyType: PolicyType) =>
-        policyFilters[policyType].positive &&
-        profile.policyInterests[policyType].source !== ""
-    )
+  const checkedFilters = Object.keys(policyFilters).filter(
+    (type: PolicyType) => policyFilters[type].positive
+  );
+
+  return profiles.filter(
+    (profile) =>
+      matchesSelectedPolicies(profile, checkedFilters) &&
+      matchesSearchInput(profile, filters.searchInput.toLowerCase())
   );
 };
+
+const matchesSelectedPolicies = (
+  profile: MP,
+  checkedFilters: PolicyType[]
+): boolean =>
+  checkedFilters.every(
+    (policyType) =>
+      profile.policyInterests[policyType].source !== "" &&
+      profile.policyInterests[policyType].source !== undefined
+  );
+
+const matchesSearchInput = (profile: MP, searchInput: string): boolean =>
+  profile.name.toLowerCase().includes(searchInput) ||
+  profile.constituency.toLowerCase().includes(searchInput);
 
 export const fetchMPs = (
   updateProfiles: (profiles: MP[], status: DataStatus) => void
 ) => {
-  fetch(process.env.REACT_APP_API_ENDPOINT ?? "")
+  const apiUrl =
+    (process.env.REACT_APP_API_ENDPOINT ?? "") +
+    "/" +
+    (process.env.REACT_APP_API_COLS ?? "");
+  fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
       updateProfiles(formatResponse(data.values), "complete");

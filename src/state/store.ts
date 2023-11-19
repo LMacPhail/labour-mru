@@ -14,6 +14,7 @@ export const initState: AppState = {
   data: { status: "loading", profiles: formatResponse(values) },
   view: "about",
   activeFilters: {
+    searchInput: "",
     policies: {
       climate: {
         source: undefined,
@@ -44,6 +45,14 @@ export const initState: AppState = {
         positive: undefined,
       },
       publicOwnership: {
+        source: undefined,
+        positive: undefined,
+      },
+      housing: {
+        source: undefined,
+        positive: undefined,
+      },
+      palestine: {
         source: undefined,
         positive: undefined,
       },
