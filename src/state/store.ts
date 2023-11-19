@@ -47,6 +47,14 @@ export const initState: AppState = {
         source: undefined,
         positive: undefined,
       },
+      housing: {
+        source: undefined,
+        positive: undefined,
+      },
+      palestine: {
+        source: undefined,
+        positive: undefined,
+      },
     },
   },
 };

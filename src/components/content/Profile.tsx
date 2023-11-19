@@ -64,12 +64,13 @@ export const ProfileHeader: React.FC<{
             if (policy.source) {
               return (
                 <PolicyBadge
+                  key={`${policyType}-badge`}
                   policyName={policyType as keyof PolicyInterests}
                   positive={policy.positive}
                 />
               );
             }
-            return <></>;
+            return <div key={`${policyType}-badge`} className="hidden"></div>;
           })}
         </div>
       </div>
@@ -122,14 +123,14 @@ export const ProfileContent: React.FC<{
           if (policy.source) {
             return (
               <PolicyCard
-                key={`${policyType}`}
+                key={`${policyType}-card`}
                 policyName={policyType as keyof PolicyInterests}
                 content={policy.source}
                 positive={policy.positive}
               />
             );
           }
-          return <></>;
+          return <div key={`${policyType}-card`} className="hidden"></div>;
         })}
       </div>
     </>

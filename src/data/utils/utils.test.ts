@@ -2,6 +2,33 @@ import { values } from "../test/rawResponse";
 import { Filters, MP } from "../types";
 import { filterProfiles, formatResponse } from "./utils";
 
+// Here are the policies the test profiles mention
+// Frank McNally
+// NHS
+// strikes
+
+// Roisin
+// NHS
+
+// Martin Rhodes
+// climate
+// LGBTQ
+// NHS
+
+// Michael Shanks
+// migration
+// LGBTQ
+// benefits
+
+// John Grady
+// climate
+// workers
+// NHS
+// publicOwnership
+
+// Gordon mckee
+// climate
+
 const expectedValues = [
   {
     name: "Frank McNally",
@@ -56,6 +83,14 @@ const expectedValues = [
         positive: false,
       },
       publicOwnership: {
+        source: "",
+        positive: undefined,
+      },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
         source: "",
         positive: undefined,
       },
@@ -114,6 +149,14 @@ const expectedValues = [
         source: "",
       },
       publicOwnership: {
+        source: "",
+        positive: undefined,
+      },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
         source: "",
         positive: undefined,
       },
@@ -177,8 +220,16 @@ const expectedValues = [
         source: "",
         positive: undefined,
       },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
+        source: "",
+        positive: undefined,
+      },
     },
-    notes: "martin.rhodes@glasgow.gov.uk\n\nSource",
+    notes: "",
   },
   {
     name: "Michael Shanks MP",
@@ -236,6 +287,14 @@ const expectedValues = [
         positive: undefined,
       },
       publicOwnership: {
+        source: "",
+        positive: undefined,
+      },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
         source: "",
         positive: undefined,
       },
@@ -301,6 +360,14 @@ const expectedValues = [
           "His interview about energy transition doesn't incl…e need to ensure that investors see a good return",
         positive: undefined,
       },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
+        source: "",
+        positive: undefined,
+      },
     },
     notes: "",
   },
@@ -332,23 +399,18 @@ const expectedValues = [
         positive: true,
       },
       migration: {
-        source: "Nothing found",
         positive: undefined,
       },
       LGBTQ: {
-        source: "Nothing found",
         positive: undefined,
       },
       workers: {
-        source: "Nothing found",
         positive: undefined,
       },
       NHS: {
-        source: "Nothing found",
         positive: undefined,
       },
       benefits: {
-        source: "Nothing found",
         positive: undefined,
       },
       strikes: {
@@ -356,6 +418,14 @@ const expectedValues = [
         positive: undefined,
       },
       publicOwnership: {
+        source: "",
+        positive: undefined,
+      },
+      housing: {
+        source: "",
+        positive: undefined,
+      },
+      palestine: {
         source: "",
         positive: undefined,
       },
@@ -413,8 +483,9 @@ describe("filterProfiles", () => {
     const NHSFilter: Filters = blankFilters();
     NHSFilter.policies["NHS"].positive = true;
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
-    expect(filtered.length).toBe(5);
+    expect(filtered.length).toBe(4);
     expect(filtered[0].name).toBe("Frank McNally");
+    expect(filtered[2].name).toBe("Martin Rhodes");
   });
 
   it("filters profiles that match NHS and climate mentions", () => {
@@ -423,8 +494,19 @@ describe("filterProfiles", () => {
     NHSFilter.policies["climate"].positive = true;
 
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
-    expect(filtered.length).toBe(5);
-    expect(filtered[2].name).toBe("Martin Rhodes");
+    expect(filtered.length).toBe(2);
+    expect(filtered[0].name).toBe("Martin Rhodes");
+    expect(filtered[1].name).toBe("John Grady");
+  });
+
+  it("filters no profiles when no profile matches", () => {
+    const NHSFilter: Filters = blankFilters();
+    NHSFilter.policies["NHS"].positive = true;
+    NHSFilter.policies["climate"].positive = true;
+    NHSFilter.policies["strikes"].positive = true;
+
+    const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
+    expect(filtered.length).toBe(0);
   });
 
   it("returns all profiles if the filters are all undefined (not active)", () => {
