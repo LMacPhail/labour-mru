@@ -6,6 +6,7 @@ import {
   SocialMediaLinks,
 } from "../../data/types";
 import {
+  CaretDown,
   FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
@@ -48,65 +49,71 @@ export const ProfileHeader: React.FC<{
     }
   };
   return (
-    <div className="flex flex-row justify-between flex-wrap">
-      <div className="flex flex-col md:flex-row gap-6">
-        <span>
-          {profile ? (
-            <img
-              className="rounded-md"
-              src={profile}
-              height={"100px"}
-              width={"100px"}
-              alt="MP Headshot"
-            />
-          ) : (
-            <UserCircle size={100} />
-          )}
-        </span>
-        <div className="lg:w-2/3">
-          <h2 className="font-bold mb-2">{name}</h2>
+    <div className="flex flex-col overflow-x-hidden">
+      <div className="flex flex-row justify-between flex-wrap">
+        <div className="flex flex-col md:flex-row gap-6">
           <span>
-            <p className="font-light text-sm mb-2">{bio}</p>
-            <p className="font-light text-sm italic">{constituency}</p>
-            {contact && (
-              <p>
-                <span className="font-bold text-sm">Contact details: </span>
-                <span className="font-light text-sm italic hover:cursor-text">
-                  {contact}
-                </span>
-              </p>
+            {profile ? (
+              <img
+                className="rounded-md"
+                src={profile}
+                height={"100px"}
+                width={"100px"}
+                alt="MP Headshot"
+              />
+            ) : (
+              <UserCircle size={100} />
             )}
           </span>
+          <div className="lg:w-2/3">
+            <h2 className="font-bold mb-2">{name}</h2>
+            <span>
+              <p className="font-light text-sm mb-2">{bio}</p>
+              <p className="font-light text-sm italic">{constituency}</p>
+              {contact && (
+                <p>
+                  <span className="font-bold text-sm">Contact details: </span>
+                  <span className="font-light text-sm italic hover:cursor-text">
+                    {contact}
+                  </span>
+                </p>
+              )}
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col justify-end h-full w-full gap-4 md:justify-between">
+          <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">
+            {Object.keys(socials)
+              .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
+              .map((site: string) => {
+                const link = socials[site as keyof SocialMediaLinks];
+                return (
+                  <a href={link} key={`${name}-${site}-link`}>
+                    {getLogo(site)}
+                  </a>
+                );
+              })}
+          </span>
+          <div className="flex flex-row flex-wrap gap-1 justify-end">
+            {Object.keys(policyInterests).map((policyType) => {
+              const policy = policyInterests[policyType];
+              if (policy.source) {
+                return (
+                  <PolicyBadge
+                    key={`${policyType}-badge`}
+                    policyName={policyType as keyof PolicyInterests}
+                    positive={policy.positive}
+                  />
+                );
+              }
+              return <div key={`${policyType}-badge`} className="hidden"></div>;
+            })}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col justify-end h-full w-full gap-4 md:justify-between">
-        <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">
-          {Object.keys(socials)
-            .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
-            .map((site: string) => {
-              const link = socials[site as keyof SocialMediaLinks];
-              return (
-                <a href={link} key={`${name}-${site}-link`}>
-                  {getLogo(site)}
-                </a>
-              );
-            })}
-        </span>
-        <div className="flex flex-row flex-wrap gap-1 justify-end">
-          {Object.keys(policyInterests).map((policyType) => {
-            const policy = policyInterests[policyType];
-            if (policy.source) {
-              return (
-                <PolicyBadge
-                  key={`${policyType}-badge`}
-                  policyName={policyType as keyof PolicyInterests}
-                  positive={policy.positive}
-                />
-              );
-            }
-            return <div key={`${policyType}-badge`} className="hidden"></div>;
-          })}
-        </div>
+      <div className="w-full flex justify-center mt-4">
+        <p className="text-xs font-light italic pr-4">expand for more info</p>
+        <CaretDown size={16} />
       </div>
     </div>
   );
