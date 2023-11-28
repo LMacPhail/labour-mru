@@ -95,7 +95,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
   {
     name: "Roisin McKenna Favier",
@@ -161,7 +160,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
   {
     name: "Martin Rhodes",
@@ -229,7 +227,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
   {
     name: "Michael Shanks MP",
@@ -299,7 +296,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
   {
     name: "John Grady",
@@ -369,7 +365,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
   {
     name: "Gordon McKee",
@@ -430,7 +425,6 @@ const expectedValues = [
         positive: undefined,
       },
     },
-    notes: "",
   },
 ];
 

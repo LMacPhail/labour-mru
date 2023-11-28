@@ -1,4 +1,5 @@
-const urlRegex = /(https?:\/\/[^ ]*)/;
+const urlRegex = /(https?:\/\/[^ ]*)/g;
+const bracketRegex = /[<>]/g;
 
 /**
  * Given a content string including a hyperlink in <> parentheses, separates into content and link
@@ -13,6 +14,7 @@ export const extractLinks = (
   }
 
   const content = raw
+    .replace(bracketRegex, " ")
     .replace(urlRegex, "")
     .split("|")
     .filter((string) => string !== "")
