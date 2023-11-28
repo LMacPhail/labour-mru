@@ -5,6 +5,7 @@ import {
   PartyIDs,
   PolicyInterests,
   PolicyType,
+  WinningProbability,
 } from "./../types";
 
 const TWITTER_IDX = 12;
@@ -50,7 +51,17 @@ const mpIdxLookup: Record<number, keyof MP> = {
   37: "policyInterests",
   38: "policyInterests",
   39: "policyInterests",
-  40: "notes",
+  40: "contact",
+  41: "educationType",
+  42: "notes",
+  43: "profilePic",
+  44: "winningProbability",
+  45: "winningProbability",
+};
+
+const winningLookupIdx: Record<number, keyof WinningProbability> = {
+  44: "percentage",
+  45: "source",
 };
 
 const policyLookupIdx: Record<number, keyof PolicyInterests> = {
@@ -177,8 +188,25 @@ export const formatResponse = (values: string[][]): MP[] => {
         case "incumbentParty":
           mp.incumbentParty = v as PartyIDs;
           break;
+        case "winningProbability":
+          const winningProbabilityType = winningLookupIdx[x];
+          if (winningProbabilityType === "percentage" && v !== "") {
+            mp.winningProbability = {
+              percentage: +v,
+              source: "",
+            };
+          }
+          if (winningProbabilityType === "source" && v !== "") {
+            mp.winningProbability = {
+              percentage: mp.winningProbability?.percentage ?? 0,
+              source: v,
+            };
+          }
+          break;
         default:
-          mp[valueIdx] = v;
+          if (v !== "") {
+            mp[valueIdx] = v;
+          }
       }
     });
     mpData.push(mp);

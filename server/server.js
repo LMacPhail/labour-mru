@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 // Configuration for the proxy
-const API_SERVICE_URL = "https://api.futurelabourmps.com";
+const API_SERVICE_URL = "https://api.futurelabourmps.com/A3:AT65";
 
 app.use(
   "/api",

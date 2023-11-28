@@ -20,6 +20,11 @@ export type Policy = {
   positive?: boolean;
 };
 
+export type WinningProbability = {
+  percentage: number; // 44
+  source: string; // 45
+};
+
 // number comments are the column index
 export type PolicyInterests = {
   climate: Policy; // 20 - 21
@@ -56,7 +61,11 @@ export type MP = {
     directorOfCompanies: string;
   };
   policyInterests: Record<PolicyType, Policy>;
-  notes?: string; // 35
+  contact?: string; // 40
+  educationType?: string; // 41
+  notes?: string; // 42
+  profilePic?: string; // 43
+  winningProbability?: WinningProbability;
 };
 
 export type ViewType = "about" | "index";
