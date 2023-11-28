@@ -10,6 +10,7 @@ import {
   InstagramLogo,
   LinkedinLogo,
   TwitterLogo,
+  UserCircle,
 } from "@phosphor-icons/react";
 import { FormattedContent } from "./FormattedContent";
 import { PolicyCard } from "./PolicyCard";
@@ -21,9 +22,10 @@ export const ProfileHeader: React.FC<{
   name: string;
   bio: string;
   constituency: string;
+  profile?: string;
   socials: SocialMediaLinks;
   policyInterests: Record<PolicyType, Policy>;
-}> = ({ name, bio, constituency, socials, policyInterests }) => {
+}> = ({ name, bio, constituency, profile, socials, policyInterests }) => {
   const getLogo = (siteType: string) => {
     switch (siteType) {
       case "facebook":
@@ -38,12 +40,26 @@ export const ProfileHeader: React.FC<{
   };
   return (
     <div className="flex flex-row justify-between flex-wrap">
-      <div className="lg:w-2/3">
-        <h2 className="font-bold mb-2">{name}</h2>
+      <div className="flex flex-col md:flex-row gap-6">
         <span>
-          <p className="font-light text-sm mb-2">{bio}</p>
-          <p className="font-light text-sm italic">{constituency}</p>
+          {profile ? (
+            <img
+              className="rounded-md"
+              src={profile}
+              height={"100px"}
+              width={"100px"}
+            />
+          ) : (
+            <UserCircle size={100} />
+          )}
         </span>
+        <div className="lg:w-2/3">
+          <h2 className="font-bold mb-2">{name}</h2>
+          <span>
+            <p className="font-light text-sm mb-2">{bio}</p>
+            <p className="font-light text-sm italic">{constituency}</p>
+          </span>
+        </div>
       </div>
       <div className="flex flex-col justify-end h-full w-full gap-4 md:justify-between">
         <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">

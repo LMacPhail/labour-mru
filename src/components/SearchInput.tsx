@@ -30,7 +30,7 @@ export const SearchInput: React.FC = () => {
           id="icon"
           name="icon"
           className="py-2 px-4 pl-11 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-          placeholder="Search"
+          placeholder="Search by name or constituency"
           onChange={(e) => handleSearchChange(e.currentTarget.value)}
         />
       </div>

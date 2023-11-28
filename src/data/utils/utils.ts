@@ -54,14 +54,14 @@ const mpIdxLookup: Record<number, keyof MP> = {
   40: "contact",
   41: "educationType",
   42: "notes",
-  43: "profilePic",
-  44: "winningProbability",
-  45: "winningProbability",
+  49: "profilePic",
+  50: "winningProbability",
+  51: "winningProbability",
 };
 
 const winningLookupIdx: Record<number, keyof WinningProbability> = {
-  44: "percentage",
-  45: "source",
+  50: "percentage",
+  51: "source",
 };
 
 const policyLookupIdx: Record<number, keyof PolicyInterests> = {
