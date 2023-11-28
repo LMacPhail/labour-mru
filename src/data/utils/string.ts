@@ -10,7 +10,9 @@ export const extractLinks = (
   const possibleLinks = raw.match(urlRegex);
   let link: string[] = [];
   if (possibleLinks) {
-    link = possibleLinks.map((l) => l.replace("|", ""));
+    link = possibleLinks
+      .map((l) => l.replace("|", ""))
+      .map((l) => l.replace(bracketRegex, ""));
   }
 
   const content = raw

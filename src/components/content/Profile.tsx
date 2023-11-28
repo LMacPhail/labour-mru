@@ -48,6 +48,7 @@ export const ProfileHeader: React.FC<{
               src={profile}
               height={"100px"}
               width={"100px"}
+              alt="MP Headshot"
             />
           ) : (
             <UserCircle size={100} />
