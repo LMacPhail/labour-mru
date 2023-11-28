@@ -24,6 +24,7 @@ export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
                 bio={mp.biography}
                 policyInterests={mp.policyInterests}
                 profile={mp.profilePic}
+                contact={mp.contact}
               />
             </label>
             <div className="accordion-content">

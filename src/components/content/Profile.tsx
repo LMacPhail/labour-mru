@@ -23,9 +23,18 @@ export const ProfileHeader: React.FC<{
   bio: string;
   constituency: string;
   profile?: string;
+  contact?: string;
   socials: SocialMediaLinks;
   policyInterests: Record<PolicyType, Policy>;
-}> = ({ name, bio, constituency, profile, socials, policyInterests }) => {
+}> = ({
+  name,
+  bio,
+  constituency,
+  profile,
+  contact,
+  socials,
+  policyInterests,
+}) => {
   const getLogo = (siteType: string) => {
     switch (siteType) {
       case "facebook":
@@ -59,6 +68,14 @@ export const ProfileHeader: React.FC<{
           <span>
             <p className="font-light text-sm mb-2">{bio}</p>
             <p className="font-light text-sm italic">{constituency}</p>
+            {contact && (
+              <p>
+                <span className="font-bold text-sm">Contact details: </span>
+                <span className="font-light text-sm italic hover:cursor-text">
+                  {contact}
+                </span>
+              </p>
+            )}
           </span>
         </div>
       </div>
