@@ -46,6 +46,11 @@ export type SocialMediaLinks = {
   instagram?: string;
 };
 
+export type Contact = {
+  email?: string;
+  phone?: string;
+};
+
 export type MP = {
   name: string; // 0
   constituency: string; // 1
@@ -61,7 +66,7 @@ export type MP = {
     directorOfCompanies: string;
   };
   policyInterests: Record<PolicyType, Policy>;
-  contact?: string; // 40
+  contact?: Contact; // 40
   educationType?: string; // 41
   notes?: string; // 42
   profilePic?: string; // 43
@@ -73,4 +78,5 @@ export type ViewType = "about" | "index";
 export type Filters = {
   policies: Record<Partial<PolicyType>, Policy>;
   searchInput: string;
+  sortByDescending?: boolean;
 };

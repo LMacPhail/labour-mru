@@ -57,6 +57,7 @@ export const initState: AppState = {
         positive: undefined,
       },
     },
+    sortByDescending: undefined,
   },
 };
 
