@@ -247,18 +247,23 @@ export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
 
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   const policyFilters = filters.policies;
+  const sortedProfiles =
+    filters.sortByDescending === undefined
+      ? profiles
+      : sortByWin(profiles, filters.sortByDescending);
+
   // If there are no active filters, then return all data
   if (
     !Object.values(policyFilters).some((p) => p.positive !== undefined) &&
     filters.searchInput === ""
   )
-    return profiles;
+    return sortedProfiles;
 
   const checkedFilters = Object.keys(policyFilters).filter(
     (type: PolicyType) => policyFilters[type].positive
   );
 
-  return profiles.filter(
+  return sortedProfiles.filter(
     (profile) =>
       matchesSelectedPolicies(profile, checkedFilters) &&
       matchesSearchInput(profile, filters.searchInput.toLowerCase())

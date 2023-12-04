@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { PolicyType } from "../../data/types";
 import { SET_POLICY_STANCE_ACTION } from "../../state/actions";
+import { Checkbox } from "@mui/material";
 
 const categories: PolicyType[] = [
   "climate",
@@ -50,18 +51,19 @@ const FilterCheckbox: React.FC<{
 
   return (
     <div
-      className={`flex flex-row justify-between m-3 ${category}`}
+      className={`flex flex-row justify-between ${category} text-black dark:text-white`}
       key={category}
     >
       <p className="flex align-middle text-center capitalize">
         {category === "publicOwnership" ? "public ownership" : category}
       </p>
-      <input
-        type="checkbox"
-        className="checkbox"
+      <Checkbox
         checked={checked}
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
+        sx={{
+          color: "white",
+        }}
       />
     </div>
   );
