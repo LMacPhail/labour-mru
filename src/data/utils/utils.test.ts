@@ -1,6 +1,6 @@
 import { values } from "../test/rawResponse";
 import { Filters, MP } from "../types";
-import { filterProfiles, formatResponse } from "./utils";
+import { filterProfiles, formatResponse, sortByWin } from "./utils";
 
 // Here are the policies the test profiles mention
 // Frank McNally
@@ -51,6 +51,11 @@ const expectedValues = [
       membershipOrg: "Food 365 - campaign to deliver free school meals",
       charitiesBoard: "",
       directorOfCompanies: "",
+    },
+    contact: undefined,
+    winningProbability: {
+      percentage: 90,
+      source: "",
     },
     policyInterests: {
       climate: {
@@ -118,6 +123,11 @@ const expectedValues = [
       charitiesBoard: "",
       directorOfCompanies: "",
     },
+    contact: undefined,
+    winningProbability: {
+      percentage: 92,
+      source: "",
+    },
     policyInterests: {
       climate: {
         source: "",
@@ -182,6 +192,11 @@ const expectedValues = [
       membershipOrg: "",
       charitiesBoard: "",
       directorOfCompanies: "",
+    },
+    contact: undefined,
+    winningProbability: {
+      percentage: 93,
+      source: "",
     },
     policyInterests: {
       climate: {
@@ -250,6 +265,12 @@ const expectedValues = [
       charitiesBoard:
         "Board member of Epilepsy Scotland\nBoard member of …d active member of St Mary's Episcopal Cathedral)",
       directorOfCompanies: "",
+    },
+    contact: undefined,
+
+    winningProbability: {
+      percentage: 94,
+      source: "",
     },
     policyInterests: {
       climate: {
@@ -320,6 +341,11 @@ const expectedValues = [
       charitiesBoard: "",
       directorOfCompanies: "",
     },
+    contact: undefined,
+
+    winningProbability: {
+      percentage: 95,
+    },
     policyInterests: {
       climate: {
         source:
@@ -386,6 +412,10 @@ const expectedValues = [
       membershipOrg: "",
       charitiesBoard: "",
       directorOfCompanies: "None",
+    },
+    contact: undefined,
+    winningProbability: {
+      percentage: 96,
     },
     policyInterests: {
       climate: {
@@ -509,5 +539,19 @@ describe("filterProfiles", () => {
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
     expect(filtered.length).toBe(6);
     expect(filtered[0].name).toBe("Frank McNally");
+  });
+});
+
+describe("sortByWin", () => {
+  it("sorts by descent", () => {
+    const sorted = sortByWin(expectedValues as MP[], true);
+    expect(sorted.map((x) => x.name)).toStrictEqual([
+      "Gordon McKee",
+      "John Grady",
+      "Michael Shanks MP",
+      "Martin Rhodes",
+      "Roisin McKenna Favier",
+      "Frank McNally",
+    ]);
   });
 });

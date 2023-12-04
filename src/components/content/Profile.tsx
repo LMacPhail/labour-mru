@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Contact,
   Policy,
   PolicyInterests,
   PolicyType,
@@ -24,7 +25,7 @@ export const ProfileHeader: React.FC<{
   bio: string;
   constituency: string;
   profile?: string;
-  contact?: string;
+  contact?: Contact;
   socials: SocialMediaLinks;
   policyInterests: Record<PolicyType, Policy>;
 }> = ({
@@ -48,6 +49,7 @@ export const ProfileHeader: React.FC<{
         return <LinkedinLogo size={LOGO_SIZE} />;
     }
   };
+
   return (
     <div className="flex flex-col overflow-x-hidden">
       <div className="flex flex-row justify-between flex-wrap">
@@ -71,12 +73,24 @@ export const ProfileHeader: React.FC<{
               <p className="font-light text-sm mb-2">{bio}</p>
               <p className="font-light text-sm italic">{constituency}</p>
               {contact && (
-                <p>
-                  <span className="font-bold text-sm">Contact details: </span>
-                  <span className="font-light text-sm italic hover:cursor-text">
-                    {contact}
-                  </span>
-                </p>
+                <>
+                  {contact.email && (
+                    <p>
+                      <span className="font-bold text-sm">Email: </span>
+                      <span className="font-light text-sm italic hover:cursor-text">
+                        {contact.email}
+                      </span>
+                    </p>
+                  )}
+                  {contact.phone && (
+                    <p>
+                      <span className="font-bold text-sm">Phone: </span>
+                      <span className="font-light text-sm italic hover:cursor-text">
+                        {contact.phone}
+                      </span>
+                    </p>
+                  )}
+                </>
               )}
             </span>
           </div>
@@ -88,7 +102,12 @@ export const ProfileHeader: React.FC<{
               .map((site: string) => {
                 const link = socials[site as keyof SocialMediaLinks];
                 return (
-                  <a href={link} key={`${name}-${site}-link`}>
+                  <a
+                    href={link}
+                    key={`${name}-${site}-link`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {getLogo(site)}
                   </a>
                 );

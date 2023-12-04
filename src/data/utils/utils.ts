@@ -7,6 +7,7 @@ import {
   PolicyType,
   WinningProbability,
 } from "./../types";
+import { extractContacts } from "./string";
 
 const TWITTER_IDX = 12;
 const FB_IDX = 13;
@@ -43,8 +44,6 @@ const mpIdxLookup: Record<number, keyof MP> = {
   29: "policyInterests",
   30: "policyInterests",
   31: "policyInterests",
-  32: "policyInterests",
-  33: "policyInterests",
   34: "policyInterests",
   35: "policyInterests",
   36: "policyInterests",
@@ -77,8 +76,6 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   29: "NHS",
   30: "benefits",
   31: "benefits",
-  32: "strikes",
-  33: "strikes",
   34: "publicOwnership",
   35: "publicOwnership",
   36: "housing",
@@ -123,9 +120,6 @@ const blankMp = (): MP => ({
       positive: undefined,
     },
     benefits: {
-      positive: undefined,
-    },
-    strikes: {
       positive: undefined,
     },
     publicOwnership: {
@@ -188,11 +182,14 @@ export const formatResponse = (values: string[][]): MP[] => {
         case "incumbentParty":
           mp.incumbentParty = v as PartyIDs;
           break;
+        case "contact":
+          mp.contact = extractContacts(v);
+          break;
         case "winningProbability":
           const winningProbabilityType = winningLookupIdx[x];
           if (winningProbabilityType === "percentage" && v !== "") {
             mp.winningProbability = {
-              percentage: +v,
+              percentage: +v.replace("%", ""),
               source: "",
             };
           }
@@ -215,8 +212,34 @@ export const formatResponse = (values: string[][]): MP[] => {
   return mpData;
 };
 
+const sortAB = (a: number | undefined, b: number | undefined): number => {
+  if (a === b) return 0;
+  if (a === undefined && b) return -1;
+  if (a && b === undefined) return 1;
+
+  // can assert because if both are undefined they will have been already returned
+  if (a! < b!) return -1;
+  if (a! > b!) return 1;
+
+  return 0;
+};
+
+export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
+  return profiles.sort((a, b) => {
+    const aPercent = a.winningProbability
+      ? a.winningProbability.percentage
+      : undefined;
+    const bPercent = b.winningProbability
+      ? b.winningProbability.percentage
+      : undefined;
+    const sorted = sortAB(aPercent, bPercent);
+    return descending ? -sorted : sorted;
+  });
+};
+
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   const policyFilters = filters.policies;
+
   // If there are no active filters, then return all data
   if (
     !Object.values(policyFilters).some((p) => p.positive !== undefined) &&

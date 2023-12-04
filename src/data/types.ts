@@ -9,8 +9,9 @@ export const policyTypeNames = [
   "workers",
   "NHS",
   "benefits",
-  "strikes",
   "publicOwnership",
+  "housing",
+  "palestine",
 ];
 
 export type PolicyType = (typeof policyTypeNames)[number];
@@ -33,7 +34,6 @@ export type PolicyInterests = {
   workers: Policy; // 26
   NHS: Policy; // 28
   benefits: Policy; // 30
-  strikes: Policy; // 32
   publicOwnership: Policy; // 34
   housing: Policy; // 41
   palestine: Policy; // 43
@@ -44,6 +44,11 @@ export type SocialMediaLinks = {
   facebook?: string; // 13
   linkedin?: string;
   instagram?: string;
+};
+
+export type Contact = {
+  email?: string;
+  phone?: string;
 };
 
 export type MP = {
@@ -61,7 +66,7 @@ export type MP = {
     directorOfCompanies: string;
   };
   policyInterests: Record<PolicyType, Policy>;
-  contact?: string; // 40
+  contact?: Contact; // 40
   educationType?: string; // 41
   notes?: string; // 42
   profilePic?: string; // 43

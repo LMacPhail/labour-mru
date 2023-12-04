@@ -21,7 +21,12 @@ export const FormattedContent: React.FC<{
             <li key={i}>
               {formattedPoint.content}{" "}
               {formattedPoint.link?.[0] && (
-                <a className="text-blue-500" href={formattedPoint.link[0]}>
+                <a
+                  className="text-blue-500"
+                  href={formattedPoint.link[0]}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   (source)
                 </a>
               )}
@@ -32,7 +37,12 @@ export const FormattedContent: React.FC<{
         <>
           {formattedContent[0].content}{" "}
           {formattedContent[0].link && formattedContent[0].link.length > 0 && (
-            <a className="text-blue-500" href={formattedContent[0]?.link[0]}>
+            <a
+              className="text-blue-500"
+              href={formattedContent[0]?.link[0]}
+              target="_blank"
+              rel="noreferrer"
+            >
               (source)
             </a>
           )}

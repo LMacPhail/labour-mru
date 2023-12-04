@@ -26,19 +26,19 @@ export const Header: React.FC<{
           <div className="flex gap-2">
             <button
               className={`btn btn-${
-                view === "about" ? "outline-primary" : "ghost"
-              }`}
-              onClick={() => setView("about")}
-            >
-              About
-            </button>
-            <button
-              className={`btn btn-${
                 view === "index" ? "outline-primary" : "ghost"
               }`}
               onClick={() => setView("index")}
             >
               Index
+            </button>
+            <button
+              className={`btn btn-${
+                view === "about" ? "outline-primary" : "ghost"
+              }`}
+              onClick={() => setView("about")}
+            >
+              About
             </button>
           </div>
         </div>

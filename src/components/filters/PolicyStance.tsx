@@ -11,7 +11,6 @@ const categories: PolicyType[] = [
   "workers",
   "NHS",
   "benefits",
-  "strikes",
   "publicOwnership",
   "housing",
   "palestine",
@@ -50,7 +49,7 @@ const FilterCheckbox: React.FC<{
 
   return (
     <div
-      className={`flex flex-row justify-between m-3 ${category}`}
+      className={`flex flex-row justify-between ${category} text-black dark:text-white mb-4`}
       key={category}
     >
       <p className="flex align-middle text-center capitalize">
@@ -59,7 +58,6 @@ const FilterCheckbox: React.FC<{
       <input
         type="checkbox"
         className="checkbox"
-        checked={checked}
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
       />

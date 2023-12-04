@@ -1,7 +1,7 @@
 import React from "react";
-import { Filters } from "../filters/Filters";
 import { ProjectTitle } from "../atoms/ProjectTitle";
 import { Footer } from "./Footer";
+import { PolicyStance } from "../filters/PolicyStance";
 
 export const SidebarContent: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ export const SidebarContent: React.FC = () => {
         <ProjectTitle />
         <div className="divider"></div>
       </div>
-      <Filters />
+      <PolicyStance />
       <Footer />
     </div>
   );

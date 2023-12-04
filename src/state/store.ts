@@ -12,7 +12,7 @@ export type AppState = {
 
 export const initState: AppState = {
   data: { status: "loading", profiles: formatResponse(values) },
-  view: "about",
+  view: "index",
   activeFilters: {
     searchInput: "",
     policies: {
