@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Accordion } from "./Accordion";
-import { filterProfiles, sortByWin } from "../../data/utils/utils";
+import { filterProfiles } from "../../data/utils/utils";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";

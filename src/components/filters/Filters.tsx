@@ -1,9 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { SearchInput } from "../SearchInput";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../state/store";
-import { SET_DATA_ACTION } from "../../state/actions";
-import { sortByWin } from "../../data/utils/utils";
 
 export const Filters: React.FC = () => {
   return (

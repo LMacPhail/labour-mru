@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { PolicyType } from "../../data/types";
 import { SET_POLICY_STANCE_ACTION } from "../../state/actions";
-import { Checkbox } from "@mui/material";
 
 const categories: PolicyType[] = [
   "climate",
