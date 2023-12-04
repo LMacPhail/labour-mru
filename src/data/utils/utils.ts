@@ -197,7 +197,7 @@ export const formatResponse = (values: string[][]): MP[] => {
           const winningProbabilityType = winningLookupIdx[x];
           if (winningProbabilityType === "percentage" && v !== "") {
             mp.winningProbability = {
-              percentage: +v,
+              percentage: +v.replace("%", ""),
               source: "",
             };
           }
@@ -247,23 +247,19 @@ export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
 
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {
   const policyFilters = filters.policies;
-  const sortedProfiles =
-    filters.sortByDescending === undefined
-      ? profiles
-      : sortByWin(profiles, filters.sortByDescending);
 
   // If there are no active filters, then return all data
   if (
     !Object.values(policyFilters).some((p) => p.positive !== undefined) &&
     filters.searchInput === ""
   )
-    return sortedProfiles;
+    return profiles;
 
   const checkedFilters = Object.keys(policyFilters).filter(
     (type: PolicyType) => policyFilters[type].positive
   );
 
-  return sortedProfiles.filter(
+  return profiles.filter(
     (profile) =>
       matchesSelectedPolicies(profile, checkedFilters) &&
       matchesSearchInput(profile, filters.searchInput.toLowerCase())

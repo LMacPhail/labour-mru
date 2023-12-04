@@ -36,7 +36,6 @@ const getMatchFromMatches = (
   matches && matches.length > 0 ? matches[0] : undefined;
 
 export const extractContacts = (raw: string): Contact | undefined => {
-  console.log(raw.match(emailRegex));
   const email = getMatchFromMatches(raw.match(emailRegex));
   const phone = getMatchFromMatches(raw.match(phoneRegex));
 
