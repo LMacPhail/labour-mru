@@ -15,9 +15,9 @@ export const PolicyBadge: React.FC<{
     <span
       className={`w-min ${getBGColour(
         positive
-      )} text-white text-xs rounded-full px-2 py-1`}
+      )} text-white text-xs rounded-full px-2 py-1 whitespace-nowrap`}
     >
-      {policyName}
+      {policyName === "publicOwnership" ? "public ownership" : policyName}
     </span>
   );
 };

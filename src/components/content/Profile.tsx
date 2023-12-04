@@ -102,7 +102,7 @@ export const ProfileHeader: React.FC<{
               .map((site: string) => {
                 const link = socials[site as keyof SocialMediaLinks];
                 return (
-                  <a href={link} key={`${name}-${site}-link`}>
+                  <a href={link} key={`${name}-${site}-link`} target="_blank">
                     {getLogo(site)}
                   </a>
                 );

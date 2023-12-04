@@ -9,8 +9,9 @@ export const policyTypeNames = [
   "workers",
   "NHS",
   "benefits",
-  "strikes",
   "publicOwnership",
+  "housing",
+  "palestine",
 ];
 
 export type PolicyType = (typeof policyTypeNames)[number];
@@ -33,7 +34,6 @@ export type PolicyInterests = {
   workers: Policy; // 26
   NHS: Policy; // 28
   benefits: Policy; // 30
-  strikes: Policy; // 32
   publicOwnership: Policy; // 34
   housing: Policy; // 41
   palestine: Policy; // 43

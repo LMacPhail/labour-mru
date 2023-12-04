@@ -1,5 +1,4 @@
 import {
-  Contact,
   DataStatus,
   Filters,
   MP,
@@ -45,8 +44,6 @@ const mpIdxLookup: Record<number, keyof MP> = {
   29: "policyInterests",
   30: "policyInterests",
   31: "policyInterests",
-  32: "policyInterests",
-  33: "policyInterests",
   34: "policyInterests",
   35: "policyInterests",
   36: "policyInterests",
@@ -79,8 +76,6 @@ const policyLookupIdx: Record<number, keyof PolicyInterests> = {
   29: "NHS",
   30: "benefits",
   31: "benefits",
-  32: "strikes",
-  33: "strikes",
   34: "publicOwnership",
   35: "publicOwnership",
   36: "housing",
@@ -125,9 +120,6 @@ const blankMp = (): MP => ({
       positive: undefined,
     },
     benefits: {
-      positive: undefined,
-    },
-    strikes: {
       positive: undefined,
     },
     publicOwnership: {

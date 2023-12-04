@@ -12,7 +12,6 @@ const categories: PolicyType[] = [
   "workers",
   "NHS",
   "benefits",
-  "strikes",
   "publicOwnership",
   "housing",
   "palestine",
@@ -51,19 +50,17 @@ const FilterCheckbox: React.FC<{
 
   return (
     <div
-      className={`flex flex-row justify-between ${category} text-black dark:text-white`}
+      className={`flex flex-row justify-between ${category} text-black dark:text-white mb-4`}
       key={category}
     >
       <p className="flex align-middle text-center capitalize">
         {category === "publicOwnership" ? "public ownership" : category}
       </p>
-      <Checkbox
-        checked={checked}
+      <input
+        type="checkbox"
+        className="checkbox"
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
-        sx={{
-          color: "white",
-        }}
       />
     </div>
   );
