@@ -225,7 +225,7 @@ const sortAB = (a: number | undefined, b: number | undefined): number => {
 };
 
 export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
-  return profiles.sort((a, b) => {
+  const sorted = profiles.sort((a, b) => {
     const aPercent = a.winningProbability
       ? a.winningProbability.percentage
       : undefined;
@@ -235,6 +235,9 @@ export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
     const sorted = sortAB(aPercent, bPercent);
     return descending ? -sorted : sorted;
   });
+  console.log(profiles.length);
+  console.log(sorted.length);
+  return sorted;
 };
 
 export const filterProfiles = (profiles: MP[], filters: Filters): MP[] => {

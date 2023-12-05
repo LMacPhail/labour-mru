@@ -8,7 +8,7 @@ export const SearchInput: React.FC = () => {
     dispatch({ type: SET_SEARCH_INPUT_ACTION, payload: { value } });
   };
   return (
-    <>
+    <div className="min-w-60%">
       <label htmlFor="icon" className="sr-only">
         Search
       </label>
@@ -34,6 +34,6 @@ export const SearchInput: React.FC = () => {
           onChange={(e) => handleSearchChange(e.currentTarget.value)}
         />
       </div>
-    </>
+    </div>
   );
 };

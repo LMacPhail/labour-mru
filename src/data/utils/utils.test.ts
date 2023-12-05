@@ -501,6 +501,7 @@ const blankFilters = (): Filters => ({
       positive: undefined,
     },
   },
+  sortDescending: true,
 });
 
 describe("filterProfiles", () => {

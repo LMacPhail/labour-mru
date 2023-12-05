@@ -4,6 +4,7 @@ import {
   SET_DATA_ACTION,
   SET_VIEW_ACTION,
   SET_SEARCH_INPUT_ACTION,
+  SET_SORTBY_ACTION,
 } from "./actions";
 import { AppState, initState } from "./store";
 
@@ -33,11 +34,11 @@ export default function appReducer(
     }
     case SET_POLICY_STANCE_ACTION: {
       const { category, positive } = action.payload;
-      const { policies, searchInput } = state.activeFilters;
+      const { policies } = state.activeFilters;
       return {
         ...state,
         activeFilters: {
-          searchInput,
+          ...state.activeFilters,
           policies: { ...policies, [category]: { positive } },
         },
       };
@@ -49,6 +50,16 @@ export default function appReducer(
         activeFilters: {
           ...state.activeFilters,
           searchInput: value,
+        },
+      };
+    }
+    case SET_SORTBY_ACTION: {
+      const { descending } = action.payload;
+      return {
+        ...state,
+        activeFilters: {
+          ...state.activeFilters,
+          sortDescending: descending,
         },
       };
     }

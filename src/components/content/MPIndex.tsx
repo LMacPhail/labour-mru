@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Accordion } from "./Accordion";
-import { filterProfiles } from "../../data/utils/utils";
+import { filterProfiles, sortByWin } from "../../data/utils/utils";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";
@@ -26,7 +26,13 @@ const MPIndex: React.FC = () => {
       ) : (
         <div className="flex flex-col">
           <Filters />
-          <Accordion mps={mps} />
+          <Accordion
+            mps={
+              filters.sortDescending !== undefined
+                ? sortByWin(mps.slice(), filters.sortDescending)
+                : mps
+            }
+          />
         </div>
       )}
     </>
