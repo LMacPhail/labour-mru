@@ -16,17 +16,7 @@ export const Footer: React.FC = () => {
           Movement Research Unit.
         </a>
       </p>
-      <p>
-        Questions or changes:{" "}
-        <a
-          className="text-link"
-          href="mps@mvmtresearch.org"
-          target="_blank"
-          rel="noreferrer"
-        >
-          mps@mvmtresearch.org
-        </a>
-      </p>
+      <p>Questions or changes: mps@mvmtresearch.org</p>
       <a
         className="text-link"
         href="https://donate.stripe.com/bIY6rig2w5ohat24gg"
