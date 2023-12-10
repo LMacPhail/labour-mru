@@ -22,7 +22,7 @@ export const FormattedContent: React.FC<{
               {formattedPoint.content}{" "}
               {formattedPoint.link?.[0] && (
                 <a
-                  className="text-blue-500"
+                  className="text-link"
                   href={formattedPoint.link[0]}
                   target="_blank"
                   rel="noreferrer"
@@ -38,7 +38,7 @@ export const FormattedContent: React.FC<{
           {formattedContent[0].content}{" "}
           {formattedContent[0].link && formattedContent[0].link.length > 0 && (
             <a
-              className="text-blue-500"
+              className="text-link"
               href={formattedContent[0]?.link[0]}
               target="_blank"
               rel="noreferrer"
