@@ -14,7 +14,16 @@ const MPIndex: React.FC = () => {
   const [mps, setMPs] = useState<MP[]>(filterProfiles(profiles, filters));
 
   useMemo(() => {
-    setMPs(filterProfiles(profiles, filters));
+    if (filters.sortDescending !== undefined) {
+      setMPs(
+        sortByWin(
+          filterProfiles(profiles, filters).slice(),
+          filters.sortDescending
+        )
+      );
+    } else {
+      setMPs(filterProfiles(profiles, filters));
+    }
   }, [filters, profiles]);
 
   return (
@@ -26,13 +35,7 @@ const MPIndex: React.FC = () => {
       ) : (
         <div className="flex flex-col">
           <Filters />
-          <Accordion
-            mps={
-              filters.sortDescending !== undefined
-                ? sortByWin(mps.slice(), filters.sortDescending)
-                : mps
-            }
-          />
+          <Accordion mps={mps} />
         </div>
       )}
     </>
