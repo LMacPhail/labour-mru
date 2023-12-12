@@ -29,11 +29,7 @@ export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
             </label>
             <div className="accordion-content">
               <div className="min-h-0 px-6 border-l-2 border-slate-400">
-                <ProfileContent
-                  profession={mp.currentProfession}
-                  orgs={mp.organisationalLinks}
-                  policyInterests={mp.policyInterests}
-                />
+                <ProfileContent mp={mp} />
               </div>
             </div>
           </div>

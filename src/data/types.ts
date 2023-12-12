@@ -67,7 +67,7 @@ export type MP = {
   };
   policyInterests: Record<PolicyType, Policy>;
   contact?: Contact; // 40
-  educationType?: string; // 41
+  education?: string; // 41
   notes?: string; // 42
   profilePic?: string; // 43
   winningProbability?: WinningProbability;
