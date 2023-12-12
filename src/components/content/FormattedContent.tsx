@@ -1,5 +1,6 @@
 import React from "react";
 import { extractLinks } from "../../data/utils/string";
+import TextLink from "../atoms/Link";
 
 export const FormattedContent: React.FC<{
   subHeader: string;
@@ -21,14 +22,7 @@ export const FormattedContent: React.FC<{
             <li key={i}>
               {formattedPoint.content}{" "}
               {formattedPoint.link?.[0] && (
-                <a
-                  className="text-link"
-                  href={formattedPoint.link[0]}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  (source)
-                </a>
+                <TextLink link={formattedPoint.link[0]}>(source)</TextLink>
               )}
             </li>
           ))}
@@ -37,14 +31,7 @@ export const FormattedContent: React.FC<{
         <>
           {formattedContent[0].content}{" "}
           {formattedContent[0].link && formattedContent[0].link.length > 0 && (
-            <a
-              className="text-link"
-              href={formattedContent[0]?.link[0]}
-              target="_blank"
-              rel="noreferrer"
-            >
-              (source)
-            </a>
+            <TextLink link={formattedContent[0]?.link[0]}>(source)</TextLink>
           )}
         </>
       )}

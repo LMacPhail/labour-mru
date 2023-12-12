@@ -1,4 +1,5 @@
 import React from "react";
+import TextLink from "../atoms/Link";
 
 // TODO: Make templates for some of these links that get reused
 export const Footer: React.FC = () => {
@@ -7,32 +8,16 @@ export const Footer: React.FC = () => {
       <div className="divider"></div>
       <p>
         Built by volunteers at the{" "}
-        <a
-          className="text-link"
-          href="http://mvmtresearch.org"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Movement Research Unit.
-        </a>
+        <TextLink link="http://mvmtresearch.org">
+          Movement Research Unit
+        </TextLink>
+        .
       </p>
       <p>Questions or changes: mps@mvmtresearch.org</p>
-      <a
-        className="text-link"
-        href="https://donate.stripe.com/bIY6rig2w5ohat24gg"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <TextLink link="https://donate.stripe.com/bIY6rig2w5ohat24gg">
         Support our work.
-      </a>
-      <a
-        className="text-link"
-        href="https://go.mvmtresearch.org/join"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Get involved.
-      </a>
+      </TextLink>
+      <TextLink link="https://go.mvmtresearch.org/join">Get involved.</TextLink>
     </div>
   );
 };

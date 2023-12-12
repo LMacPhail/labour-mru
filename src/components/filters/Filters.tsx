@@ -2,24 +2,22 @@ import React, { useState } from "react";
 import { SearchInput } from "../SearchInput";
 import { useDispatch } from "react-redux";
 import { SET_SORTBY_ACTION } from "../../state/actions";
+import TextLink from "../atoms/Link";
 export const Filters: React.FC = () => {
-  return (
-    <div className="flex flex-wrap gap-4">
-      <SearchInput />
-      <SortByDropdown />
-    </div>
-  );
+  return <SearchInput />;
 };
 
 type SelectedSortDirection = "ascending" | "descending";
+const DESCENDING_OPT_TEXT = "Most Likely";
+const ASCENDING_OPT_TEXT = "Least Likely";
 
 // TODO: Not make this break everything
-const SortByDropdown: React.FC = () => {
+export const SortByDropdown: React.FC = () => {
   const dispatch = useDispatch();
 
   const [sortDirection, setSortDirection] = useState<
     SelectedSortDirection | undefined
-  >(undefined);
+  >("descending");
 
   const handleSelectChange = (value: SelectedSortDirection) => {
     dispatch({
@@ -30,16 +28,32 @@ const SortByDropdown: React.FC = () => {
   };
 
   return (
-    <select
-      className="select select-ghost-primary"
-      value={sortDirection}
-      onChange={(event) =>
-        handleSelectChange(event.target.value as SelectedSortDirection)
-      }
-      aria-label="sort profiles"
-    >
-      <option>Most Likely to Win</option>
-      <option>Least Likely to Win</option>
-    </select>
+    <div>
+      <span className="text-xs">
+        Sort by likeliness to win:{" "}
+        <TextLink link="https://www.electoralcalculus.co.uk/">
+          (source)
+        </TextLink>
+      </span>
+      <select
+        className="select select-ghost-primary select-sm"
+        value={
+          sortDirection === "descending"
+            ? DESCENDING_OPT_TEXT
+            : ASCENDING_OPT_TEXT
+        }
+        onChange={(event) =>
+          handleSelectChange(
+            event.target.value === DESCENDING_OPT_TEXT
+              ? "descending"
+              : "ascending"
+          )
+        }
+        aria-label="sort profiles"
+      >
+        <option key={"descending"}>{DESCENDING_OPT_TEXT}</option>
+        <option key={"ascending"}>{ASCENDING_OPT_TEXT}</option>
+      </select>
+    </div>
   );
 };

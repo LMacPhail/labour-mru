@@ -3,6 +3,7 @@ import { ProjectTitle } from "./atoms/ProjectTitle";
 import { ViewType } from "../data/types";
 import { SET_VIEW_ACTION } from "../state/actions";
 import { useDispatch } from "react-redux";
+import { SortByDropdown } from "./filters/Filters";
 
 export const Header: React.FC<{
   view: "about" | "index";
@@ -41,6 +42,7 @@ export const Header: React.FC<{
               About
             </button>
           </div>
+          <SortByDropdown />
         </div>
       </nav>
     </header>
