@@ -1,7 +1,7 @@
 import React from "react";
 import TextLink from "../atoms/Link";
+import { GithubLogo } from "@phosphor-icons/react";
 
-// TODO: Make templates for some of these links that get reused
 export const Footer: React.FC = () => {
   return (
     <div className="text-sm flex flex-col gap-2">
@@ -18,6 +18,14 @@ export const Footer: React.FC = () => {
         Support our work.
       </TextLink>
       <TextLink link="https://go.mvmtresearch.org/join">Get involved.</TextLink>
+      <TextLink link="https://github.com/LMacPhail/labour-mru">
+        <span className="flex flex-row gap-2 items-center">
+          Contribute on Github{" "}
+          <span>
+            <GithubLogo size={18} />
+          </span>
+        </span>
+      </TextLink>
     </div>
   );
 };

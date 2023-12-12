@@ -7,7 +7,6 @@ type SelectedSortDirection = "ascending" | "descending";
 const DESCENDING_OPT_TEXT = "Most Likely";
 const ASCENDING_OPT_TEXT = "Least Likely";
 
-// TODO: Not make this break everything
 export const SortByDropdown: React.FC = () => {
   const dispatch = useDispatch();
 
