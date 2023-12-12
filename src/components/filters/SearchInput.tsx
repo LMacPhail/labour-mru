@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { SET_SEARCH_INPUT_ACTION } from "../state/actions";
+import { SET_SEARCH_INPUT_ACTION } from "../../state/actions";
 
 export const SearchInput: React.FC = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ export const SearchInput: React.FC = () => {
     dispatch({ type: SET_SEARCH_INPUT_ACTION, payload: { value } });
   };
   return (
-    <div className="min-w-60%">
+    <div className="max-[300px]:w-auto min-[300px]:min-w-[280px]">
       <label htmlFor="icon" className="sr-only">
         Search
       </label>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";
 import { Spinner } from "../atoms/Spinner";
-import { Filters } from "../filters/Filters";
+import { SearchInput } from "../filters/SearchInput";
 
 const MPIndex: React.FC = () => {
   const filters = useSelector((state: AppState) => state.activeFilters);
@@ -33,8 +33,7 @@ const MPIndex: React.FC = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="flex flex-col">
-          <Filters />
+        <div className="flex flex-col gap-4">
           <Accordion mps={mps} />
         </div>
       )}

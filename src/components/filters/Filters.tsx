@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { SearchInput } from "../SearchInput";
 import { useDispatch } from "react-redux";
 import { SET_SORTBY_ACTION } from "../../state/actions";
 import TextLink from "../atoms/Link";
-export const Filters: React.FC = () => {
-  return <SearchInput />;
-};
 
 type SelectedSortDirection = "ascending" | "descending";
 const DESCENDING_OPT_TEXT = "Most Likely";

@@ -2,6 +2,7 @@ import React from "react";
 import { ProjectTitle } from "../atoms/ProjectTitle";
 import { Footer } from "./Footer";
 import { PolicyStance } from "../filters/PolicyStance";
+import { SortByDropdown } from "../filters/Filters";
 
 export const SidebarContent: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ export const SidebarContent: React.FC = () => {
         <ProjectTitle />
         <div className="divider"></div>
       </div>
+      <SortByDropdown />
       <PolicyStance />
       <Footer />
     </div>
