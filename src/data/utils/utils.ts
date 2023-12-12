@@ -235,8 +235,6 @@ export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
     const sorted = sortAB(aPercent, bPercent);
     return descending ? -sorted : sorted;
   });
-  console.log(profiles.length);
-  console.log(sorted.length);
   return sorted;
 };
 
