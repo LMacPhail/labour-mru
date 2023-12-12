@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { Accordion } from "./Accordion";
-import { filterProfiles } from "../../data/utils/utils";
+import { filterProfiles, sortByWin } from "../../data/utils/utils";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/store";
 import { MP } from "../../data/types";
 import { Spinner } from "../atoms/Spinner";
-import { Filters } from "../filters/Filters";
 
 const MPIndex: React.FC = () => {
   const filters = useSelector((state: AppState) => state.activeFilters);
@@ -14,7 +13,16 @@ const MPIndex: React.FC = () => {
   const [mps, setMPs] = useState<MP[]>(filterProfiles(profiles, filters));
 
   useMemo(() => {
-    setMPs(filterProfiles(profiles, filters));
+    if (filters.sortDescending !== undefined) {
+      setMPs(
+        sortByWin(
+          filterProfiles(profiles, filters).slice(),
+          filters.sortDescending
+        )
+      );
+    } else {
+      setMPs(filterProfiles(profiles, filters));
+    }
   }, [filters, profiles]);
 
   return (
@@ -24,8 +32,7 @@ const MPIndex: React.FC = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="flex flex-col">
-          <Filters />
+        <div className="flex flex-col gap-4">
           <Accordion mps={mps} />
         </div>
       )}

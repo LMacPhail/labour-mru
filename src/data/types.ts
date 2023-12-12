@@ -78,4 +78,5 @@ export type ViewType = "about" | "index";
 export type Filters = {
   policies: Record<Partial<PolicyType>, Policy>;
   searchInput: string;
+  sortDescending?: boolean;
 };

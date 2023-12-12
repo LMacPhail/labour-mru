@@ -1,4 +1,5 @@
 import React from "react";
+import TextLink from "../atoms/Link";
 
 const faqs: { question: string; answer: JSX.Element }[] = [
   {
@@ -131,14 +132,9 @@ const faqs: { question: string; answer: JSX.Element }[] = [
       <p>
         This tool was made by volunteer researchers from the{" "}
         <span>
-          <a
-            className="text-link"
-            href="http://mvmtresearch.org"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <TextLink link="http://mvmtresearch.org">
             Movement Research Unit
-          </a>
+          </TextLink>
         </span>
         . We do practical research in support of social movements and campaign
         groups.
@@ -151,25 +147,15 @@ const faqs: { question: string; answer: JSX.Element }[] = [
       <p>
         There are two ways: you can{" "}
         <span>
-          <a
-            className="text-link"
-            href="https://go.mvmtresearch.org/join"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <TextLink link="https://go.mvmtresearch.org/join">
             get involved
-          </a>
+          </TextLink>
         </span>{" "}
         (no research experience necessary) or you can{" "}
         <span>
-          <a
-            className="text-link"
-            href="https://donate.stripe.com/bIY6rig2w5ohat24gg"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <TextLink link="https://donate.stripe.com/bIY6rig2w5ohat24gg">
             donate
-          </a>
+          </TextLink>
         </span>{" "}
         to cover our running costs.
       </p>
