@@ -18,6 +18,12 @@ To get the server running, go into the folder `./server` and run `yarn start`;
 
 Run tests with `yarn test`. All tests must pass before your changes can be added to the project.
 
+## Contributions
+
+If you'd like to contribute to this tool, feel free to pick up one of the issues that's currently open, or create your own!
+
+When submitting a pull request, please describe your changes clearly, and include screenshots and tests where relevant.
+
 ## FAQ
 
 ### What is Future Labour MPs?
