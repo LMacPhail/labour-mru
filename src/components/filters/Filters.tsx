@@ -3,21 +3,19 @@ import { useDispatch } from "react-redux";
 import { SET_SORTBY_ACTION } from "../../state/actions";
 import TextLink from "../atoms/Link";
 
-type SelectedSortDirection = "ascending" | "descending";
-const DESCENDING_OPT_TEXT = "Most Likely";
-const ASCENDING_OPT_TEXT = "Least Likely";
+type SelectedSortDirection = "highest" | "lowest";
 
 export const SortByDropdown: React.FC = () => {
   const dispatch = useDispatch();
 
   const [sortDirection, setSortDirection] = useState<
     SelectedSortDirection | undefined
-  >("descending");
+  >("highest");
 
   const handleSelectChange = (value: SelectedSortDirection) => {
     dispatch({
       type: SET_SORTBY_ACTION,
-      payload: { descending: value === "descending" },
+      payload: { descending: value === "highest" },
     });
     setSortDirection(value);
   };
@@ -25,29 +23,23 @@ export const SortByDropdown: React.FC = () => {
   return (
     <div>
       <span className="text-xs">
-        Sort by likeliness to win:{" "}
+        Sort by chance of winning:{" "}
         <TextLink link="https://www.electoralcalculus.co.uk/">
           (source)
         </TextLink>
       </span>
       <select
-        className="select select-ghost-primary select-sm"
-        value={
-          sortDirection === "descending"
-            ? DESCENDING_OPT_TEXT
-            : ASCENDING_OPT_TEXT
-        }
+        className="select select-ghost-primary select-sm capitalize"
+        value={sortDirection}
         onChange={(event) =>
           handleSelectChange(
-            event.target.value === DESCENDING_OPT_TEXT
-              ? "descending"
-              : "ascending"
+            event.target.value.toLowerCase() as SelectedSortDirection
           )
         }
         aria-label="sort profiles"
       >
-        <option key={"descending"}>{DESCENDING_OPT_TEXT}</option>
-        <option key={"ascending"}>{ASCENDING_OPT_TEXT}</option>
+        <option key={"highest"}>highest</option>
+        <option key={"lowest"}>lowest</option>
       </select>
     </div>
   );

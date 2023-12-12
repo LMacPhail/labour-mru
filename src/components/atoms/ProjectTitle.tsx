@@ -5,6 +5,6 @@ export const ProjectTitle: React.FC = () => (
     className="flex-none w-full text-center text-xl font-semibold dark:text-white"
     aria-label="Brand"
   >
-    Labour MP Index
+    Future Labour MPs
   </div>
 );

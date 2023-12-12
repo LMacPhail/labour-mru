@@ -180,6 +180,12 @@ export const ProfileContent: React.FC<{
           {education && (
             <FormattedContent subHeader="Education" rawContent={education} />
           )}
+          {notes && (
+            <FormattedContent
+              subHeader="Miscellaneous notes"
+              rawContent={notes}
+            />
+          )}
         </>
       ) : (
         <p className="mb-2 font-light italic">
@@ -203,9 +209,6 @@ export const ProfileContent: React.FC<{
           return <div key={`${policyType}-card`} className="hidden"></div>;
         })}
       </div>
-      {notes && (
-        <FormattedContent subHeader="Miscellaneous notes" rawContent={notes} />
-      )}
     </>
   );
 };

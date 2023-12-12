@@ -1,4 +1,5 @@
-import React from "react";
+import { Minus, Plus } from "@phosphor-icons/react";
+import React, { useState } from "react";
 import TextLink from "../atoms/Link";
 
 const faqs: { question: string; answer: JSX.Element }[] = [
@@ -171,12 +172,26 @@ const faqs: { question: string; answer: JSX.Element }[] = [
       </p>
     ),
   },
+  {
+    question: ' How have you calculated "chance of winning"?',
+
+    answer: (
+      <p>
+        Our measure is based on the Electoral Calculus "chance of winning"
+        measure{" "}
+        <TextLink link="https://www.electoralcalculus.co.uk/fcgi-bin/calcwork23.py?seat=Glasgow+North+East">
+          (see an example here)
+        </TextLink>
+        . We have included all Labour MPs who hadn't been previously elected and
+        have more than an 80% chance of winning (data collected December 2023).
+      </p>
+    ),
+  },
 ];
 
 const About: React.FC = () => {
   return (
     <div className="max-w-[70rem] mx-auto pb-10">
-      <h2 className="h2">Intro</h2>
       <div className="flex flex-col gap-2">
         <p>
           MPs can be difficult to build relationships with and influence. They
@@ -201,21 +216,45 @@ const About: React.FC = () => {
         </p>
       </div>
       <h2 className="h2">FAQ</h2>
-      {faqs.map((faq) => (
-        <FAQQuestion question={faq.question} answer={faq.answer} />
-      ))}
+      <div className="accordion-group">
+        {faqs.map((faq, idx) => (
+          <FAQQuestion question={faq.question} answer={faq.answer} idx={idx} />
+        ))}
+      </div>
     </div>
   );
 };
 
-const FAQQuestion: React.FC<{ question: string; answer: JSX.Element }> = ({
-  question,
-  answer,
-}) => {
+const FAQQuestion: React.FC<{
+  question: string;
+  answer: JSX.Element;
+  idx: number;
+}> = ({ question, answer, idx }) => {
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
-    <div className="my-8">
-      <h4 className="font-bold capitalize my-4">{question}</h4>
-      {answer}
+    <div className="accordion bg-gray-50 dark:bg-slate-900">
+      <input
+        type="checkbox"
+        id={`accordion-${idx}`}
+        className="accordion-toggle"
+        checked={open}
+        onChange={() => {
+          setOpen(!open);
+        }}
+      />
+      <label
+        htmlFor={`accordion-${idx}`}
+        className="accordion-title py-0  bg-gray-50 dark:bg-slate-900"
+      >
+        <div className="flex flex-row justify-between items-center">
+          <h4 className="font-bold my-4 text-base">{question}</h4>
+          {open ? <Minus size={18} /> : <Plus size={18} />}
+        </div>
+      </label>
+      <div className="accordion-content">
+        <div className="min-h-0"> {answer}</div>
+      </div>
     </div>
   );
 };
