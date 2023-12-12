@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Contact,
+  MP,
   Policy,
   PolicyInterests,
   PolicyType,
@@ -139,37 +140,46 @@ export const ProfileHeader: React.FC<{
 };
 
 export const ProfileContent: React.FC<{
-  profession: string;
-  orgs: {
-    membershipOrg: string;
-    charitiesBoard: string;
-    directorOfCompanies: string;
-  };
-  policyInterests: Record<PolicyType, Policy>;
-}> = ({ profession, orgs, policyInterests }) => {
+  mp: MP;
+}> = ({ mp }) => {
+  const {
+    currentProfession,
+    organisationalLinks,
+    education,
+    policyInterests,
+    notes,
+  } = mp;
+  const { membershipOrg, charitiesBoard, directorOfCompanies } =
+    organisationalLinks;
   const professionalInfo = [
-    profession,
-    orgs.membershipOrg,
-    orgs.charitiesBoard,
-    orgs.directorOfCompanies,
+    currentProfession,
+    membershipOrg,
+    charitiesBoard,
+    directorOfCompanies,
   ].some((info) => info !== "");
   return (
     <>
       {professionalInfo ? (
         <>
-          <FormattedContent subHeader="Profession" rawContent={profession} />
+          <FormattedContent
+            subHeader="Profession"
+            rawContent={currentProfession}
+          />
           <FormattedContent
             subHeader="Organisation membership"
-            rawContent={orgs.membershipOrg}
+            rawContent={membershipOrg}
           />
           <FormattedContent
             subHeader="Board of charities"
-            rawContent={orgs.charitiesBoard}
+            rawContent={charitiesBoard}
           />
           <FormattedContent
             subHeader="Director of companies"
-            rawContent={orgs.directorOfCompanies}
+            rawContent={directorOfCompanies}
           />
+          {education && (
+            <FormattedContent subHeader="Education" rawContent={education} />
+          )}
         </>
       ) : (
         <p className="mb-2 font-light italic">
@@ -193,6 +203,9 @@ export const ProfileContent: React.FC<{
           return <div key={`${policyType}-card`} className="hidden"></div>;
         })}
       </div>
+      {notes && (
+        <FormattedContent subHeader="Miscellaneous notes" rawContent={notes} />
+      )}
     </>
   );
 };

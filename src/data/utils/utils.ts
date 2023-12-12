@@ -51,7 +51,7 @@ const mpIdxLookup: Record<number, keyof MP> = {
   38: "policyInterests",
   39: "policyInterests",
   40: "contact",
-  41: "educationType",
+  41: "education",
   42: "notes",
   44: "profilePic",
   45: "winningProbability",

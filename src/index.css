@@ -16,3 +16,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.text-link {
+  @apply text-blue-500 hover:text-blue-600;
+}
+
+.h2 {
+  @apply my-4 font-extrabold text-xl;
+}
