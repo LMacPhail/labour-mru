@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { SET_SORTBY_ACTION } from "../../state/actions";
-import TextLink from "../atoms/Link";
+import { Question } from "@phosphor-icons/react";
 
 type SelectedSortDirection = "highest" | "lowest";
 
@@ -24,9 +24,14 @@ export const SortByDropdown: React.FC = () => {
     <div>
       <span className="text-xs">
         Sort by chance of winning:{" "}
-        <TextLink link="https://www.electoralcalculus.co.uk/">
-          (source)
-        </TextLink>
+        <span
+          className="tooltip-click tooltip-right z-40"
+          data-tooltip="See FAQ"
+        >
+          <button>
+            <Question size={12} />
+          </button>
+        </span>
       </span>
       <select
         className="select select-ghost-primary select-sm capitalize"

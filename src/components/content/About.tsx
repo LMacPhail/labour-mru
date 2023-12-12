@@ -43,6 +43,20 @@ const faqs: { question: string; answer: JSX.Element }[] = [
     ),
   },
   {
+    question: ' How have you calculated "chance of winning"?',
+    answer: (
+      <p>
+        Our measure is based on the Electoral Calculus "chance of winning"
+        measure{" "}
+        <TextLink link="https://www.electoralcalculus.co.uk/fcgi-bin/calcwork23.py?seat=Glasgow+North+East">
+          (see an example here)
+        </TextLink>
+        . We have included all Labour MPs who hadn't been previously elected and
+        have more than an 80% chance of winning (data collected December 2023).
+      </p>
+    ),
+  },
+  {
     question: "How have you chosen the candidates?",
     answer: (
       <>
@@ -174,7 +188,6 @@ const faqs: { question: string; answer: JSX.Element }[] = [
   },
   {
     question: ' How have you calculated "chance of winning"?',
-
     answer: (
       <p>
         Our measure is based on the Electoral Calculus "chance of winning"
@@ -192,6 +205,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
 const About: React.FC = () => {
   return (
     <div className="max-w-[70rem] mx-auto pb-10">
+      <h2 className="h2">About The Project</h2>
       <div className="flex flex-col gap-2">
         <p>
           MPs can be difficult to build relationships with and influence. They
