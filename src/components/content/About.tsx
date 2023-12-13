@@ -51,7 +51,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
         <TextLink link="https://www.electoralcalculus.co.uk/fcgi-bin/calcwork23.py?seat=Glasgow+North+East">
           (see an example here)
         </TextLink>
-        . We have included all Labour MPs who hadn't been previously elected and
+        . We have included Labour candidates who haven't been previously elected and
         have more than an 80% chance of winning (data collected December 2023).
       </p>
     ),
@@ -145,7 +145,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
     question: "Who are you?",
     answer: (
       <p>
-        This tool was made by volunteer researchers from the{" "}
+        This tool was made by skilled volunteer researchers from the{" "}
         <span>
           <TextLink link="http://mvmtresearch.org">
             Movement Research Unit
@@ -166,7 +166,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
             get involved
           </TextLink>
         </span>{" "}
-        (no research experience necessary) or you can{" "}
+         or you can{" "}
         <span>
           <TextLink link="https://donate.stripe.com/bIY6rig2w5ohat24gg">
             donate
@@ -186,20 +186,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
       </p>
     ),
   },
-  {
-    question: ' How have you calculated "chance of winning"?',
-    answer: (
-      <p>
-        Our measure is based on the Electoral Calculus "chance of winning"
-        measure{" "}
-        <TextLink link="https://www.electoralcalculus.co.uk/fcgi-bin/calcwork23.py?seat=Glasgow+North+East">
-          (see an example here)
-        </TextLink>
-        . We have included all Labour MPs who hadn't been previously elected and
-        have more than an 80% chance of winning (data collected December 2023).
-      </p>
-    ),
-  },
+  
 ];
 
 const About: React.FC = () => {
@@ -220,7 +207,7 @@ const About: React.FC = () => {
         </p>
         <p>
           The next election is likely to be won by Labour. Our database shows
-          Labour candidates who are new to parliament and very likely to get
+          Labour candidates who would be new to parliament and are very likely to get
           elected. It can be used to build relationships with this new cohort of
           Labour MPs and influence what the next Labour government does.
         </p>
