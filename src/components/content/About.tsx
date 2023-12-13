@@ -137,7 +137,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
         This is a better way of getting a sense of an incumbent MP’s current
         majority under the new boundaries, though this doesn’t account for
         current polling. But that’s why we’ve also included Electoral Calculus’
-        percentage chance of winning category, which does factor polling.
+        percentage chance of winning category, which does factor in polling.
       </p>
     ),
   },
@@ -205,7 +205,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
 const About: React.FC = () => {
   return (
     <div className="max-w-[70rem] mx-auto pb-10">
-      <h2 className="h2">About The Project</h2>
+      <h2 className="h2">About </h2>
       <div className="flex flex-col gap-2">
         <p>
           MPs can be difficult to build relationships with and influence. They
@@ -220,8 +220,8 @@ const About: React.FC = () => {
         </p>
         <p>
           The next election is likely to be won by Labour. Our database shows
-          Labour candidates who are new to parliament and very likely get
-          elected. It can be used to build relationships with the new cohort of
+          Labour candidates who are new to parliament and very likely to get
+          elected. It can be used to build relationships with this new cohort of
           Labour MPs and influence what the next Labour government does.
         </p>
         <p>
