@@ -31,7 +31,7 @@ export const Header: React.FC<{
               }`}
               onClick={() => setView("index")}
             >
-              Index
+              Home
             </button>
             <button
               className={`btn btn-${
