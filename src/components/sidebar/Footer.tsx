@@ -1,10 +1,11 @@
 import React from "react";
 import TextLink from "../atoms/Link";
 import { GithubLogo } from "@phosphor-icons/react";
+import { showPrivacyPreferences } from "../../analytics";
 
 export const Footer: React.FC = () => {
   return (
-    <div className="text-sm flex flex-col gap-2">
+    <div className="text-sm flex flex-col gap-2 pb-4">
       <div className="divider"></div>
       <p>
         Built by volunteers at the{" "}
@@ -18,6 +19,9 @@ export const Footer: React.FC = () => {
         Support our work
       </TextLink>
       <TextLink link="https://go.mvmtresearch.org/join">Get involved</TextLink>
+      <span className="text-link cursor-pointer" onClick={showPrivacyPreferences}>
+        Cookies &amp; privacy settings
+      </span>
       <TextLink link="https://github.com/LMacPhail/labour-mru">
         <span className="flex flex-row gap-2 items-center">
           Contribute on Github{" "}

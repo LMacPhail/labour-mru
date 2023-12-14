@@ -4961,6 +4961,11 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+fflate@^0.4.1:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -7982,6 +7987,13 @@ postcss@^8.3.5, postcss@^8.4.21, postcss@^8.4.23, postcss@^8.4.31, postcss@^8.4.
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+posthog-js@^1.95.1:
+  version "1.95.1"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.95.1.tgz#e39d721355b732dcb49c83384b0e31f5d235531e"
+  integrity sha512-79HPLoBqENBEEGFhn+hueKliYH66Qbu4WcRTEd8WaqtvqHrK9qAQkcrShZNkg1V5vM4kHp0iMIkJYBXg1sq06Q==
+  dependencies:
+    fflate "^0.4.1"
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -9710,6 +9722,11 @@ v8-to-istanbul@^8.1.0:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
+
+vanilla-cookieconsent@^3.0.0-rc.17:
+  version "3.0.0-rc.17"
+  resolved "https://registry.yarnpkg.com/vanilla-cookieconsent/-/vanilla-cookieconsent-3.0.0-rc.17.tgz#85c738e2dc92a42dee94d2be06ffe208306b6dc0"
+  integrity sha512-YmyI+VJ+oAFxsNwWkU+DbDcVxRpttOpGzgjlAdpfELC0lF3sJiBHzrQ09WiRXdzB1nd2A1G6vYns2Niqx7wLlA==
 
 vary@~1.1.2:
   version "1.1.2"

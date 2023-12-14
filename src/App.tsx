@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMPs } from "./data/utils/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
+import { useAnalytics } from "./analytics";
 
 function App() {
   const view = useSelector((state: AppState) => state.view);
@@ -23,6 +24,7 @@ function App() {
     [dispatch]
   );
   fetchMPs(updateData);
+  useAnalytics()
 
   return (
     <div className="">
