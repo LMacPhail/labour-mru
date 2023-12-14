@@ -15,7 +15,8 @@ export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
             />
             <label
               htmlFor={`accordion-${i}`}
-              className="accordion-title bg-gray-50 dark:bg-slate-900 px-4"
+              className="mp-card accordion-title bg-gray-50 dark:bg-slate-900 px-4"
+              data-ph-capture-attribute-mp-name={mp.name}
             >
               <ProfileHeader
                 name={mp.name}

@@ -20,6 +20,14 @@ export function showPrivacyPreferences () {
   CookieConsent.show();
 }
 
+export function captureAnalyticsEvent (event: string, properties: any) {
+  posthog.capture(event, properties)
+}
+
+export function captureAnalyticsPageView (page: string) {
+  posthog.capture('change tab', { page })
+}
+
 export function useAnalytics () {
   useEffect(() => {
     CookieConsent.run({
