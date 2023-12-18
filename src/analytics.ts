@@ -4,15 +4,16 @@ import * as CookieConsent from "vanilla-cookieconsent";
 import { useEffect } from 'react';
 
 export async function enablePosthog() {
-  console.log("Enabling PostHog")
-  posthog.init(process.env.POSTHOG_API_KEY || 'phc_tRkyMnTTjz6EXTGDxTBw4FgZacvm3MdsXd7aK485Gnh', {
-    api_host: 'https://eu.posthog.com'
+  if (!process.env.REACT_APP_POSTHOG_API_KEY || !process.env.REACT_APP_POSTHOG_API_URL) {
+    return
+  }
+  posthog.init(process.env.REACT_APP_POSTHOG_API_KEY!, {
+    api_host: process.env.REACT_APP_POSTHOG_API_URL
   })
   posthog.opt_in_capturing()
 }
 
 export async function disablePosthog() {
-  console.log("Disabling PostHog")
   posthog.opt_out_capturing()
 }
 
