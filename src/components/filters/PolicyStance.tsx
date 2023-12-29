@@ -60,6 +60,7 @@ const FilterCheckbox: React.FC<{
         className="checkbox"
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
+        data-ph-capture-attribute-filter-category={category}
       />
     </div>
   );
