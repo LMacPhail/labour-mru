@@ -9,7 +9,11 @@ import { supabase } from "./supabaseClient";
 
 export default function Account({ session }: { session: any }) {
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const [lastName, setLastName] = useState<string | null>(null);
+  const [organisation, setOrganisation] = useState<string | null>(null);
+  const [purpose, setPurpose] = useState<string | null>(null);
 
   useEffect(() => {
     let ignore = false;
@@ -19,7 +23,7 @@ export default function Account({ session }: { session: any }) {
 
       const { data, error } = await supabase
         .from("profiles")
-        .select(`username`)
+        .select(`email`)
         .eq("id", user.id)
         .single();
 
@@ -27,7 +31,7 @@ export default function Account({ session }: { session: any }) {
         if (error) {
           console.warn(error);
         } else if (data) {
-          setUsername(data.username);
+          setEmail(data.email);
         }
       }
 
@@ -49,7 +53,11 @@ export default function Account({ session }: { session: any }) {
 
     const updates = {
       id: user.id,
-      username,
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      organisation,
+      purpose,
       updated_at: new Date(),
     };
 
@@ -67,14 +75,55 @@ export default function Account({ session }: { session: any }) {
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
       </div>
-      <div>
-        <label htmlFor="username">Name</label>
+{/*      <div>
+        <label htmlFor="username">Username</label>
         <input
-          id="username"
+          id="name"
           type="text"
           required
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>*/}
+      <div>
+        <label htmlFor="firstName">First name</label>
+        <input
+          id="firstName"
+          type="text"
+          required
+          value={firstName || ""}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="lastName">Last name</label>
+        <input
+          id="lastName"
+          type="text"
+          required
+          value={lastName || ""}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="Organisation">Organisation</label>
+        <input
+          id="organisation"
+          type="text"
+          value={organisation || ""}
+          onChange={(e) => setOrganisation(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="Purpose">What are you using Future Labour MPs for?</label>
+        <input
+          id="purpose"
+          type="text"
+          required
+          value={purpose || ""}
+          onChange={(e) => setPurpose(e.target.value)}
         />
       </div>
 
