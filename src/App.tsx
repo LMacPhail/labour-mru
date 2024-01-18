@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { Sidebar } from "./components/sidebar/Sidebar";
-import Main from "./components/Main";
 import { Header } from "./components/Header";
-import { AppState } from "./state/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchMPs } from "./data/utils/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
@@ -12,9 +10,13 @@ import { useAnalytics } from "./analytics";
 import { supabase } from "./supabaseClient";
 import { Session } from "@supabase/supabase-js";
 import { SignUpModal } from "./components/auth/SignUpModal";
+import MPIndex from "./pages/MPIndex";
+import { Routes, Route } from "react-router-dom";
+import About from "./pages/About";
+import { AccountPage } from "./pages/Account";
+import { SignUpPage } from "./pages/SignUp";
 
 function App() {
-  const view = useSelector((state: AppState) => state.view);
   const dispatch = useDispatch();
   const updateData = useCallback(
     (mpData: MP[], status: DataStatus) => {
@@ -51,19 +53,21 @@ function App() {
     <Sidebar>
       <>
         <SignUpModal status="sign-up" session={session} />
-        <Header view={view} />
-        <Main view={view} />
+        <Header session={session} />
+        <div className="w-full pt-4 px-4 sm:px-6 md:px-8">
+          <Routes>
+            <Route path="/" element={<MPIndex />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/account"
+              element={<AccountPage session={session} />}
+            />
+            <Route path="/sign-up" element={<SignUpPage />} />
+          </Routes>
+        </div>
       </>
     </Sidebar>
   );
 }
 
 export default App;
-
-{
-  /* {!session ? (
-        <Auth />
-      ) : (
-        <Account key={session.user.id} session={session} />
-      )} */
-}

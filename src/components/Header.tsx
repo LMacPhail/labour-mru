@@ -1,20 +1,14 @@
 import React from "react";
 import { ProjectTitle } from "./atoms/ProjectTitle";
-import { ViewType } from "../data/types";
-import { SET_VIEW_ACTION } from "../state/actions";
-import { useDispatch } from "react-redux";
 import { SearchInput } from "./filters/SearchInput";
+import { NavLink, useLocation } from "react-router-dom";
+import { Session } from "@supabase/supabase-js";
 
-export const Header: React.FC<{
-  view: "about" | "index";
-}> = ({ view }) => {
-  const dispatch = useDispatch();
-  const setView = (view: ViewType) => {
-    dispatch({ type: SET_VIEW_ACTION, payload: { view } });
-  };
-
+export const Header: React.FC<{ session: Session | null }> = ({ session }) => {
+  const route = useLocation();
+  console.log(route);
   return (
-    <header className="sticky top-0 z-10 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b text-sm py-2.5 sm:py-4 md:pl-72 dark:bg-gray-800 dark:border-gray-700">
+    <header className="sticky top-0 z-10 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b text-sm py-2.5 sm:py-4 dark:bg-gray-800 dark:border-gray-700">
       <nav
         className="flex flex-wrap justify-between flex-row gap-2 basis-full items-center w-full mx-auto px-4 sm:px-6 md:px-8"
         aria-label="Global"
@@ -25,22 +19,30 @@ export const Header: React.FC<{
 
         <div className="flex items-center justify-between sm:gap-x-3 sm:order-3">
           <div className="flex gap-2">
-            <button
-              className={`btn btn-sm`}
-              onClick={() => setView("index")}
-              aria-label="Go to MP list view"
-            >
+            <NavLink className="nav-link btn btn-sm bg-slate-200" to="/">
               Home
-            </button>
-            <button
-              className={`btn btn-sm`}
-              onClick={() => setView("about")}
-              aria-label="Go to FAQ and about page"
-            >
+            </NavLink>
+            <NavLink className="nav-link btn btn-sm bg-slate-200" to="/about">
               About
-            </button>
+            </NavLink>
+            {session === null ? (
+              <NavLink className="nav-link btn btn-sm bg-accent" to="/sign-up">
+                Sign Up
+              </NavLink>
+            ) : (
+              <NavLink
+                className="nav-link btn btn-sm bg-slate-200"
+                to="/account"
+              >
+                Account
+              </NavLink>
+            )}
+
             <div className="md:hidden">
-              <label htmlFor="my-drawer" className="btn btn-sm drawer-button">
+              <label
+                htmlFor="my-drawer"
+                className="btn btn-sm drawer-button bg-slate-200 dark:bg-slate-700"
+              >
                 <span className="sr-only">Toggle Sidebar</span>
                 <svg
                   className="w-5 h-5"
@@ -58,7 +60,7 @@ export const Header: React.FC<{
             </div>
           </div>
         </div>
-        {view === "index" && <SearchInput />}
+        {route.pathname === "/" && <SearchInput />}
       </nav>
     </header>
   );

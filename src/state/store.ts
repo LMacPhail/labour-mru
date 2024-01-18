@@ -1,18 +1,16 @@
 import { values } from "../data/test/rawResponse";
-import { Filters, MP, ViewType } from "../data/types";
+import { Filters, MP } from "../data/types";
 import { formatResponse } from "../data/utils/utils";
 import rootReducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 export type AppState = {
   data: { status: "loading" | "complete" | "error"; profiles: MP[] };
-  view: ViewType;
   activeFilters: Filters;
 };
 
 export const initState: AppState = {
   data: { status: "loading", profiles: formatResponse(values) },
-  view: "index",
   activeFilters: {
     searchInput: "",
     policies: {
