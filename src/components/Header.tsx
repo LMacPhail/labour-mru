@@ -6,7 +6,6 @@ import { Session } from "@supabase/supabase-js";
 
 export const Header: React.FC<{ session: Session | null }> = ({ session }) => {
   const route = useLocation();
-  console.log(route);
   return (
     <header className="sticky top-0 z-10 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b text-sm py-2.5 sm:py-4 dark:bg-gray-800 dark:border-gray-700">
       <nav
@@ -18,7 +17,7 @@ export const Header: React.FC<{ session: Session | null }> = ({ session }) => {
         </div>
 
         <div className="flex items-center justify-between sm:gap-x-3 sm:order-3">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <NavLink className="nav-link btn btn-sm bg-slate-200" to="/">
               Home
             </NavLink>
