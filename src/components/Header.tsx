@@ -28,14 +28,14 @@ export const Header: React.FC<{
             <button
               className={`btn btn-sm`}
               onClick={() => setView("index")}
-              name="Go to MP list view"
+              aria-label="Go to MP list view"
             >
               Home
             </button>
             <button
               className={`btn btn-sm`}
               onClick={() => setView("about")}
-              name="Go to FAQ and about page"
+              aria-label="Go to FAQ and about page"
             >
               About
             </button>

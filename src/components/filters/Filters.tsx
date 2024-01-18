@@ -28,7 +28,7 @@ export const SortByDropdown: React.FC = () => {
           className="tooltip-click tooltip-right z-40"
           data-tooltip="See FAQ"
         >
-          <button name="See FAQ">
+          <button aria-label="See FAQ">
             <Question size={12} />
           </button>
         </span>

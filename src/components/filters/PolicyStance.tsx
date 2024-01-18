@@ -29,6 +29,9 @@ export const PolicyStance: React.FC = () => {
   );
 };
 
+const formatCategory = (category: string): string =>
+  category === "publicOwnership" ? "public ownership" : category;
+
 const FilterCheckbox: React.FC<{
   category: PolicyType;
 }> = ({ category }) => {
@@ -53,10 +56,17 @@ const FilterCheckbox: React.FC<{
       key={category}
     >
       <p className="flex align-middle text-center capitalize">
-        {category === "publicOwnership" ? "public ownership" : category}
+        {formatCategory(category)}
       </p>
+      <label
+        className="sr-only"
+        htmlFor={`${formatCategory(category)}-checkbox`}
+      >
+        Select {category}
+      </label>
       <input
         type="checkbox"
+        id={`${formatCategory(category)}-checkbox`}
         className="checkbox checkbox-sm checkbox-neutral"
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
