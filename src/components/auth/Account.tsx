@@ -5,7 +5,7 @@ import {
   FormEventHandler,
   FormEvent,
 } from "react";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 export default function Account({ session }: { session: any }) {
   const [loading, setLoading] = useState(true);

@@ -11,6 +11,7 @@ import { SET_DATA_ACTION } from "./state/actions";
 import { useAnalytics } from "./analytics";
 import { supabase } from "./supabaseClient";
 import { Session } from "@supabase/supabase-js";
+import { SignUpModal } from "./components/auth/SignUpModal";
 
 function App() {
   const view = useSelector((state: AppState) => state.view);
@@ -37,11 +38,19 @@ function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, []);
+  }, [supabase.auth]);
+
+  useEffect(() => {
+    if (document !== null) {
+      // @ts-ignore
+      document.getElementById("sign_up_modal").showModal();
+    }
+  });
 
   return (
     <Sidebar>
       <>
+        <SignUpModal status="sign-up" session={session} />
         <Header view={view} />
         <Main view={view} />
       </>
