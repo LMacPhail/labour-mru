@@ -28,13 +28,13 @@ export const SortByDropdown: React.FC = () => {
           className="tooltip-click tooltip-right z-40"
           data-tooltip="See FAQ"
         >
-          <button>
+          <button name="See FAQ">
             <Question size={12} />
           </button>
         </span>
       </span>
       <select
-        className="select select-ghost-primary select-sm capitalize"
+        className="select select-bordered w-full select-sm capitalize"
         value={sortDirection}
         onChange={(event) =>
           handleSelectChange(

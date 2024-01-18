@@ -83,6 +83,7 @@ export default function Account({ session }: { session: any }) {
           className="button block primary"
           type="submit"
           disabled={loading}
+          name="Submit account info"
         >
           {loading ? "Loading ..." : "Update"}
         </button>
@@ -93,6 +94,7 @@ export default function Account({ session }: { session: any }) {
           className="button block"
           type="button"
           onClick={() => supabase.auth.signOut()}
+          name="sign out"
         >
           Sign Out
         </button>

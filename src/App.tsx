@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { Sidebar } from "./components/sidebar/Sidebar";
 import Main from "./components/Main";
-import { SidebarContent } from "./components/sidebar/SidebarContent";
 import { Header } from "./components/Header";
 import { AppState } from "./state/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +10,6 @@ import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
 import { useAnalytics } from "./analytics";
 import { supabase } from "./supabaseClient";
-import Auth from "./Auth";
-import Account from "./Account";
 import { Session } from "@supabase/supabase-js";
 
 function App() {
@@ -43,19 +40,21 @@ function App() {
   }, []);
 
   return (
-    <div className="">
-      {!session ? (
-        <Auth />
-      ) : (
-        <Account key={session.user.id} session={session} />
-      )}
-      {/* <Header view={view} />
-      <Sidebar>
-        <SidebarContent />
-      </Sidebar>
-      <Main view={view} /> */}
-    </div>
+    <Sidebar>
+      <>
+        <Header view={view} />
+        <Main view={view} />
+      </>
+    </Sidebar>
   );
 }
 
 export default App;
+
+{
+  /* {!session ? (
+        <Auth />
+      ) : (
+        <Account key={session.user.id} session={session} />
+      )} */
+}

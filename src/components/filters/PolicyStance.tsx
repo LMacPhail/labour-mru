@@ -57,7 +57,7 @@ const FilterCheckbox: React.FC<{
       </p>
       <input
         type="checkbox"
-        className="checkbox"
+        className="checkbox checkbox-sm checkbox-neutral"
         onClick={() => handleCheck()}
         onChange={(_e) => handleCheck()}
         data-ph-capture-attribute-filter-category={category}
