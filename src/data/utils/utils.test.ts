@@ -82,11 +82,6 @@ const expectedValues = [
         source: "",
         positive: undefined,
       },
-      strikes: {
-        source:
-          "Weighed in against a strike by teachers in a school with blue water coming out of the taps",
-        positive: false,
-      },
       publicOwnership: {
         source: "",
         positive: undefined,
@@ -153,10 +148,6 @@ const expectedValues = [
         source: "",
         positive: undefined,
       },
-      strikes: {
-        positive: undefined,
-        source: "",
-      },
       publicOwnership: {
         source: "",
         positive: undefined,
@@ -222,10 +213,6 @@ const expectedValues = [
         positive: true,
       },
       benefits: {
-        source: "",
-        positive: undefined,
-      },
-      strikes: {
         source: "",
         positive: undefined,
       },
@@ -300,10 +287,6 @@ const expectedValues = [
           "Said that he would scrap the two-child benefit cap ('a heinous policy') and bedroom tax ",
         positive: true,
       },
-      strikes: {
-        source: "",
-        positive: undefined,
-      },
       publicOwnership: {
         source: "",
         positive: undefined,
@@ -345,6 +328,7 @@ const expectedValues = [
 
     winningProbability: {
       percentage: 95,
+      source: "",
     },
     policyInterests: {
       climate: {
@@ -370,10 +354,6 @@ const expectedValues = [
         positive: true,
       },
       benefits: {
-        source: "",
-        positive: undefined,
-      },
-      strikes: {
         source: "",
         positive: undefined,
       },
@@ -416,6 +396,7 @@ const expectedValues = [
     contact: undefined,
     winningProbability: {
       percentage: 96,
+      source: "",
     },
     policyInterests: {
       climate: {
@@ -436,10 +417,6 @@ const expectedValues = [
         positive: undefined,
       },
       benefits: {
-        positive: undefined,
-      },
-      strikes: {
-        source: "",
         positive: undefined,
       },
       publicOwnership: {
@@ -492,10 +469,6 @@ const blankFilters = (): Filters => ({
       source: undefined,
       positive: undefined,
     },
-    strikes: {
-      source: undefined,
-      positive: undefined,
-    },
     publicOwnership: {
       source: undefined,
       positive: undefined,
@@ -529,7 +502,8 @@ describe("filterProfiles", () => {
     const NHSFilter: Filters = blankFilters();
     NHSFilter.policies["NHS"].positive = true;
     NHSFilter.policies["climate"].positive = true;
-    NHSFilter.policies["strikes"].positive = true;
+    NHSFilter.policies["publicOwnership"].positive = true;
+    NHSFilter.policies["benefits"].positive = true;
 
     const filtered = filterProfiles(expectedValues as MP[], NHSFilter);
     expect(filtered.length).toBe(0);
