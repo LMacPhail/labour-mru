@@ -18,21 +18,18 @@ export const Header: React.FC<{ session: Session | null }> = ({ session }) => {
 
         <div className="flex items-center justify-between sm:gap-x-3 sm:order-3">
           <div className="flex flex-wrap gap-2">
-            <NavLink className="nav-link btn btn-sm bg-slate-200" to="/">
+            <NavLink className="nav-link" to="/">
               Home
             </NavLink>
-            <NavLink className="nav-link btn btn-sm bg-slate-200" to="/about">
+            <NavLink className="nav-link" to="/about">
               About
             </NavLink>
             {session === null ? (
-              <NavLink className="nav-link btn btn-sm bg-accent" to="/sign-up">
+              <NavLink className="nav-link accent" to="/sign-up">
                 Sign Up
               </NavLink>
             ) : (
-              <NavLink
-                className="nav-link btn btn-sm bg-slate-200"
-                to="/account"
-              >
+              <NavLink className="nav-link" to="/account">
                 Account
               </NavLink>
             )}
