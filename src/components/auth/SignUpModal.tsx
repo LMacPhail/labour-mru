@@ -1,7 +1,7 @@
 import React from "react";
 import Auth from "./Auth";
-import Account from "./Account";
 import { Session } from "@supabase/supabase-js";
+import { Account } from "./Account";
 
 // {/* You can open the modal using document.getElementById('ID').showModal() method */}
 // <button className="btn" onClick={()=>document.getElementById('sign_up_modal').showModal()}>open modal</button>
@@ -24,10 +24,12 @@ export const SignUpModal: React.FC<{
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button className="btn btn-sm btn-ghost absolute right-2 top-2">
-            Continue without signing up
+            Continue to site
           </button>
         </form>
-        <h3 className="font-bold text-lg">Hello!</h3>
+        <h3 className="font-bold text-lg">
+          {status === "sign-up" ? "Hello!" : "Add User Info"}
+        </h3>
         {getModalContent()}
       </div>
     </dialog>

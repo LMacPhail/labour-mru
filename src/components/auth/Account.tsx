@@ -1,15 +1,26 @@
-import {
-  useState,
-  useEffect,
-  SetStateAction,
-  FormEventHandler,
-  FormEvent,
-} from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { supabase } from "../../supabaseClient";
+import { TextInput } from "../atoms/TextInput";
 
-export default function Account({ session }: { session: any }) {
+type FormData = {
+  email: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  organisation: string | null;
+  purpose: string | null;
+};
+
+const initForm = {
+  email: null,
+  firstName: null,
+  lastName: null,
+  organisation: null,
+  purpose: null,
+};
+
+export function Account({ session }: { session: any }) {
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState<string | null>(null);
+  const [form, setForm] = useState<FormData>(initForm);
 
   useEffect(() => {
     let ignore = false;
@@ -19,7 +30,7 @@ export default function Account({ session }: { session: any }) {
 
       const { data, error } = await supabase
         .from("profiles")
-        .select(`username`)
+        .select(`email, first_name, last_name, organisation, purpose`)
         .eq("id", user.id)
         .single();
 
@@ -27,7 +38,8 @@ export default function Account({ session }: { session: any }) {
         if (error) {
           console.warn(error);
         } else if (data) {
-          setUsername(data.username);
+          const { first_name, last_name } = data;
+          setForm({ ...data, firstName: first_name, lastName: last_name });
         }
       }
 
@@ -46,10 +58,15 @@ export default function Account({ session }: { session: any }) {
 
     setLoading(true);
     const { user } = session;
+    const { firstName, lastName, organisation, purpose } = form;
 
     const updates = {
       id: user.id,
-      username,
+      email: user.email,
+      first_name: firstName,
+      last_name: lastName,
+      organisation,
+      purpose,
       updated_at: new Date(),
     };
 
@@ -62,41 +79,49 @@ export default function Account({ session }: { session: any }) {
   }
 
   return (
-    <form onSubmit={updateProfile} className="form-widget">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Name</label>
-        <input
-          id="username"
-          type="text"
-          required
-          value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+    <form
+      onSubmit={updateProfile}
+      className="form-widget flex flex-col max-w-72 gap-2"
+    >
+      <TextInput label="Email" id="email" value={session.user.email} disabled />
+
+      <TextInput
+        label="First Name"
+        id="firstName"
+        value={form.firstName || ""}
+        required
+        onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+      />
+
+      <TextInput
+        label="Last Name"
+        id="lastName"
+        required
+        value={form.lastName || ""}
+        onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+      />
+
+      <TextInput
+        label="Organisation"
+        id="organisation"
+        value={form.organisation || ""}
+        onChange={(e) => setForm({ ...form, organisation: e.target.value })}
+      />
+
+      <TextInput
+        label="Purpose"
+        id="purpose"
+        value={form.purpose || ""}
+        onChange={(e) => setForm({ ...form, purpose: e.target.value })}
+      />
 
       <div>
         <button
-          className="button block primary"
+          className="btn btn-sm primary mt-8"
           type="submit"
           disabled={loading}
-          aria-label="Submit account info"
         >
           {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className="button block"
-          type="button"
-          onClick={() => supabase.auth.signOut()}
-          aria-label="sign out"
-        >
-          Sign Out
         </button>
       </div>
     </form>

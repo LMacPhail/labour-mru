@@ -52,7 +52,10 @@ function App() {
   return (
     <Sidebar>
       <>
-        <SignUpModal status="sign-up" session={session} />
+        <SignUpModal
+          status={session?.user ? "add-info" : "sign-up"}
+          session={session}
+        />
         <Header session={session} />
         <div className="w-full pt-4 px-4 sm:px-6 md:px-8">
           <Routes>

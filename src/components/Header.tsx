@@ -16,7 +16,7 @@ export const Header: React.FC<{ session: Session | null }> = ({ session }) => {
           <ProjectTitle />
         </div>
 
-        <div className="flex items-center justify-between sm:gap-x-3 sm:order-3">
+        <div className="flex items-center justify-end sm:gap-x-3 sm:order-3">
           <div className="flex flex-wrap gap-2">
             <NavLink className="nav-link" to="/">
               Home
