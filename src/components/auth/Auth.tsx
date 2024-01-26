@@ -23,10 +23,10 @@ export default function Auth() {
     <div className="flex flex-col gap-8 my-8">
       <div>
         <p className="description">
-          We're trying to get a clearer picture of how these tools are used, so
-          we can improve them in the future.
+          We're trying to understand how people are using Future Labour MPs so
+          we can add more data and improve it.
         </p>
-        <p>Would you like to help us out by signing up?</p>
+        <p>Could you help us by signing up?</p>
       </div>
       <form className="form-widget" onSubmit={handleLogin}>
         <div className="w-full flex flex-row items-center justify-center gap-4">

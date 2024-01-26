@@ -116,7 +116,7 @@ export function Account({ session }: { session: Session }) {
       />
 
       <TextInput
-        label="Purpose"
+        label="Why are you using Future Labour MPs?"
         id="purpose"
         value={form.purpose || ""}
         onChange={(e) => setForm({ ...form, purpose: e.target.value })}
