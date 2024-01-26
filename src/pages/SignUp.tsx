@@ -1,5 +1,6 @@
 import React from "react";
+import Auth from "../components/auth/Auth";
 
 export const SignUpPage: React.FC = () => {
-  return <>Sign up here</>;
+  return <Auth />;
 };

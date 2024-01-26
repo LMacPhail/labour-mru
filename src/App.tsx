@@ -31,6 +31,7 @@ function App() {
   useAnalytics();
 
   const [session, setSession] = useState<Session | null>(null);
+  const [signUpComplete, setSignUpComplete] = useState<boolean>(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -40,7 +41,40 @@ function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, [supabase.auth]);
+
+    let ignore = false;
+    async function getSignUpComplete() {
+      const { user } = session ?? { user: undefined };
+
+      if (user === null) {
+        setSignUpComplete(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select(`email, first_name, last_name, organisation, purpose`)
+        .eq("id", user?.id)
+        .single();
+
+      if (!ignore) {
+        if (error) {
+          console.warn(error);
+        } else if (data) {
+          const { first_name } = data;
+          if (first_name === undefined) {
+            setSignUpComplete(false);
+          }
+        }
+      }
+    }
+
+    getSignUpComplete();
+
+    return () => {
+      ignore = true;
+    };
+  }, [session]);
 
   useEffect(() => {
     if (document !== null) {
@@ -52,10 +86,12 @@ function App() {
   return (
     <Sidebar>
       <>
-        <SignUpModal
-          status={session?.user ? "add-info" : "sign-up"}
-          session={session}
-        />
+        {!signUpComplete && (
+          <SignUpModal
+            status={session?.user ? "add-info" : "sign-up"}
+            session={session}
+          />
+        )}
         <Header session={session} />
         <div className="w-full pt-4 px-4 sm:px-6 md:px-8">
           <Routes>
