@@ -1,4 +1,6 @@
+import { Session } from "@supabase/supabase-js";
 import { useState, useEffect, FormEvent } from "react";
+import { MODAL_DISMISSED_KEY } from "../../state/store";
 import { supabase } from "../../supabaseClient";
 import { TextInput } from "../atoms/TextInput";
 
@@ -18,7 +20,7 @@ const initForm = {
   purpose: null,
 };
 
-export function Account({ session }: { session: any }) {
+export function Account({ session }: { session: Session }) {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<FormData>(initForm);
 
@@ -51,7 +53,7 @@ export function Account({ session }: { session: any }) {
     return () => {
       ignore = true;
     };
-  }, [session]);
+  }, []);
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,7 +85,12 @@ export function Account({ session }: { session: any }) {
       onSubmit={updateProfile}
       className="form-widget flex flex-col max-w-72 gap-2"
     >
-      <TextInput label="Email" id="email" value={session.user.email} disabled />
+      <TextInput
+        label="Email"
+        id="email"
+        value={session.user.email ?? ""}
+        disabled
+      />
 
       <TextInput
         label="First Name"
@@ -115,15 +122,16 @@ export function Account({ session }: { session: any }) {
         onChange={(e) => setForm({ ...form, purpose: e.target.value })}
       />
 
-      <div>
+      <form method="dialog">
         <button
           className="btn btn-sm primary mt-8"
           type="submit"
           disabled={loading}
+          onClick={() => localStorage.setItem(MODAL_DISMISSED_KEY, "true")}
         >
           {loading ? "Loading ..." : "Update"}
         </button>
-      </div>
+      </form>
     </form>
   );
 }

@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import { AccountPage } from "./pages/Account";
 import { SignUpPage } from "./pages/SignUp";
+import { MODAL_DISMISSED_KEY } from "./state/store";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ function App() {
   useAnalytics();
 
   const [session, setSession] = useState<Session | null>(null);
-  const [signUpComplete, setSignUpComplete] = useState<boolean>(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -41,52 +41,21 @@ function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-
-    let ignore = false;
-    async function getSignUpComplete() {
-      const { user } = session ?? { user: undefined };
-
-      if (user === null) {
-        setSignUpComplete(false);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("profiles")
-        .select(`email, first_name, last_name, organisation, purpose`)
-        .eq("id", user?.id)
-        .single();
-
-      if (!ignore) {
-        if (error) {
-          console.warn(error);
-        } else if (data) {
-          const { first_name } = data;
-          if (first_name === undefined) {
-            setSignUpComplete(false);
-          }
-        }
-      }
-    }
-
-    getSignUpComplete();
-
-    return () => {
-      ignore = true;
-    };
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     if (document !== null) {
       // @ts-ignore
-      document.getElementById("sign_up_modal").showModal();
+      document.getElementById("sign_up_modal")?.showModal();
     }
   });
+
+  const modalDismissed = localStorage.getItem(MODAL_DISMISSED_KEY) !== "true";
 
   return (
     <Sidebar>
       <>
-        {!signUpComplete && (
+        {modalDismissed && (
           <SignUpModal
             status={session?.user ? "add-info" : "sign-up"}
             session={session}

@@ -62,3 +62,5 @@ export const initState: AppState = {
 const store = configureStore({ reducer: rootReducer });
 
 export default store;
+
+export const MODAL_DISMISSED_KEY = "modal-dismissed";
