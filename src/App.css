@@ -27,11 +27,14 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-link {
+  @apply btn btn-sm bg-slate-200 dark:bg-slate-700 dark:text-white;
+}
+
+.nav-link.accent {
+  @apply bg-accent;
+}
+
+.nav-link.active {
+  @apply bg-slate-800 text-white dark:bg-slate-100 dark:text-black;
 }

@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
-import { Accordion } from "./Accordion";
-import { filterProfiles, sortByWin } from "../../data/utils/utils";
+import { Accordion } from "../components/content/Accordion";
+import { filterProfiles, sortByWin } from "../data/utils/utils";
 import { useSelector } from "react-redux";
-import { AppState } from "../../state/store";
-import { MP } from "../../data/types";
-import { Spinner } from "../atoms/Spinner";
+import { AppState } from "../state/store";
+import { MP } from "../data/types";
+import { Spinner } from "../components/atoms/Spinner";
 
 const MPIndex: React.FC = () => {
   const filters = useSelector((state: AppState) => state.activeFilters);

@@ -1,6 +1,5 @@
-import { Minus, Plus } from "@phosphor-icons/react";
-import React, { useState } from "react";
-import TextLink from "../atoms/Link";
+import React from "react";
+import TextLink from "../components/atoms/Link";
 
 const faqs: { question: string; answer: JSX.Element }[] = [
   {
@@ -51,8 +50,9 @@ const faqs: { question: string; answer: JSX.Element }[] = [
         <TextLink link="https://www.electoralcalculus.co.uk/fcgi-bin/calcwork23.py?seat=Glasgow+North+East">
           (see an example here)
         </TextLink>
-        . We have included Labour candidates who haven't been previously elected and
-        have more than an 80% chance of winning (data collected December 2023).
+        . We have included Labour candidates who haven't been previously elected
+        and have more than an 80% chance of winning (data collected December
+        2023).
       </p>
     ),
   },
@@ -166,7 +166,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
             get involved
           </TextLink>
         </span>{" "}
-         or you can{" "}
+        or you can{" "}
         <span>
           <TextLink link="https://donate.stripe.com/bIY6rig2w5ohat24gg">
             donate
@@ -186,7 +186,6 @@ const faqs: { question: string; answer: JSX.Element }[] = [
       </p>
     ),
   },
-  
 ];
 
 const About: React.FC = () => {
@@ -207,9 +206,10 @@ const About: React.FC = () => {
         </p>
         <p>
           The next election is likely to be won by Labour. Our database shows
-          Labour candidates who would be new to parliament and are very likely to get
-          elected. It can be used to build relationships with this new cohort of
-          Labour MPs and influence what the next Labour government does.
+          Labour candidates who would be new to parliament and are very likely
+          to get elected. It can be used to build relationships with this new
+          cohort of Labour MPs and influence what the next Labour government
+          does.
         </p>
         <p>
           This is the first version of this database and over the next few
@@ -231,29 +231,13 @@ const FAQQuestion: React.FC<{
   answer: JSX.Element;
   idx: number;
 }> = ({ question, answer, idx }) => {
-  const [open, setOpen] = useState<boolean>(false);
-
   return (
-    <div className="accordion bg-gray-50 dark:bg-slate-900">
-      <input
-        type="checkbox"
-        id={`accordion-${idx}`}
-        className="accordion-toggle"
-        checked={open}
-        onChange={() => {
-          setOpen(!open);
-        }}
-      />
-      <label
-        htmlFor={`accordion-${idx}`}
-        className="accordion-title py-0  bg-gray-50 dark:bg-slate-900"
-      >
-        <div className="flex flex-row justify-between items-center">
-          <h4 className="font-bold my-4 text-base">{question}</h4>
-          {open ? <Minus size={18} /> : <Plus size={18} />}
-        </div>
-      </label>
-      <div className="accordion-content">
+    <div className="collapse collapse-plus bg-gray-50 dark:bg-slate-900">
+      <input type="checkbox" />
+      <div className="collapse-title py-0  bg-gray-50 dark:bg-slate-900">
+        <h4 className="font-bold my-4 text-base">{question}</h4>
+      </div>
+      <div className="collapse-content">
         <div className="min-h-0"> {answer}</div>
       </div>
     </div>

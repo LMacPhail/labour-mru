@@ -1,9 +1,8 @@
-import { captureAnalyticsEvent, captureAnalyticsPageView } from "../analytics";
+import { captureAnalyticsEvent } from "../analytics";
 import {
   Action,
   SET_POLICY_STANCE_ACTION,
   SET_DATA_ACTION,
-  SET_VIEW_ACTION,
   SET_SEARCH_INPUT_ACTION,
   SET_SORTBY_ACTION,
 } from "./actions";
@@ -27,19 +26,14 @@ export default function appReducer(
         },
       };
     }
-    case SET_VIEW_ACTION: {
-      captureAnalyticsPageView(action.payload.view);
-      return {
-        ...state,
-        view: action.payload.view,
-      };
-    }
     case SET_POLICY_STANCE_ACTION: {
       const { category, positive } = action.payload;
       const { policies } = state.activeFilters;
       captureAnalyticsEvent("filter changed", { category, positive });
-      const policyStances = { ...policies, [category]: { positive } }
-      const activeFilters = Object.entries(policyStances).filter(([key, p]) => p.positive).map(([policy, _]) => policy)
+      const policyStances = { ...policies, [category]: { positive } };
+      const activeFilters = Object.entries(policyStances)
+        .filter(([key, p]) => p.positive)
+        .map(([policy, _]) => policy);
       captureAnalyticsEvent("set active filters", activeFilters);
       return {
         ...state,

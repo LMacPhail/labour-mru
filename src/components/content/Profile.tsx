@@ -60,8 +60,8 @@ export const ProfileHeader: React.FC<{
               <img
                 className="rounded-md"
                 src={profile}
-                height={"100px"}
-                width={"100px"}
+                height={100}
+                width={100}
                 alt="MP Headshot"
               />
             ) : (
@@ -106,6 +106,7 @@ export const ProfileHeader: React.FC<{
                   <a
                     href={link}
                     key={`${name}-${site}-link`}
+                    aria-label={`${site}`}
                     target="_blank"
                     rel="noreferrer"
                   >
