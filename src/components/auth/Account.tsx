@@ -53,7 +53,7 @@ export function Account({ session }: { session: Session }) {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [session]);
 
   async function updateProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

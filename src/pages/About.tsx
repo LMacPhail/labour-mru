@@ -1,5 +1,4 @@
-import { Minus, Plus } from "@phosphor-icons/react";
-import React, { useState } from "react";
+import React from "react";
 import TextLink from "../components/atoms/Link";
 
 const faqs: { question: string; answer: JSX.Element }[] = [

@@ -1,4 +1,4 @@
-import { captureAnalyticsEvent, captureAnalyticsPageView } from "../analytics";
+import { captureAnalyticsEvent } from "../analytics";
 import {
   Action,
   SET_POLICY_STANCE_ACTION,
