@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { MODAL_DISMISSED_KEY } from "../../state/store";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -7,6 +8,8 @@ export default function Auth() {
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    localStorage.setItem(MODAL_DISMISSED_KEY, "false");
 
     setLoading(true);
     const { error } = await supabase.auth.signInWithOtp({ email });
