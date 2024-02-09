@@ -78,6 +78,10 @@ export function Account({ session }: { session: Session }) {
       alert(error.message);
     }
     setLoading(false);
+
+    // @ts-expect-error
+    document?.getElementById("sign_up_modal")?.close();
+    localStorage.setItem(MODAL_DISMISSED_KEY, "true");
   }
 
   return (
@@ -122,16 +126,13 @@ export function Account({ session }: { session: Session }) {
         onChange={(e) => setForm({ ...form, purpose: e.target.value })}
       />
 
-      <form method="dialog">
-        <button
-          className="btn btn-sm primary mt-8"
-          type="submit"
-          disabled={loading}
-          onClick={() => localStorage.setItem(MODAL_DISMISSED_KEY, "true")}
-        >
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </form>
+      <button
+        className="btn btn-sm primary mt-8"
+        type="submit"
+        disabled={loading}
+      >
+        {loading ? "Loading ..." : "Update"}
+      </button>
     </form>
   );
 }
