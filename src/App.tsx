@@ -50,6 +50,11 @@ function App() {
     }
   });
 
+  useEffect(() => {
+    if (!session) return
+    identifyUser(session)
+  }, [session])
+
   const modalDismissed = localStorage.getItem(MODAL_DISMISSED_KEY) !== "true";
 
   return (

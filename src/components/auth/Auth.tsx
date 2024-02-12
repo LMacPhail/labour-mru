@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { MODAL_DISMISSED_KEY } from "../../state/store";
 import Link from "../atoms/Link";
+import { captureEmail } from '../../analytics'
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ export default function Auth() {
     if (error) {
       alert(error.message);
     } else {
+      captureEmail(email)
       alert("Check your email for the login link!");
     }
     setLoading(false);
@@ -44,7 +46,9 @@ export default function Auth() {
             id="sign_up_input"
             value={email}
             required={true}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value)
+            }}
           />
           <button
             className={"btn btn-accent btn-sm block w-24"}
