@@ -10,6 +10,7 @@ export default function Auth() {
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    captureEmail(email)
 
     localStorage.setItem(MODAL_DISMISSED_KEY, "false");
 
@@ -19,7 +20,6 @@ export default function Auth() {
     if (error) {
       alert(error.message);
     } else {
-      captureEmail(email)
       alert("Check your email for the login link!");
     }
     setLoading(false);

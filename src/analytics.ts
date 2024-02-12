@@ -2,7 +2,7 @@ import posthog from 'posthog-js'
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import * as CookieConsent from "vanilla-cookieconsent";
 import { useEffect } from 'react';
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 
 export async function enablePosthog() {
   if (!process.env.REACT_APP_POSTHOG_API_KEY || !process.env.REACT_APP_POSTHOG_API_URL) {
@@ -34,9 +34,23 @@ export function captureEmail (email: string) {
   posthog.capture('newsletter signup', { $set: { email } })
 }
 
-export function identifyUser (session: Session) {
-  if (!session) return
-  posthog.identify(session.user.id, { email: session.user.email })
+// Anonymous ID
+let distinct_id: string | null = null;
+
+// set distinct_id after the posthog library has loaded
+posthog.init('YOUR PROJECT TOKEN', {
+  loaded: function(posthog) {
+      distinct_id = posthog.get_distinct_id();
+  }
+});
+
+export function identifyUser (user?: User | null) {
+  if (!user?.email || !distinct_id) return
+  posthog.alias(
+    distinct_id,
+    user.id,
+  )
+  posthog.setPersonProperties({ email: user.email, phone: user.phone })
 }
 
 export function useAnalytics () {
