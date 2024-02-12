@@ -4,12 +4,18 @@ import * as CookieConsent from "vanilla-cookieconsent";
 import { useEffect } from 'react';
 import { Session, User } from "@supabase/supabase-js";
 
+// Anonymous ID that posthog sets by default
+let distinct_id: string | null = null;
+
 export async function enablePosthog() {
   if (!process.env.REACT_APP_POSTHOG_API_KEY || !process.env.REACT_APP_POSTHOG_API_URL) {
     return
   }
   posthog.init(process.env.REACT_APP_POSTHOG_API_KEY!, {
-    api_host: process.env.REACT_APP_POSTHOG_API_URL
+    api_host: process.env.REACT_APP_POSTHOG_API_URL,
+    loaded: function(posthog) {
+      distinct_id = posthog.get_distinct_id();
+    }
   })
   posthog.opt_in_capturing()
 }
@@ -34,22 +40,14 @@ export function captureEmail (email: string) {
   posthog.capture('newsletter signup', { $set: { email } })
 }
 
-// Anonymous ID
-let distinct_id: string | null = null;
-
-// set distinct_id after the posthog library has loaded
-posthog.init('YOUR PROJECT TOKEN', {
-  loaded: function(posthog) {
-      distinct_id = posthog.get_distinct_id();
-  }
-});
-
 export function identifyUser (user?: User | null) {
-  if (!user?.email || !distinct_id) return
-  posthog.alias(
-    distinct_id,
-    user.id,
-  )
+  if (!user?.email) return
+  if (distinct_id) {
+    posthog.alias(
+      distinct_id,
+      user.id,
+    )
+  }
   posthog.setPersonProperties({ email: user.email, phone: user.phone })
 }
 
