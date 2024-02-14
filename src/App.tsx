@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { fetchMPs } from "./data/utils/utils";
 import { DataStatus, MP } from "./data/types";
 import { SET_DATA_ACTION } from "./state/actions";
-import { useAnalytics } from "./analytics";
+import { identifyUser, useAnalytics } from "./analytics";
 import { supabase } from "./supabaseClient";
 import { Session } from "@supabase/supabase-js";
 import { SignUpModal } from "./components/auth/SignUpModal";
@@ -49,6 +49,10 @@ function App() {
       document.getElementById("sign_up_modal")?.showModal();
     }
   });
+
+  useEffect(() => {
+    identifyUser(session?.user)
+  }, [session, session?.user.id, session?.user.email])
 
   const modalDismissed = localStorage.getItem(MODAL_DISMISSED_KEY) !== "true";
 
