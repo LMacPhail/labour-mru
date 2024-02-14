@@ -19,12 +19,10 @@ const faqs: { question: string; answer: JSX.Element }[] = [
     question: "What is this tool for?",
     answer: (
       <p>
-        This tool is for campaigners and local constituents to better understand
+        This tool is for campaigners, local and national to better understand
         who their future MP is and what they think. It can be used by
         campaigners to find allies among future MPs on the issues that matter
-        and build useful relationships now, or for constituents to reach out to
-        the candidates who will likely represent them in Parliament in the near
-        future.
+        and build useful relationships now.
       </p>
     ),
   },
@@ -36,8 +34,7 @@ const faqs: { question: string; answer: JSX.Element }[] = [
         MPs, including how they voted and who they have accepted donations from.
         But there’s often very little accessible information in one place about
         candidates standing for Parliament. Building awareness of candidates
-        before they become MPs is essential for effective campaigning and
-        informed voting.
+        before they become MPs is essential for effective campaigning.
       </p>
     ),
   },
