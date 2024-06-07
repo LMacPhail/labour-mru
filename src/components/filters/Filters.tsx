@@ -22,16 +22,11 @@ export const SortByDropdown: React.FC = () => {
 
   return (
     <div>
-      <span className="text-xs">
+      <span className="text-xs tooltip" data-tip="See FAQ on about page">
         Sort by chance of winning:{" "}
-        <span
-          className="tooltip-click tooltip-right z-40"
-          data-tooltip="See FAQ"
-        >
-          <button aria-label="See FAQ">
+          <button>
             <Question size={12} />
           </button>
-        </span>
       </span>
       <select
         className="select select-bordered w-full select-sm capitalize"
