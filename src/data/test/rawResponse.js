@@ -24,7 +24,7 @@ export const mps = [
       phone: "",
       email: "",
     },
-    policyInterests: {
+    policy_interests: {
       climate: {
         source:
           "In 2023 she campaigned with colleague Kate Taylor to clean up waterways in Bolton and to put preassure on central government https://uk.finance.yahoo.com/news/petition-remove-raw-sewage-waterways-040000236.html",
@@ -58,6 +58,7 @@ export const mps = [
       current:
         "Works for WaveLength, a charity that helps to tackle loneliness and social isolation. \nHas worked for the Royal British Legion, and is vocal about campaigning for the armed forces https://www.kirithentwistle.com/",
     },
+    winning_probability: "95%",
   },
   {
     id: "c41473a9-2145-4575-92b5-6ada9019f559",
@@ -82,7 +83,7 @@ export const mps = [
       phone: "",
       email: "",
     },
-    policyInterests: {
+    policy_interests: {
       benefits: {
         source:
           "Endorsed cheaper bus fares for 16-18s from Derbyshire https://www.buxtonadvertiser.co.uk/news/transport/more-families-jump-aboard-high-peak-student-bus-pass-campaign-for-cheaper-fares-4358679",
@@ -122,6 +123,7 @@ export const mps = [
       current:
         "Lawyer, Hempsons https://www.hempsons.co.uk/news-articles/hempsons-welcomes-new-partner-to-head-up-its-employment-team-in-london/",
     },
+    winning_probability: "90%",
   },
   {
     id: "4ff94a8b-3830-4ec1-ac45-80a40a41c610",
@@ -146,7 +148,7 @@ export const mps = [
       phone: null,
       email: "team@labourlola.com",
     },
-    policyInterests: {
+    policy_interests: {
       benefits: {
         source:
           "Supportive of Sadiq Khan's covid measure providing rough sleepers with hotel rooms\nhttps://twitter.com/Lola__McEvoy/status/1241444308693258240",
@@ -180,6 +182,7 @@ export const mps = [
         "GMB organiser https://labourlist.org/2023/11/our-rolling-list-of-labour-parliamentary-candidate-selections/",
       director: "",
     },
+    winning_probability: "88%",
   },
   {
     id: "9f426e24-7fd3-4a4f-a1b8-010012e6832f",
@@ -203,7 +206,7 @@ export const mps = [
       phone: null,
       email: "campaign@jeevunsandher.com",
     },
-    policyInterests: {
+    policy_interests: {
       workers: {
         source:
           "Organised KCL UCU members to stop a 33% paycut https://www.jeevunsandher.com/# | Callsingfor higher wages through a green industrial revolution https://www.jeevunsandher.com |\nSays people 'absolutely have a right to strike' in this video https://www.youtube.com/watch?v=ni4FRgBskIc | Was an active member of UCU during the university strikes https://twitter.com/TimesRadio/status/1466132492465885192",
@@ -247,5 +250,6 @@ export const mps = [
         "Head of Economics at New Economics Foundation, a think tank focused on living wage, a green new deal and new city and regional authorities which de-centralise and devolve economic power https://uk.linkedin.com/in/dr-jeevun-sandher-0867a5107",
       charity: "",
     },
+    winning_probability: "92%",
   },
 ];

@@ -135,7 +135,7 @@ export const ProfileHeader: React.FC<{
 export const ProfileContent: React.FC<{
   mp: MP;
 }> = ({ mp }) => {
-  const { profession, education, policyInterests, notes } = mp;
+  const { profession, education, policy_interests, notes } = mp;
   const { current, membership, charity, director } = profession;
   const professionalInfo = [current, membership, charity, director].some(
     (info) => info !== ""
@@ -174,8 +174,8 @@ export const ProfileContent: React.FC<{
       )}
       <h4 className="font-bold my-4">Policy Interests</h4>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Object.keys(policyInterests).map((policyType) => {
-          const policy = policyInterests[policyType];
+        {Object.keys(policy_interests).map((policyType) => {
+          const policy = policy_interests[policyType];
           if (policy?.source) {
             return (
               <PolicyCard

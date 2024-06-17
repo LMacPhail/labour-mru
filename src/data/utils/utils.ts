@@ -14,12 +14,8 @@ const sortAB = (a: number | undefined, b: number | undefined): number => {
 
 export const sortByWin = (profiles: MP[], descending: boolean): MP[] => {
   const sorted = profiles.sort((a, b) => {
-    const aPercent = a.winningProbability
-      ? a.winningProbability.percentage
-      : undefined;
-    const bPercent = b.winningProbability
-      ? b.winningProbability.percentage
-      : undefined;
+    const aPercent = parseInt(a.winning_probability?.replace("%", "") ?? "0");
+    const bPercent = parseInt(b.winning_probability?.replace("%", "") ?? "0");
     const sorted = sortAB(aPercent, bPercent);
     return descending ? -sorted : sorted;
   });
@@ -53,8 +49,8 @@ const matchesSelectedPolicies = (
 ): boolean =>
   checkedFilters.every(
     (policyType) =>
-      profile.policyInterests[policyType]?.source !== "" &&
-      profile.policyInterests[policyType]?.source !== undefined
+      profile.policy_interests[policyType]?.source !== "" &&
+      profile.policy_interests[policyType]?.source !== undefined
   );
 
 const matchesSearchInput = (profile: MP, searchInput: string): boolean =>

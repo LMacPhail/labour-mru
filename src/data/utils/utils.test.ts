@@ -112,16 +112,14 @@ describe("filterProfiles", () => {
   });
 });
 
-// describe("sortByWin", () => {
-//   it("sorts by descent", () => {
-//     const sorted = sortByWin(values as MP[], true);
-//     expect(sorted.map((x) => x.name)).toStrictEqual([
-//       "Gordon McKee",
-//       "John Grady",
-//       "Michael Shanks MP",
-//       "Martin Rhodes",
-//       "Roisin McKenna Favier",
-//       "Frank McNally",
-//     ]);
-//   });
-// });
+describe("sortByWin", () => {
+  it("sorts by descent", () => {
+    const sorted = sortByWin(mps as MP[], true);
+    expect(sorted.map((x) => x.name)).toStrictEqual([
+      "Kirith Entwistle",
+      "Jeevun Sandher",
+      "Jon Pearce",
+      "Lola McEvoy",
+    ]);
+  });
+});

@@ -68,11 +68,11 @@ export type MP = {
     membership?: string;
     charity?: string;
   };
-  policyInterests: Record<string, Policy | undefined>; // TODO - inconsistent casing (need to fix db table)
+  policy_interests: Record<string, Policy | undefined>;
   education?: string | null;
   notes?: string;
   headshot_link?: string;
-  winningProbability?: WinningProbability;
+  winning_probability?: string;
 };
 
 export type ViewType = "about" | "index";

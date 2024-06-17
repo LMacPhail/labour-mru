@@ -18,7 +18,7 @@ export const Accordion: React.FC<{ mps: MP[] }> = ({ mps }) => {
                 name={mp.name}
                 constituency={mp.constituency}
                 bio={mp.biography}
-                policyInterests={mp.policyInterests}
+                policyInterests={mp.policy_interests}
                 profile={mp.headshot_link}
                 contact={mp.contact}
               />
