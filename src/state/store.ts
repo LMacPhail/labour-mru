@@ -1,6 +1,5 @@
-import { values } from "../data/test/rawResponse";
 import { Filters, MP } from "../data/types";
-import { formatResponse } from "../data/utils/utils";
+import { mps } from "../data/test/rawResponse";
 import rootReducer from "./reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -10,49 +9,55 @@ export type AppState = {
 };
 
 export const initState: AppState = {
-  data: { status: "loading", profiles: formatResponse(values) },
+  data: {
+    status: "loading",
+    profiles: mps.map((x) => {
+      const { id, created_at, ...mp } = x;
+      return mp;
+    }) as MP[],
+  },
   activeFilters: {
     searchInput: "",
     policies: {
       climate: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       migration: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       LGBTQ: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       workers: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       NHS: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       benefits: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       strikes: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       publicOwnership: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       housing: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
       palestine: {
         source: undefined,
-        positive: undefined,
+        positive: null,
       },
     },
     sortDescending: true,
