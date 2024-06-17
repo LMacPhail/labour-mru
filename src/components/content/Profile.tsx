@@ -5,7 +5,7 @@ import {
   Policy,
   PolicyInterests,
   PolicyType,
-  SocialMediaLinks,
+  socialMediaSites,
 } from "../../data/types";
 import {
   CaretDown,
@@ -27,17 +27,8 @@ export const ProfileHeader: React.FC<{
   constituency: string;
   profile?: string;
   contact?: Contact;
-  socials: SocialMediaLinks;
-  policyInterests: Record<PolicyType, Policy>;
-}> = ({
-  name,
-  bio,
-  constituency,
-  profile,
-  contact,
-  socials,
-  policyInterests,
-}) => {
+  policyInterests: Record<PolicyType, Policy | undefined>;
+}> = ({ name, bio, constituency, profile, contact, policyInterests }) => {
   const getLogo = (siteType: string) => {
     switch (siteType) {
       case "facebook":
@@ -98,27 +89,28 @@ export const ProfileHeader: React.FC<{
         </div>
         <div className="flex flex-col justify-end h-full w-full gap-4 md:justify-between">
           <span className="flex flex-row gap-2 font-extralight text-sm italic justify-end">
-            {Object.keys(socials)
-              .filter((site) => socials[site as keyof SocialMediaLinks] !== "")
-              .map((site: string) => {
-                const link = socials[site as keyof SocialMediaLinks];
-                return (
-                  <a
-                    href={link}
-                    key={`${name}-${site}-link`}
-                    aria-label={`${site}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {getLogo(site)}
-                  </a>
-                );
-              })}
+            {contact &&
+              socialMediaSites
+                .filter((site) => contact[site as keyof Contact] !== "")
+                .map((site: string) => {
+                  const link = contact[site as keyof Contact];
+                  return (
+                    <a
+                      href={link ?? undefined}
+                      key={`${name}-${site}-link`}
+                      aria-label={`${site}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {getLogo(site)}
+                    </a>
+                  );
+                })}
           </span>
           <div className="flex flex-row flex-wrap gap-1 justify-end">
             {Object.keys(policyInterests).map((policyType) => {
               const policy = policyInterests[policyType];
-              if (policy.source) {
+              if (policy?.source) {
                 return (
                   <PolicyBadge
                     key={`${policyType}-badge`}
@@ -143,40 +135,27 @@ export const ProfileHeader: React.FC<{
 export const ProfileContent: React.FC<{
   mp: MP;
 }> = ({ mp }) => {
-  const {
-    currentProfession,
-    organisationalLinks,
-    education,
-    policyInterests,
-    notes,
-  } = mp;
-  const { membershipOrg, charitiesBoard, directorOfCompanies } =
-    organisationalLinks;
-  const professionalInfo = [
-    currentProfession,
-    membershipOrg,
-    charitiesBoard,
-    directorOfCompanies,
-  ].some((info) => info !== "");
+  const { profession, education, policy_interests, notes } = mp;
+  const { current, membership, charity, director } = profession;
+  const professionalInfo = [current, membership, charity, director].some(
+    (info) => info !== ""
+  );
   return (
     <>
       {professionalInfo ? (
         <>
-          <FormattedContent
-            subHeader="Profession"
-            rawContent={currentProfession}
-          />
+          <FormattedContent subHeader="Profession" rawContent={current} />
           <FormattedContent
             subHeader="Organisation membership"
-            rawContent={membershipOrg}
+            rawContent={membership}
           />
           <FormattedContent
             subHeader="Board of charities"
-            rawContent={charitiesBoard}
+            rawContent={charity}
           />
           <FormattedContent
             subHeader="Director of companies"
-            rawContent={directorOfCompanies}
+            rawContent={director}
           />
           {education && (
             <FormattedContent subHeader="Education" rawContent={education} />
@@ -195,9 +174,9 @@ export const ProfileContent: React.FC<{
       )}
       <h4 className="font-bold my-4">Policy Interests</h4>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Object.keys(policyInterests).map((policyType) => {
-          const policy = policyInterests[policyType];
-          if (policy.source) {
+        {Object.keys(policy_interests).map((policyType) => {
+          const policy = policy_interests[policyType];
+          if (policy?.source) {
             return (
               <PolicyCard
                 key={`${policyType}-card`}

@@ -14,63 +14,65 @@ export const policyTypeNames = [
   "palestine",
 ];
 
+export const socialMediaSites = [
+  "facebook",
+  "twitter",
+  "instagram",
+  "linkedin",
+];
+
 export type PolicyType = (typeof policyTypeNames)[number];
 
 export type Policy = {
-  source?: string;
-  positive?: boolean;
+  source?: string | null;
+  positive?: boolean | null;
 };
 
 export type WinningProbability = {
-  percentage: number; // 44
-  source: string; // 45
+  percentage: number;
+  source: string;
 };
 
-// number comments are the column index
 export type PolicyInterests = {
-  climate: Policy; // 20 - 21
-  migration: Policy; // 22
-  LGBTQ: Policy; // 24
-  workers: Policy; // 26
-  NHS: Policy; // 28
-  benefits: Policy; // 30
-  publicOwnership: Policy; // 34
-  housing: Policy; // 41
-  palestine: Policy; // 43
-};
-
-export type SocialMediaLinks = {
-  twitter?: string; // 12
-  facebook?: string; // 13
-  linkedin?: string;
-  instagram?: string;
+  climate?: Policy;
+  migration?: Policy;
+  LGBTQ?: Policy;
+  workers?: Policy;
+  NHS?: Policy;
+  benefits?: Policy;
+  publicOwnership?: Policy;
+  housing?: Policy;
+  palestine?: Policy;
 };
 
 export type Contact = {
-  email?: string;
-  phone?: string;
+  email?: string | null;
+  phone?: string | null;
+  twitter?: string | null;
+  facebook?: string | null;
+  linkedin?: string | null;
+  instagram?: string | null;
 };
 
 export type MP = {
-  name: string; // 0
-  constituency: string; // 1
-  incumbentParty: PartyIDs; // 9
-  incumbentMajoritySize: number | "n/a"; // 10
-  alreadyCouncillor: string;
+  name: string;
+  constituency: string;
+  incumbent_party: PartyIDs;
+  incumbent_majority_size: number | "n/a";
+  already_councillor: boolean;
   biography: string;
-  socialMedia: SocialMediaLinks;
-  currentProfession: string; // 16
-  organisationalLinks: {
-    membershipOrg: string; // 17
-    charitiesBoard: string;
-    directorOfCompanies: string;
+  contact: Contact;
+  profession: {
+    current?: string;
+    director?: string;
+    membership?: string;
+    charity?: string;
   };
-  policyInterests: Record<PolicyType, Policy>;
-  contact?: Contact; // 40
-  education?: string; // 41
-  notes?: string; // 42
-  profilePic?: string; // 43
-  winningProbability?: WinningProbability;
+  policy_interests: Record<string, Policy | undefined>;
+  education?: string | null;
+  notes?: string;
+  headshot_link?: string;
+  winning_probability?: string;
 };
 
 export type ViewType = "about" | "index";
