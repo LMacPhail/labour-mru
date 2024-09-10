@@ -16,6 +16,7 @@ import About from "./pages/About";
 import { AccountPage } from "./pages/Account";
 import { SignUpPage } from "./pages/SignUp";
 import { MODAL_DISMISSED_KEY } from "./state/store";
+import { Banner } from "./components/Banner";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,34 +52,43 @@ function App() {
   });
 
   useEffect(() => {
-    identifyUser(session?.user)
-  }, [session, session?.user.id, session?.user.email])
+    identifyUser(session?.user);
+  }, [session, session?.user.id, session?.user.email]);
 
   const modalDismissed = localStorage.getItem(MODAL_DISMISSED_KEY) !== "true";
 
   return (
-    <Sidebar>
-      <>
-        {modalDismissed && (
-          <SignUpModal
-            status={session?.user ? "add-info" : "sign-up"}
-            session={session}
-          />
-        )}
-        <Header session={session} />
-        <div className="w-full pt-4 px-4 sm:px-6 md:px-8">
-          <Routes>
-            <Route path="/" element={<MPIndex />} />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/account"
-              element={<AccountPage session={session} />}
+    <>
+      <Banner>
+        <p className="w-full text-center text-sm sticky top-0">
+          Future Labour MPs is no longer being maintained and was last updated
+          June 2024. If you’d like to incorporate the data into your own dataset
+          contact us at <strong>mps&#64;mvmtresearch&#46;org</strong>
+        </p>
+      </Banner>
+      <Sidebar>
+        <>
+          {modalDismissed && (
+            <SignUpModal
+              status={session?.user ? "add-info" : "sign-up"}
+              session={session}
             />
-            <Route path="/sign-up" element={<SignUpPage />} />
-          </Routes>
-        </div>
-      </>
-    </Sidebar>
+          )}
+          <Header session={session} />
+          <div className="w-full pt-4 px-4 sm:px-6 md:px-8">
+            <Routes>
+              <Route path="/" element={<MPIndex />} />
+              <Route path="/about" element={<About />} />
+              <Route
+                path="/account"
+                element={<AccountPage session={session} />}
+              />
+              <Route path="/sign-up" element={<SignUpPage />} />
+            </Routes>
+          </div>
+        </>
+      </Sidebar>
+    </>
   );
 }
 
