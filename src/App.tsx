@@ -60,7 +60,7 @@ function App() {
   return (
     <>
       <Banner>
-        <p className="w-full text-center text-sm sticky top-0">
+        <p className="w-full text-center text-sm sticky top-0 text-black">
           Future Labour MPs is no longer being maintained and was last updated
           June 2024. If you’d like to incorporate the data into your own dataset
           contact us at <strong>mps&#64;mvmtresearch&#46;org</strong>
