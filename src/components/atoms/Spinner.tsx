@@ -5,7 +5,7 @@ const SpinnerContainer = styled.div`
   .loader {
     width: 48px;
     height: 48px;
-    border: 5px solid #fff;
+    border: 5px solid #00edce;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

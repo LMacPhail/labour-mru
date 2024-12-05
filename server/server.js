@@ -7,7 +7,8 @@ const app = express();
 app.use(cors());
 
 // Configuration for the proxy
-const API_SERVICE_URL = "https://api.futurelabourmps.com";
+const API_SERVICE_URL =
+  "https://atgeeldxjscyxbkgyijr.supabase.co/functions/v1/mps";
 
 app.use(
   "/api",

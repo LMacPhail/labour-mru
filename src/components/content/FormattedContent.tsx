@@ -4,8 +4,10 @@ import TextLink from "../atoms/Link";
 
 export const FormattedContent: React.FC<{
   subHeader: string;
-  rawContent: string;
+  rawContent: string | undefined;
 }> = ({ subHeader, rawContent }) => {
+  if (rawContent === undefined) return <></>;
+
   const contentArray = rawContent.split("|");
   if (contentArray.length === 1 && contentArray[0] === "") return <></>;
 

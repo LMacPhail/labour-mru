@@ -2,11 +2,11 @@ import React from "react";
 import { PolicyInterests } from "../../data/types";
 
 export const PolicyBadge: React.FC<{
-  positive?: boolean;
+  positive?: boolean | null;
   policyName: keyof PolicyInterests;
 }> = ({ positive, policyName }) => {
-  const getBGColour = (positive?: boolean) =>
-    positive === undefined
+  const getBGColour = (positive?: boolean | null) =>
+    positive === null || positive === undefined
       ? "bg-slate-800"
       : positive
       ? "bg-green-700"
